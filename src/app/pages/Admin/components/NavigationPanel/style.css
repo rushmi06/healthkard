@@ -1,0 +1,13 @@
+#navigation-panel {
+  overflow-y: scroll;
+  height: calc(100vh - 8rem);
+}
+
+#navigation-panel::-webkit-scrollbar {
+  width: 12px;
+}
+
+a.active {
+  background-color: #303486;
+  color: #fff !important;
+}
