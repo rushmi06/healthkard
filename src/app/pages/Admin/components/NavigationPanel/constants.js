@@ -9,6 +9,7 @@ import { MdOutlineRssFeed } from "react-icons/md";
 import { GiSatelliteCommunication } from "react-icons/gi";
 import { FaYoutube } from "react-icons/fa";
 import { FaPalette } from "react-icons/fa";
+import { FaMobileAlt } from "react-icons/fa";
 export const NAVIGATION_PANEL_LINKS = [
     {
         label: 'Hospitals',
@@ -32,6 +33,11 @@ export const NAVIGATION_PANEL_LINKS = [
                 label: 'Details',
                 link: '/admin/users/details',
                 icon: FaRegUserCircle
+            },
+            {
+                label: 'Mobile',
+                link: '/admin/users/mobile',
+                icon: FaMobileAlt
             },
 
             {

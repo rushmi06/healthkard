@@ -1,12 +1,12 @@
 import React from 'react'
 import logo from '../../../../../logo.svg'
-import { colors } from '../../../../theme/colors'
 import './style.css'
+import withTheme from '../../../../theme/Theme'
 
-function Logo() {
+function Logo({ theme }) {
     return (
 
-        <div style={ { backgroundColor: colors.secondary } } className='w-full h-12 flex items-center justify-center gap-2 rounded'>
+        <div style={ { backgroundColor: theme.secondary } } className='w-full h-12 flex items-center justify-center gap-2 rounded'>
             <img src={ logo } alt='logo' style={ { width: '30px', height: '22px' } } />
             <div id='title' className='text-lg font-bold'>HealthKard</div>
         </div >
@@ -14,4 +14,4 @@ function Logo() {
 
 }
 
-export default Logo
+export default withTheme(Logo)

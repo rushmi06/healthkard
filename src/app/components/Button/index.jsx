@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { colors } from '../../theme/colors';
-
-const Button = ({ label, type, color, disabled, isLoading, style, onClick }) => {
+import withTheme from '../../theme/Theme';
+const Button = ({ label, type, color, disabled, isLoading, style, onClick, icon: Icon, iconPosition, theme }) => {
     const baseStyle = {
-        padding: '0.5rem 1rem',
         borderRadius: '0.25rem',
-        fontWeight: '600',
         transition: 'background-color 0.2s',
         cursor: disabled || isLoading ? 'not-allowed' : 'pointer',
         opacity: disabled || isLoading ? 0.5 : 1,
@@ -14,37 +11,38 @@ const Button = ({ label, type, color, disabled, isLoading, style, onClick }) => 
 
     const typeStyles = {
         'btn-primary': {
-            backgroundColor: colors.primary,
-            color: 'white',
-            ':hover': { backgroundColor: colors.primaryHover },
+            backgroundColor: theme.primary,
+            color: theme.senary,
+            ':hover': { backgroundColor: theme.primaryHover },
         },
         'btn-secondary': {
-            backgroundColor: colors.secondary,
-            color: colors.secondaryText,
-            ':hover': { backgroundColor: colors.secondaryHover },
+            backgroundColor: theme.secondary,
+            color: theme.primary,
+            ':hover': { backgroundColor: theme.secondaryHover },
+            border: `1px solid ${theme.primary}`,
         },
         'btn-tertiary': {
             backgroundColor: 'transparent',
-            color: colors.primary,
-            ':hover': { backgroundColor: colors.tertiaryHover },
+            color: theme.primary,
+            ':hover': { backgroundColor: theme.tertiaryHover },
         },
         'btn-danger': {
-            backgroundColor: colors.danger,
+            backgroundColor: theme.danger,
             color: 'white',
-            ':hover': { backgroundColor: colors.dangerHover },
+            ':hover': { backgroundColor: theme.dangerHover },
         },
     };
 
     const colorStyles = {
         blue: {
-            backgroundColor: colors.blue,
+            backgroundColor: theme.blue,
             color: 'white',
-            ':hover': { backgroundColor: colors.blueHover },
+            ':hover': { backgroundColor: theme.blueHover },
         },
         green: {
-            backgroundColor: colors.green,
+            backgroundColor: theme.green,
             color: 'white',
-            ':hover': { backgroundColor: colors.greenHover },
+            ':hover': { backgroundColor: theme.greenHover },
         },
     };
 
@@ -60,6 +58,7 @@ const Button = ({ label, type, color, disabled, isLoading, style, onClick }) => 
             style={ buttonStyle }
             disabled={ disabled || isLoading }
             onClick={ onClick }
+            className='flex items-center gap-2 h-9 text-sm min-w-32 justify-center rounded'
         >
             { isLoading ? (
                 <span style={ { display: 'flex', alignItems: 'center', justifyContent: 'center' } }>
@@ -70,7 +69,11 @@ const Button = ({ label, type, color, disabled, isLoading, style, onClick }) => 
                     Loading...
                 </span>
             ) : (
-                label
+                <>
+                    { Icon && iconPosition === 'left' && <Icon className="w-5 h-5" /> }
+                    { label }
+                    { Icon && iconPosition === 'right' && <Icon className="w-5 h-5" /> }
+                </>
             ) }
         </button>
     );
@@ -84,12 +87,15 @@ Button.propTypes = {
     isLoading: PropTypes.bool,
     style: PropTypes.object,
     onClick: PropTypes.func,
+    icon: PropTypes.elementType,
+    iconPosition: PropTypes.oneOf(['left', 'right']),
 };
 
 Button.defaultProps = {
     type: 'btn-primary',
     disabled: false,
     isLoading: false,
+    iconPosition: 'left',
 };
 
-export default Button;
+export default withTheme(Button);

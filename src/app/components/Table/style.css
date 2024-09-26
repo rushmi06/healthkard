@@ -1,0 +1,11 @@
+#table-container::-webkit-scrollbar {
+  /* width: 1px;
+  background-color: #303486; */
+  display: none;
+}
+
+#table-container::-webkit-scrollbar-thumb {
+  width: 1px;
+  height: 1px;
+  background-color: #303486;
+}
