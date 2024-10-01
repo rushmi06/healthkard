@@ -5,8 +5,8 @@ import Search from '../../../../components/Search'
 import Table from '../../../../components/Table'
 import { IoFilter } from "react-icons/io5";
 import { IoAdd } from "react-icons/io5";
-
-function TableContainer({ title, headers = [], data = [], onApplyFilters = () => { }, onAdd = () => { }, theme, currentPage, totalPages, onPageChange, isLoading }) {
+import './style.css'
+function TableContainer({ title, headers = [], data = [], onApplyFilters = () => { }, onAdd = () => { }, theme, currentPage, totalPages, onPageChange, isLoading, onRowClick }) {
     const [filteredData, setFilteredData] = useState(data);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function TableContainer({ title, headers = [], data = [], onApplyFilters = () =>
     }
 
     return (
-        <div style={ { backgroundColor: theme.secondary } } className='flex flex-col flex-grow rounded overflow-y-scroll h-full'>
+        <div id='table-container' style={ { backgroundColor: theme.secondary } } className='flex flex-col rounded'>
             <div style={ { borderBottom: `1px solid ${theme.primary}`, color: theme.primary } } className='flex justify-between items-center p-2 h-11 '>
                 <div className='text-sm font-semibold'>{ title }</div>
                 <div className='flex gap-2'>
@@ -26,12 +26,12 @@ function TableContainer({ title, headers = [], data = [], onApplyFilters = () =>
                     <Button label='Add Hospital' icon={ IoAdd } onClick={ onAdd } />
                 </div>
             </div>
-            <div className='flex flex-col justify-start items-start p-2 flex-grow w-full gap-2'>
+            <div id='table-container-body' className='flex flex-col justify-start items-start p-2 w-full gap-2'>
                 <div className='w-full flex items-center justify-start gap-2'>
                     <Search onChangeHandler={ (value) => filterData(value) } />
                     <Button label='Search' />
                 </div>
-                <div className='flex-grow max-h-[35rem] w-full rounded overflow-hidden'>
+                <div id='outer-table' className='w-full rounded overflow-y-scroll'>
                     <Table
                         headers={ headers }
                         data={ filteredData }
@@ -39,7 +39,7 @@ function TableContainer({ title, headers = [], data = [], onApplyFilters = () =>
                         totalPages={ totalPages }
                         onPageChange={ onPageChange }
                         isLoading={ isLoading }
-                    // style={ { border: `1px solid ${theme.primary}`, height: '120%' } }
+                        onRowClick={ onRowClick }
                     />
                 </div>
             </div>

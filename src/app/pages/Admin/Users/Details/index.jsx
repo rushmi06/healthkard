@@ -68,7 +68,6 @@ function Details() {
 
     const handleApplyFilters = (filters) => {
         setIsFilterSliderOpen(false);
-        // Implement filter logic here
     }
 
     const handlePageChange = (newPage) => {
@@ -76,26 +75,26 @@ function Details() {
     }
 
     return (
-        <div className='flex flex-col gap-4 w-full'>
+        <div className='flex flex-col gap-4 w-full h-full'>
             <FilterSlider open={ isFilterSliderOpen } onClose={ () => setIsFilterSliderOpen(false) } filterCategories={ filterCategories } onApplyFilters={ handleApplyFilters } />
             <div className='flex h-20 justify-between gap-4 w-full'>
-                { statistics.users.map((statistic, index) => (
-                    <Statistic key={ index } label={ statistic.label } value={ statistic.value } color={ statistic.color } style={ { width: '30%' } } />
-                )) }
+                {
+                    statistics.users.map((statistic, index) => (
+                        <Statistic key={ index } label={ statistic.label } value={ statistic.value } color={ statistic.color } style={ { width: '30%' } } />
+                    ))
+                }
             </div>
-            <div style={ { flexGrow: 1 } } className='flex flex-col gap-4'>
-                <TableContainer
-                    title='Users'
-                    headers={ userHeaders }
-                    data={ data }
-                    onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
-                    onAdd={ () => console.log('Add') }
-                    currentPage={ currentPage }
-                    totalPages={ totalPages }
-                    onPageChange={ handlePageChange }
-                    isLoading={ isLoading }
-                />
-            </div>
+            <TableContainer
+                title='Users'
+                headers={ userHeaders }
+                data={ data }
+                onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
+                onAdd={ () => console.log('Add') }
+                currentPage={ currentPage }
+                totalPages={ totalPages }
+                onPageChange={ handlePageChange }
+                isLoading={ isLoading }
+            />
         </div>
     )
 }

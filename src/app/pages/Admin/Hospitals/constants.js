@@ -1,9 +1,8 @@
-import { theme } from '../../../../theme/colors'
+import { theme } from '../../../theme/colors'
 
 export const hospitalHeaders = ['Hospital', 'Contact Number', 'Owner Name', 'Category', 'Available Days (Sun-Sat)']
 
 export const statistics = {
-
 
     hospitals: [
         {
@@ -24,3 +23,5 @@ export const statistics = {
     ]
 
 }
+
+export const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']

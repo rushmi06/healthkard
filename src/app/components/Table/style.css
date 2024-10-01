@@ -1,11 +1,15 @@
-#table-container::-webkit-scrollbar {
-  /* width: 1px;
+#table::-webkit-scrollbar {
+    /* width: 1px;
   background-color: #303486; */
-  display: none;
+    display: none;
 }
 
-#table-container::-webkit-scrollbar-thumb {
-  width: 1px;
-  height: 1px;
-  background-color: #303486;
+#table::-webkit-scrollbar-thumb {
+    width: 1px;
+    height: 1px;
+    background-color: #303486;
+}
+
+#table-body {
+    height: calc(100% - 9rem);
 }

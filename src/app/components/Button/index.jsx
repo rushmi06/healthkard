@@ -58,7 +58,7 @@ const Button = ({ label, type, color, disabled, isLoading, style, onClick, icon:
             style={ buttonStyle }
             disabled={ disabled || isLoading }
             onClick={ onClick }
-            className='flex items-center gap-2 h-9 text-sm min-w-32 justify-center rounded'
+            className='flex items-center gap-2 h-9 text-sm min-w-32 justify-center rounded font-semibold'
         >
             { isLoading ? (
                 <span style={ { display: 'flex', alignItems: 'center', justifyContent: 'center' } }>

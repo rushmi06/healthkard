@@ -1,0 +1,16 @@
+#table-container {
+    height: calc(100%);
+}
+
+#table-container-body {
+    height: calc(100% - 2.75rem);
+}
+
+
+/* #outer-table {
+    height: calc(100% - 2.75rem);
+} */
+
+#outer-table::-webkit-scrollbar {
+    display: none;
+}
