@@ -1,6 +1,6 @@
-import { theme } from '../../../../theme/colors'
+import { theme } from '../../../theme/colors'
 
-export const agentHeaders = ['Agent', 'Contact Number', 'Owner Name', 'Category', 'Available Days (Sun-Sat)']
+export const agentHeaders = ['Agent', 'Contact Number', 'Today\'s Users onboarded', 'Total users onboarded', 'Today\'s Hospitals onboarded', 'Total hospitals onboarded']
 
 export const statistics = {
 

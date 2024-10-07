@@ -1,6 +1,7 @@
 export const formatNumber = (number) => {
     if (!number) return '';
     let formattedNumber = number.trim();
+    formattedNumber = formattedNumber.replace(/\s/g, '');
     if (formattedNumber.length !== 10) {
         formattedNumber = `+${formattedNumber}`;
     } else {
@@ -29,3 +30,21 @@ export const formateAddress = (address) => {
     // Join the parts with commas and spaces
     return filteredParts.join(', ');
 }
+
+export const formatDate = (date) => {
+    if (!date) return '';
+    const dateObj = new Date(date);
+    const day = dateObj.getDate();
+    // const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthName = monthNames[dateObj.getMonth()];
+    return `${day.toString().padStart(2, '0')} ${monthName} ${year}`;
+}
+
+
+export const formatCurrency = (amount) => {
+    if (!amount) return '';
+    return `₹ ${amount.toLocaleString('en-IN')}/-`;
+}
+

@@ -15,7 +15,7 @@ function Admin({ theme }) {
                 <NavigationPanel />
                 <Button label='Logout' type='btn-danger' onClick={ () => { } } />
             </div>
-            <div id='admin-content' className='h-full '>
+            <div id='admin-content' className='w-full '>
                 <Outlet />
             </div>
         </div>

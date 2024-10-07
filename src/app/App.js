@@ -5,16 +5,25 @@ import Hospitals from './pages/Admin/Hospitals'
 import Approved from './pages/Admin/Hospitals/Approved'
 import Pending from './pages/Admin/Hospitals/Pending'
 import HospitalDetails from './pages/Admin/Hospitals/Details'
-import UserDetails from './pages/Admin/Users/Details'
+import UsersDetails from './pages/Admin/Users/Details'
+import UserDetailed from './pages/Admin/Users/Detailed'
 import NewAgent from './pages/Admin/Agents/NewAgent'
 import { ThemeProvider } from './theme/Theme/ThemeContext'
 import NotFound from './pages/NotFound'
 import Blogs from './pages/Admin/Marketing/Blogs'
 import Testimonials from './pages/Admin/Marketing/Testimonials'
 import Youtube from './pages/Admin/Marketing/Youtube'
+import Alert from './components/Alert'
+import EmailBox from './components/EmailBox'
+import Users from './pages/Admin/Users'
+import Agents from './pages/Admin/Agents'
+import AgentLogs from './pages/Admin/Agents/AgentLogs'
+import AgentDetails from './pages/Admin/Agents/AgentDetails'
 function App() {
   return (
     <ThemeProvider>
+      <Alert />
+      <EmailBox />
       <Routes>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >
@@ -25,8 +34,17 @@ function App() {
               <Route path=":hospitalId" element={ <HospitalDetails /> } />
             </Route>
           </Route>
-          <Route path="users/details" element={ <UserDetails /> } />
-          <Route path="agents/new" element={ <NewAgent /> } />
+          <Route path="users" element={ <Users /> } >
+            <Route path="details" element={ <UsersDetails /> } >
+              <Route path=":userId" element={ <UserDetailed /> } />
+            </Route>
+          </Route>
+          <Route path="agents" element={ <Agents /> } >
+            <Route path="new" element={ <NewAgent /> } />
+            <Route path="logs" element={ <AgentLogs /> } >
+              <Route path=":agentId" element={ <AgentDetails /> } />
+            </Route>
+          </Route>
           <Route path="marketing/blogs" element={ <Blogs /> } />
           <Route path="marketing/testimonials" element={ <Testimonials /> } />
           <Route path="marketing/youtube" element={ <Youtube /> } />

@@ -1,6 +1,4 @@
 import React from 'react'
-import Statistic from '../../components/Statistic'
-import { statistics } from './constants'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import Checkbox from '../../../../components/Checkbox'
@@ -9,13 +7,6 @@ import withTheme from '../../../../theme/Theme'
 function NewAgent({ theme }) {
     return (
         <div className='flex flex-col gap-4 w-full h-full'>
-            <div className='flex h-20  justify-between gap-4 w-full'>
-                {
-                    statistics.agents.map((statistic, index) => (
-                        <Statistic key={ index } label={ statistic.label } value={ statistic.value } color={ statistic.color } style={ { width: '30%' } } />
-                    ))
-                }
-            </div>
             <div style={ { backgroundColor: theme.secondary } } className='flex flex-col flex-grow rounded overflow-y-scroll h-full p-4'>
                 <Form />
             </div>

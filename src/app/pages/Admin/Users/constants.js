@@ -1,4 +1,4 @@
-import { theme } from '../../../../theme/colors'
+import { theme } from '../../../theme/colors'
 
 export const userHeaders = ['User', 'Gender', 'Location', 'On-boarded By', 'Mobile Number']
 

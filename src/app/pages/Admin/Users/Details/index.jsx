@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Statistic from '../../components/Statistic'
-import { userHeaders, statisticsTemplate } from './constants'
+import { userHeaders, statisticsTemplate } from '../constants'
+import { Outlet, useParams } from 'react-router-dom'
 import TableContainer from '../../components/TableContainer'
 import httpService from '../../../../api/httpService';
 import FilterSlider from '../../components/FilterSlider';
@@ -13,6 +13,7 @@ function Details() {
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const itemsPerPage = 10;
+    const { userId } = useParams();
 
     const [filterCategories] = useState({
         location: ['Guntur', 'Narasaraopet', 'Vijayawada'],
@@ -76,25 +77,20 @@ function Details() {
 
     return (
         <div className='flex flex-col gap-4 w-full h-full'>
-            <FilterSlider open={ isFilterSliderOpen } onClose={ () => setIsFilterSliderOpen(false) } filterCategories={ filterCategories } onApplyFilters={ handleApplyFilters } />
-            <div className='flex h-20 justify-between gap-4 w-full'>
-                {
-                    statistics.users.map((statistic, index) => (
-                        <Statistic key={ index } label={ statistic.label } value={ statistic.value } color={ statistic.color } style={ { width: '30%' } } />
-                    ))
-                }
-            </div>
-            <TableContainer
-                title='Users'
-                headers={ userHeaders }
-                data={ data }
-                onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
-                onAdd={ () => console.log('Add') }
-                currentPage={ currentPage }
-                totalPages={ totalPages }
-                onPageChange={ handlePageChange }
-                isLoading={ isLoading }
-            />
+            { !userId ? <div className='flex flex-col gap-4 w-full h-full'>
+                <FilterSlider open={ isFilterSliderOpen } onClose={ () => setIsFilterSliderOpen(false) } filterCategories={ filterCategories } onApplyFilters={ handleApplyFilters } />
+                <TableContainer
+                    title='Users'
+                    headers={ userHeaders }
+                    data={ data }
+                    onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
+                    onAdd={ () => console.log('Add') }
+                    currentPage={ currentPage }
+                    totalPages={ totalPages }
+                    onPageChange={ handlePageChange }
+                    isLoading={ isLoading }
+                />
+            </div> : <Outlet /> }
         </div>
     )
 }

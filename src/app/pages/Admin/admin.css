@@ -1,3 +1,8 @@
 #admin-content {
-    width: calc(100% - 224px);
+  width: calc(100% - 224px);
+  /* height: calc(100% - 6rem); */
+}
+
+#content {
+  height: calc(100% - 6rem);
 }

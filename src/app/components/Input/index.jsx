@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../../theme/Theme';
 
-const Input = ({ label, type, onChange, style, inputStyle, placeholder = 'Enter value', theme, multiline, rows = 10 }) => {
+const Input = ({ label, type, onChange, style, inputStyle, placeholder = 'Enter value', theme, multiline, rows = 10, value }) => {
     const inputProps = {
         type: multiline ? undefined : type,
         onChange: onChange,
@@ -21,9 +21,9 @@ const Input = ({ label, type, onChange, style, inputStyle, placeholder = 'Enter 
         <div style={ { ...style } } className={ `flex gap-2 ${multiline ? 'flex-col' : 'h-9 items-center'}  justify-between` }>
             <label style={ { color: theme.primary } } className='text-sm font-semibold'>{ label }</label>
             { multiline ? (
-                <textarea { ...inputProps } rows={ rows } />
+                <textarea { ...inputProps } rows={ rows } value={ value } />
             ) : (
-                <input { ...inputProps } />
+                <input { ...inputProps } value={ value } />
             ) }
         </div>
     );

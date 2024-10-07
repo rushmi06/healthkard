@@ -7,12 +7,26 @@ import { IoIosAdd, IoIosClose, IoMdCall, IoIosSend, IoMdTrash, IoIosMail } from 
 import { MdEdit } from "react-icons/md";
 import { IoLocation } from "react-icons/io5";
 import { days } from '../constants'
-
-
+import alertTrigger from '../../../../components/Alert/alertTrigger';
+import emailBoxTrigger from '../../../../components/EmailBox/emailBoxTrigger'
+import EditHome from './EditHome'
+import GeneralEditModal from './GeneralEditModal'
+import AddressEditModal from './AddressEditModal'
+import OwnerEditModal from './OwnerEditModal'
+import DoctorsEditModal from './DoctorsEditModal'
+import GalleryEditModal from './GalleryEditModal'
+import CloseOnOutsideClick from '../../../../components/CloseOnOutsideClick'
 
 function Details({ theme }) {
     const { hospitalId } = useParams()
-    const [hospital, setHospital] = useState(null)
+    const [hospital, setHospital] = useState(null);
+    const [isEditHomeOpen, setIsEditHomeOpen] = useState(false);
+    const [isGeneralModalOpen, setIsGeneralModalOpen] = useState(false);
+    const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+    const [isOwnerModalOpen, setIsOwnerModalOpen] = useState(false);
+    const [isDoctorsModalOpen, setIsDoctorsModalOpen] = useState(false);
+    const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await httpService.get('hospitals', `?hospitalId=${hospitalId}`);
@@ -21,11 +35,41 @@ function Details({ theme }) {
         fetchData()
     }, [hospitalId])
 
+    const onChooseCategory = (category) => {
+        switch (category) {
+            case 'general':
+                setIsGeneralModalOpen(true);
+                break;
+            case 'address':
+                setIsAddressModalOpen(true);
+                break;
+            case 'owner':
+                setIsOwnerModalOpen(true);
+                break;
+            case 'doctors':
+                setIsDoctorsModalOpen(true);
+                break;
+            case 'gallery':
+                setIsGalleryModalOpen(true);
+                break;
+            default:
+                setIsEditHomeOpen(true);
+                break;
+        }
+        setIsEditHomeOpen(false)
+    }
+
     return (
         <div style={ { backgroundColor: theme.secondary, color: theme.text } } className='relative flex items-center text-sm flex-col gap-4 w-full h-full rounded '>
+            { isEditHomeOpen && <EditHome isOpen={ isEditHomeOpen } setIsOpen={ setIsEditHomeOpen } onChooseCategory={ onChooseCategory } /> }
+            { isGeneralModalOpen && <GeneralEditModal isOpen={ isGeneralModalOpen } setIsOpen={ setIsGeneralModalOpen } /> }
+            { isAddressModalOpen && <AddressEditModal isOpen={ isAddressModalOpen } setIsOpen={ setIsAddressModalOpen } /> }
+            { isOwnerModalOpen && <OwnerEditModal isOpen={ isOwnerModalOpen } setIsOpen={ setIsOwnerModalOpen } /> }
+            { isDoctorsModalOpen && <DoctorsEditModal isOpen={ isDoctorsModalOpen } setIsOpen={ setIsDoctorsModalOpen } /> }
+            { isGalleryModalOpen && <GalleryEditModal isOpen={ isGalleryModalOpen } setIsOpen={ setIsGalleryModalOpen } /> }
             <DetailsHeader theme={ theme } hospital={ hospital } />
             <Content theme={ theme } hospital={ hospital } />
-            <MoreOptions theme={ theme } />
+            <MoreOptions theme={ theme } hospital={ hospital } setIsEditHomeOpen={ setIsEditHomeOpen } />
             <OnBoardedBy theme={ theme } agentID={ hospital?.agentID } />
         </div>
     )
@@ -37,7 +81,7 @@ export default withTheme(Details)
 function DetailsHeader({ theme, hospital }) {
     return (
         <div style={ { borderBottom: `1px solid ${theme.primary}` } } className='flex justify-between items-center p-2 w-full'>
-            <div className=' rounded-full flex items-center justify-center gap-2 h-10'>
+            <div className=' flex items-center justify-center gap-2 h-10'>
                 <img src={ hospital?.mediaDetails?.logoURL } alt='logo' className='h-10 w-10 rounded-full' />
                 <div className='flex flex-col h-full'>
                     <div className='flex items-center gap-2'>
@@ -126,37 +170,58 @@ function Content({ theme, hospital }) {
     )
 }
 
-function MoreOptions({ theme }) {
+function MoreOptions({ theme, hospital, setIsEditHomeOpen }) {
     const [isOpen, setIsOpen] = useState(false);
     const onEdit = (e) => {
         e.stopPropagation()
-        console.log('Edit')
-        setIsOpen(!isOpen)
+        setIsEditHomeOpen(prev => !prev)
     }
     const onDelete = (e) => {
         e.stopPropagation()
-        console.log('Delete')
-        setIsOpen(!isOpen)
+        alertTrigger.emit(
+            'Confirm Deletion',
+            `Are you sure you want to delete ${hospital?.hospitalDetails?.hospitalLegalName}? This action cannot be undone.`,
+            () => {
+                console.log('Deletion cancelled')
+                setIsOpen(false)
+            },
+            () => {
+                console.log('Deleting hospital:', hospital?.hospitalId)
+                // Implement actual delete logic here
+                setIsOpen(false)
+            }
+        )
     }
     const onSendMessage = (e) => {
         e.stopPropagation()
         console.log('Send Message')
-        setIsOpen(!isOpen)
+        emailBoxTrigger.emit(
+            hospital?.email,
+            `Message from ${hospital?.hospitalDetails?.hospitalLegalName}`,
+            () => {
+                console.log('Message cancelled')
+                setIsOpen(false)
+            },
+            () => { console.log('Message sent') }
+        )
     }
     const optionStyle = `flex items-center gap-2 px-2 py-1 hover:cursor-pointer hover:bg-gray-600 hover:text-white`
     return (
-        <div className='absolute bottom-10 right-10'>
-            <div onClick={ () => setIsOpen(!isOpen) } style={ { backgroundColor: theme.primary, color: theme.textSecondary } } className='rounded-full w-10 h-10 flex items-center justify-center text-xl hover:scale-110 transition-all duration-300 hover:shadow-lg hover:shadow-quaternary hover:cursor-pointer '>
-                { isOpen ? <IoIosClose /> : <IoIosAdd /> }
-            </div>
-            { isOpen && <div style={ { backgroundColor: theme.primary, color: theme.textSecondary } } className='absolute bottom-10 right-10 w-52 rounded'>
-                <div className='flex flex-col font-regular text-sm'>
-                    <div onClick={ onEdit } className={ optionStyle }> <MdEdit /> Edit Hospital</div>
-                    <div onClick={ onDelete } style={ { color: theme.danger } } className={ optionStyle }> <IoMdTrash /> Delete Hospital</div>
-                    <div onClick={ onSendMessage } className={ optionStyle }> <IoIosSend /> Send Message</div>
+        <CloseOnOutsideClick onClose={ () => setIsOpen(false) }>
+
+            <div className='absolute bottom-10 right-10'>
+                <div onClick={ () => setIsOpen(!isOpen) } style={ { backgroundColor: theme.primary, color: theme.textSecondary } } className='rounded-full w-10 h-10 flex items-center justify-center text-xl hover:scale-110 transition-all duration-300 hover:shadow-lg hover:shadow-quaternary hover:cursor-pointer '>
+                    { isOpen ? <IoIosClose /> : <IoIosAdd /> }
                 </div>
-            </div> }
-        </div>
+                { isOpen && <div style={ { backgroundColor: theme.primary, color: theme.textSecondary } } className='absolute bottom-10 right-10 w-52 rounded'>
+                    <div className='flex flex-col font-regular text-sm'>
+                        <div onClick={ onEdit } className={ optionStyle }> <MdEdit /> Edit Hospital</div>
+                        <div onClick={ onDelete } style={ { color: theme.danger } } className={ optionStyle }> <IoMdTrash /> Delete Hospital</div>
+                        <div onClick={ onSendMessage } className={ optionStyle }> <IoIosSend /> Send Message</div>
+                    </div>
+                </div> }
+            </div>
+        </CloseOnOutsideClick>
     )
 }
 
