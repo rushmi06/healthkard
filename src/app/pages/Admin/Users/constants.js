@@ -2,6 +2,8 @@ import { theme } from '../../../theme/colors'
 
 export const userHeaders = ['User', 'Gender', 'Location', 'On-boarded By', 'Mobile Number']
 
+export const mobileUserHeaders = ['Name', 'Email', 'Phone Number', 'Registered In']
+
 export const statisticsTemplate = {
     users: [
         {

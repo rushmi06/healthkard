@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { userHeaders } from '../constants'
+import { mobileUserHeaders } from '../constants'
 import { Outlet, useParams } from 'react-router-dom'
 import TableContainer from '../../components/TableContainer'
 import httpService from '../../../../api/httpService';
 import FilterSlider from '../../components/FilterSlider';
+import { formatDate, formatNumber } from '../../../../utils/format';
 
 function Details() {
     const [data, setData] = useState([]);
     const [isFilterSliderOpen, setIsFilterSliderOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    const itemsPerPage = 10;
+
     const { userId } = useParams();
 
     const [filterCategories] = useState({
@@ -27,20 +27,16 @@ function Details() {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response = await httpService.get(`users?page=${currentPage}&limit=${itemsPerPage}`);
-                const { users, totalPages: total } = response;
-                const formattedData = users.map((user) => ({
+                const response = await httpService.get(`mobile`);
+
+                const formattedData = response.map((user) => ({
                     _id: user?._id,
-                    id: user?.healthId,
                     name: user?.name,
-                    image: user?.image,
-                    gender: user?.gender,
-                    location: user?.city,
-                    onBoardedBy: user?.agent,
-                    number: user?.number,
+                    email: user?.email,
+                    phoneNumber: formatNumber(user?.number),
+                    registeredIn: formatDate(user?.createdAt),
                 }));
                 setData(formattedData);
-                setTotalPages(total);
             } catch (error) {
                 console.error('Error fetching users:', error);
             } finally {
@@ -48,7 +44,7 @@ function Details() {
             }
         };
         fetchData();
-    }, [currentPage, totalPages]);
+    }, []);
 
     const handleApplyFilters = (filters) => {
         setIsFilterSliderOpen(false);
@@ -64,12 +60,12 @@ function Details() {
                 <FilterSlider open={ isFilterSliderOpen } onClose={ () => setIsFilterSliderOpen(false) } filterCategories={ filterCategories } onApplyFilters={ handleApplyFilters } />
                 <TableContainer
                     title='Users'
-                    headers={ userHeaders }
+                    headers={ mobileUserHeaders }
                     data={ data }
                     onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
                     onAdd={ () => console.log('Add') }
                     currentPage={ currentPage }
-                    totalPages={ totalPages }
+                    totalPages={ 1 }
                     onPageChange={ handlePageChange }
                     isLoading={ isLoading }
                 />

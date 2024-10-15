@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import withTheme from '../../theme/Theme'
-function Panel({ header, theme, onSelect, body }) {
+function Panel({ header, theme, onSelect = () => { }, body }) {
     const [selected, setSelected] = useState(header[0])
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function PanelHeader({ theme, header, selected, setSelected }) {
     return (
         <div className='flex'>
             { header.map((item, index) => (
-                <button type='button' onClick={ () => setSelected(item) } key={ index } style={ { backgroundColor: selected === item ? theme.primary : '', color: selected !== item ? theme.text : theme.textSecondary, } } className='flex rounded-t px-2 py-1 w-24 items-center justify-center'>{ item }</button>
+                <button type='button' onClick={ () => setSelected(item) } key={ index } style={ { backgroundColor: selected === item ? theme.primary : '', color: selected !== item ? theme.text : theme.textSecondary, } } className='flex rounded-t px-2 py-1 min-w-24 items-center justify-center'>{ item }</button>
             )) }
         </div>
     )

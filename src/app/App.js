@@ -19,6 +19,9 @@ import Users from './pages/Admin/Users'
 import Agents from './pages/Admin/Agents'
 import AgentLogs from './pages/Admin/Agents/AgentLogs'
 import AgentDetails from './pages/Admin/Agents/AgentDetails'
+import MobileUsers from './pages/Admin/Users/MobileUsers'
+import MobileUserDetailed from './pages/Admin/Users/MobileUserDetailed'
+import Records from './pages/Admin/Users/Records'
 function App() {
   return (
     <ThemeProvider>
@@ -38,6 +41,10 @@ function App() {
             <Route path="details" element={ <UsersDetails /> } >
               <Route path=":userId" element={ <UserDetailed /> } />
             </Route>
+            <Route path="mobile" element={ <MobileUsers /> } >
+              <Route path=":userId" element={ <MobileUserDetailed /> } />
+            </Route>
+            <Route path="records" element={ <Records /> } />
           </Route>
           <Route path="agents" element={ <Agents /> } >
             <Route path="new" element={ <NewAgent /> } />

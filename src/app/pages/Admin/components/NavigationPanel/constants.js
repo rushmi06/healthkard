@@ -1,7 +1,6 @@
 import { TiInputChecked } from "react-icons/ti";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { FaLock, FaMoneyBill, FaRegUserCircle } from "react-icons/fa";
-import { VscJson } from "react-icons/vsc";
 import { MdOutlineFeedback } from "react-icons/md";
 import { FaUserShield } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
@@ -10,6 +9,8 @@ import { GiSatelliteCommunication } from "react-icons/gi";
 import { FaYoutube } from "react-icons/fa";
 import { FaPalette } from "react-icons/fa";
 import { FaMobileAlt } from "react-icons/fa";
+import { RiFolderShield2Fill } from "react-icons/ri";
+
 export const NAVIGATION_PANEL_LINKS = [
     {
         label: 'Hospitals',
@@ -41,9 +42,9 @@ export const NAVIGATION_PANEL_LINKS = [
             },
 
             {
-                label: 'Logs',
-                link: '/admin/users/logs',
-                icon: VscJson
+                label: 'Records',
+                link: '/admin/users/records',
+                icon: RiFolderShield2Fill
             },
             {
                 label: 'Feedback',

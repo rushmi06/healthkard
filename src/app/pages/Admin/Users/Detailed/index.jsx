@@ -14,8 +14,8 @@ function Detailed({ theme }) {
     const [user, setUser] = useState(null)
     useEffect(() => {
         const fetchData = async () => {
-            const response = await httpService.get('users', `?healthId=${userId}`);
-            setUser(response.users[0])
+            const response = await httpService.get(`users/user/${userId}`);
+            setUser(response)
         }
         fetchData()
     }, [userId])

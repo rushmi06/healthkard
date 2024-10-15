@@ -3,7 +3,7 @@ import withTheme from '../../../../theme/Theme'
 import { useParams } from 'react-router-dom'
 import httpService from '../../../../api/httpService'
 import { formateAddress, formatNumber } from '../../../../utils/format'
-import { IoIosAdd, IoIosClose, IoMdCall, IoIosSend, IoMdTrash, IoIosMail } from "react-icons/io";
+import { IoIosAdd, IoIosClose, IoMdCall, IoIosSend, IoMdTrash, IoIosMail, IoIosCheckmark, IoMdClose } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
 import { IoLocation } from "react-icons/io5";
 import { days } from '../constants'
@@ -29,8 +29,8 @@ function Details({ theme }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await httpService.get('hospitals', `?hospitalId=${hospitalId}`);
-            setHospital(response.hospitals[0])
+            const response = await httpService.get(`hospitals/hospital/${hospitalId}`);
+            setHospital(response)
         }
         fetchData()
     }, [hospitalId])
@@ -171,6 +171,25 @@ function Content({ theme, hospital }) {
 }
 
 function MoreOptions({ theme, hospital, setIsEditHomeOpen }) {
+    const [isPending, setIsPending] = useState(false);
+
+    useEffect(() => {
+        const checkPendingStatus = () => {
+            const currentUrl = window.location.href;
+            setIsPending(currentUrl.includes('pending'));
+        };
+
+        checkPendingStatus();
+
+        // Add event listener for URL changes (if using client-side routing)
+        window.addEventListener('popstate', checkPendingStatus);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('popstate', checkPendingStatus);
+        };
+    }, []);
+
     const [isOpen, setIsOpen] = useState(false);
     const onEdit = (e) => {
         e.stopPropagation()
@@ -205,6 +224,14 @@ function MoreOptions({ theme, hospital, setIsEditHomeOpen }) {
             () => { console.log('Message sent') }
         )
     }
+    const onApprove = (e) => {
+        e.stopPropagation()
+        console.log('Approve Hospital')
+    }
+    const onReject = (e) => {
+        e.stopPropagation()
+        console.log('Reject Hospital')
+    }
     const optionStyle = `flex items-center gap-2 px-2 py-1 hover:cursor-pointer hover:bg-gray-600 hover:text-white`
     return (
         <CloseOnOutsideClick onClose={ () => setIsOpen(false) }>
@@ -218,6 +245,8 @@ function MoreOptions({ theme, hospital, setIsEditHomeOpen }) {
                         <div onClick={ onEdit } className={ optionStyle }> <MdEdit /> Edit Hospital</div>
                         <div onClick={ onDelete } style={ { color: theme.danger } } className={ optionStyle }> <IoMdTrash /> Delete Hospital</div>
                         <div onClick={ onSendMessage } className={ optionStyle }> <IoIosSend /> Send Message</div>
+                        { isPending && <div onClick={ onApprove } className={ optionStyle }> <IoIosCheckmark /> Approve Hospital</div> }
+                        { !isPending && <div onClick={ onReject } className={ optionStyle }> <IoMdClose /> Reject Hospital</div> }
                     </div>
                 </div> }
             </div>

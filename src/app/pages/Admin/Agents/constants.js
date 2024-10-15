@@ -24,3 +24,5 @@ export const statistics = {
     ]
 
 }
+
+export const agentDetailsPanel = ['Agent Details', 'Users onboarded', 'Hospitals onboarded', 'Edit Agent']

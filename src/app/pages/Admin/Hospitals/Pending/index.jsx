@@ -3,8 +3,10 @@ import { hospitalHeaders } from '../constants'
 import TableContainer from '../../components/TableContainer'
 import httpService from '../../../../api/httpService';
 import FilterSlider from '../../components/FilterSlider';
+import { Outlet, useParams } from 'react-router-dom';
 
 function Pending() {
+    const { hospitalId } = useParams()
     const [data, setData] = useState([]);
     const [isFilterSliderOpen, setIsFilterSliderOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -50,19 +52,23 @@ function Pending() {
 
     return (
         <div className='flex flex-col gap-4 w-full h-full'>
-            <FilterSlider open={ isFilterSliderOpen } onClose={ () => setIsFilterSliderOpen(false) } filterCategories={ filterCategories } onApplyFilters={ handleApplyFilters } />
-            <TableContainer
-                title='Approved Hospitals'
-                headers={ hospitalHeaders }
-                data={ data }
-                onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
-                onAdd={ () => console.log('Add') }
-                currentPage={ currentPage }
-                totalPages={ totalPages }
-                onPageChange={ handlePageChange }
-                isLoading={ isLoading }
-                onRowClick={ (id) => console.log(id) }
-            />
+            { !hospitalId ?
+                <div className='flex flex-col gap-4 w-full h-full'>
+                    <FilterSlider open={ isFilterSliderOpen } onClose={ () => setIsFilterSliderOpen(false) } filterCategories={ filterCategories } onApplyFilters={ handleApplyFilters } />
+                    <TableContainer
+                        title='Pending Hospitals'
+                        headers={ hospitalHeaders }
+                        data={ data }
+                        onApplyFilters={ (filters) => setIsFilterSliderOpen(true) }
+                        onAdd={ () => console.log('Add') }
+                        currentPage={ currentPage }
+                        totalPages={ totalPages }
+                        onPageChange={ handlePageChange }
+                        isLoading={ isLoading }
+                        onRowClick={ (id) => console.log(id) }
+                    />
+                </div>
+                : <Outlet /> }
         </div>
     )
 }
