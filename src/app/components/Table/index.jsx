@@ -25,7 +25,7 @@ function Table({ headers, data, theme, currentPage, totalPages, onPageChange, is
                             { data.map((row, rowIndex) => (
                                 <tr key={ rowIndex } style={ { backgroundColor: rowIndex % 2 === 0 ? theme.secondary : '' } } className='text-center text-sm p-2 row'>
                                     <td className='p-2 text-left flex items-center gap-2'>
-                                        <Link to={ `${row._id}` } style={ { textDecoration: 'none', color: 'inherit' } } className='p-2 text-left flex items-center gap-2'>
+                                        <Link to={ row.navigateTo ? row.navigateTo : `${row._id}` } style={ { textDecoration: 'none', color: 'inherit' } } className='p-2 text-left flex items-center gap-2'>
                                             { row.image && <div className=' h-10 w-10 rounded-full'>
                                                 <img src={ row.image } alt={ row.name } className='object-cover h-10 w-10 rounded-full' />
                                             </div> }
@@ -35,7 +35,7 @@ function Table({ headers, data, theme, currentPage, totalPages, onPageChange, is
                                             </div>
                                         </Link>
                                     </td>
-                                    { Object.keys(row).filter(key => key !== '_id' && key !== 'id' && key !== 'name' && key !== 'image').map((key, cellIndex) => (
+                                    { Object.keys(row).filter(key => key !== '_id' && key !== 'id' && key !== 'name' && key !== 'image' && key !== 'navigateTo').map((key, cellIndex) => (
                                         <td key={ cellIndex } style={ { borderLeft: `1px solid ${theme.primary}` } } className='p-2 capitalize'>{ key === 'number' ? formatNumber(row[key]) : row[key] }</td>
                                     )) }
                                 </tr>

@@ -22,6 +22,7 @@ import AgentDetails from './pages/Admin/Agents/AgentDetails'
 import MobileUsers from './pages/Admin/Users/MobileUsers'
 import MobileUserDetailed from './pages/Admin/Users/MobileUserDetailed'
 import Records from './pages/Admin/Users/Records'
+import Transactions from './pages/Admin/Transactions'
 function App() {
   return (
     <ThemeProvider>
@@ -55,6 +56,7 @@ function App() {
           <Route path="marketing/blogs" element={ <Blogs /> } />
           <Route path="marketing/testimonials" element={ <Testimonials /> } />
           <Route path="marketing/youtube" element={ <Youtube /> } />
+          <Route path="transactions" element={ <Transactions /> } />
         </Route>
         <Route path='*' element={ <NotFound /> } />
       </Routes>

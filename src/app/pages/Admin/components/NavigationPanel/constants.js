@@ -117,7 +117,7 @@ export const NAVIGATION_PANEL_LINKS = [
         subLinks: [
             {
                 label: 'Transactions',
-                link: '/admin/payments/transactions',
+                link: '/admin/transactions',
                 icon: FaMoneyBill
             },
 
