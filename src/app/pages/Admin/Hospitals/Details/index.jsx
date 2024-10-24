@@ -26,6 +26,7 @@ function Details({ theme }) {
     const [isOwnerModalOpen, setIsOwnerModalOpen] = useState(false);
     const [isDoctorsModalOpen, setIsDoctorsModalOpen] = useState(false);
     const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+    const [updateCount, setUpdateCount] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +34,7 @@ function Details({ theme }) {
             setHospital(response)
         }
         fetchData()
-    }, [hospitalId])
+    }, [hospitalId, updateCount])
 
     const onChooseCategory = (category) => {
         switch (category) {
@@ -62,11 +63,11 @@ function Details({ theme }) {
     return (
         <div style={ { backgroundColor: theme.secondary, color: theme.text } } className='relative flex items-center text-sm flex-col gap-4 w-full h-full rounded '>
             { isEditHomeOpen && <EditHome isOpen={ isEditHomeOpen } setIsOpen={ setIsEditHomeOpen } onChooseCategory={ onChooseCategory } /> }
-            { isGeneralModalOpen && <GeneralEditModal isOpen={ isGeneralModalOpen } setIsOpen={ setIsGeneralModalOpen } /> }
-            { isAddressModalOpen && <AddressEditModal isOpen={ isAddressModalOpen } setIsOpen={ setIsAddressModalOpen } /> }
-            { isOwnerModalOpen && <OwnerEditModal isOpen={ isOwnerModalOpen } setIsOpen={ setIsOwnerModalOpen } /> }
-            { isDoctorsModalOpen && <DoctorsEditModal isOpen={ isDoctorsModalOpen } setIsOpen={ setIsDoctorsModalOpen } /> }
-            { isGalleryModalOpen && <GalleryEditModal isOpen={ isGalleryModalOpen } setIsOpen={ setIsGalleryModalOpen } /> }
+            { isGeneralModalOpen && <GeneralEditModal isOpen={ isGeneralModalOpen } setIsOpen={ setIsGeneralModalOpen } setUpdateCount={ setUpdateCount } /> }
+            { isAddressModalOpen && <AddressEditModal isOpen={ isAddressModalOpen } setIsOpen={ setIsAddressModalOpen } setUpdateCount={ setUpdateCount } /> }
+            { isOwnerModalOpen && <OwnerEditModal isOpen={ isOwnerModalOpen } setIsOpen={ setIsOwnerModalOpen } setUpdateCount={ setUpdateCount } /> }
+            { isDoctorsModalOpen && <DoctorsEditModal isOpen={ isDoctorsModalOpen } setIsOpen={ setIsDoctorsModalOpen } setUpdateCount={ setUpdateCount } /> }
+            { isGalleryModalOpen && <GalleryEditModal isOpen={ isGalleryModalOpen } setIsOpen={ setIsGalleryModalOpen } setUpdateCount={ setUpdateCount } /> }
             <DetailsHeader theme={ theme } hospital={ hospital } />
             <Content theme={ theme } hospital={ hospital } />
             <MoreOptions theme={ theme } hospital={ hospital } setIsEditHomeOpen={ setIsEditHomeOpen } />

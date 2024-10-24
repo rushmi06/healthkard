@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import withTheme from '../../theme/Theme'
-function Panel({ header, theme, onSelect = () => { }, body }) {
+function Panel({ header = [], theme, onSelect = () => { }, body }) {
     const [selected, setSelected] = useState(header[0])
 
     useEffect(() => {

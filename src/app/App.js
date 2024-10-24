@@ -23,6 +23,9 @@ import MobileUsers from './pages/Admin/Users/MobileUsers'
 import MobileUserDetailed from './pages/Admin/Users/MobileUserDetailed'
 import Records from './pages/Admin/Users/Records'
 import Transactions from './pages/Admin/Transactions'
+import Database from './pages/Admin/Database'
+import NewHospital from './pages/Registration/NewHospital'
+import './App.css'
 function App() {
   return (
     <ThemeProvider>
@@ -57,7 +60,9 @@ function App() {
           <Route path="marketing/testimonials" element={ <Testimonials /> } />
           <Route path="marketing/youtube" element={ <Youtube /> } />
           <Route path="transactions" element={ <Transactions /> } />
+          <Route path="database" element={ <Database /> } />
         </Route>
+        <Route path='new-hospital' element={ <NewHospital /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
     </ThemeProvider>

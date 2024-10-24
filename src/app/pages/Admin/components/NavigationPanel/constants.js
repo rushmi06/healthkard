@@ -1,6 +1,6 @@
 import { TiInputChecked } from "react-icons/ti";
 import { MdOutlinePendingActions } from "react-icons/md";
-import { FaLock, FaMoneyBill, FaRegUserCircle } from "react-icons/fa";
+import { FaDatabase, FaLock, FaMoneyBill, FaRegUserCircle } from "react-icons/fa";
 import { MdOutlineFeedback } from "react-icons/md";
 import { FaUserShield } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
@@ -120,8 +120,16 @@ export const NAVIGATION_PANEL_LINKS = [
                 link: '/admin/transactions',
                 icon: FaMoneyBill
             },
-
-
+        ]
+    },
+    {
+        label: 'Database',
+        subLinks: [
+            {
+                label: 'Data storage',
+                link: '/admin/database',
+                icon: FaDatabase
+            }
         ]
     }
 ]
