@@ -13,7 +13,7 @@ function Slider({ isVisible, onClose = () => { }, children, theme }) {
                     transition: 'transform 0.5s ease-in-out',
                     color: theme.primary
                 } }
-                className='lg:w-1/2 w-full absolute right-0 top-0 h-full z-10 shadow'
+                className='lg:w-1/2 w-full absolute right-0 top-0 h-full z-10 shadow justify-between flex flex-col'
             >
                 { children }
             </div>

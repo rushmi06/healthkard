@@ -16,6 +16,7 @@ import OwnerEditModal from './OwnerEditModal'
 import DoctorsEditModal from './DoctorsEditModal'
 import GalleryEditModal from './GalleryEditModal'
 import CloseOnOutsideClick from '../../../../components/CloseOnOutsideClick'
+import viewImageTrigger from '../../../../components/ViewImage/viewImageTrigger'
 
 function Details({ theme }) {
     const { hospitalId } = useParams()
@@ -265,13 +266,16 @@ function OnBoardedBy({ theme, agentID }) {
 }
 
 function Gallery({ theme, hospital }) {
+    const viewImage = (image, title) => {
+        viewImageTrigger.emit(image, title)
+    }
     return (
         <div className='flex flex-col gap-2'>
             <div className='font-semibold'>Gallery</div>
             <div className='w-full flex items-center justify-start gap-2 h-40'>
-                <Image theme={ theme } image={ hospital?.mediaDetails?.logoURL } title='Logo' />
-                <Image theme={ theme } image={ hospital?.mediaDetails?.doctorImageURL } title='Doctor' />
-                <Image theme={ theme } image={ hospital?.mediaDetails?.hospitalImageURL } title='Hospital' />
+                <Image onClick={ () => viewImage(hospital?.mediaDetails?.logoURL, 'Logo') } theme={ theme } image={ hospital?.mediaDetails?.logoURL } title='Logo' />
+                <Image onClick={ () => viewImage(hospital?.mediaDetails?.doctorImageURL, 'Doctor') } theme={ theme } image={ hospital?.mediaDetails?.doctorImageURL } title='Doctor' />
+                <Image onClick={ () => viewImage(hospital?.mediaDetails?.hospitalImageURL, 'Hospital') } theme={ theme } image={ hospital?.mediaDetails?.hospitalImageURL } title='Hospital' />
                 { hospital?.mediaDetails?.achivements?.length > 0 && <div style={ { backgroundColor: theme.primary, color: theme.textSecondary } } className='flex flex-col items-center justify-center gap-2 p-2 rounded [writing-mode:vertical-rl] rotate-180 font-semibold h-full'>
                     Achivements
                 </div> }
@@ -287,15 +291,15 @@ function Gallery({ theme, hospital }) {
     )
 }
 
-function Image({ image, title }) {
+function Image({ onClick, image, title }) {
     if (!image) return null
     return (
-        <div className=' flex flex-col items-center gap-2 shadow p-2 rounded'>
+        <button type='button' onClick={ onClick } className=' flex flex-col items-center gap-2 shadow p-2 rounded'>
             <div className='w-32 h-32 rounded overflow-hidden'>
                 <img src={ image } alt='Gallery' className='w-full h-full object-cover' />
             </div>
             <div className='w-full text-center font-medium'>{ title }</div>
-        </div>
+        </button>
     )
 }
 

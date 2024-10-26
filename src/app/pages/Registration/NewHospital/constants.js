@@ -18,6 +18,7 @@ export const CARD_DATA = [
         id: 1,
         title: 'General Details',
         description: 'Hospital Name, Hospital Address, Hospital Contact Number, Hospital Email',
+        sliderDescription: 'Please fill in the following details to help us understand your hospital better.',
         icon: HospitalIcon,
         form: GeneralForm
     },
@@ -25,6 +26,7 @@ export const CARD_DATA = [
         id: 2,
         title: 'Owner Details',
         description: 'Owner Name, Owner Contact Number, Owner Email',
+        sliderDescription: 'Please fill in the following details to help us understand your hospital better.',
         icon: OwnerIcon,
         form: OwnerForm
     },
@@ -32,6 +34,7 @@ export const CARD_DATA = [
         id: 3,
         title: 'Hospital Services',
         description: 'Hospital Type, Hospital Speciality, Hospital Timings, Available Days',
+        sliderDescription: 'Please fill in the following details to help us understand your hospital better.',
         icon: ServicesIcon,
         form: ServicesForm
     },
@@ -39,6 +42,7 @@ export const CARD_DATA = [
         id: 4,
         title: 'Doctors Details',
         description: 'Doctor Name, Doctor Contact Number, Doctor Email, Doctor License Number',
+        sliderDescription: 'Please fill in the following details to help us understand your hospital better.',
         icon: DoctorIcon,
         form: DoctorForm
     },
@@ -46,6 +50,7 @@ export const CARD_DATA = [
         id: 5,
         title: 'Upload Documents',
         description: 'Hospital License, Owner PAN Card, Hospital GST Certificate',
+        sliderDescription: 'Please fill in the following details to help us understand your hospital better.',
         icon: DocumentsIcon,
         form: UploadForm
     },
@@ -53,6 +58,7 @@ export const CARD_DATA = [
         id: 6,
         title: 'Media Details',
         description: 'Hospital Logo, Doctor Images, Hospital Banner ',
+        sliderDescription: 'Please fill in the following details to help us understand your hospital better.',
         icon: MediaIcon,
         form: MediaForm
     }

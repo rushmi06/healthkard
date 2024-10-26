@@ -1,7 +1,7 @@
 import { RiProfileLine as GeneralIcon } from "react-icons/ri";
 import { GiHorseHead as OwnerIcon } from "react-icons/gi";
 import { FaUserDoctor as DoctorIcon } from "react-icons/fa6";
-import { TfiGallery as GalleryIcon } from "react-icons/tfi";
+// import { TfiGallery as GalleryIcon } from "react-icons/tfi";
 import { FaRegAddressCard as AddressIcon } from "react-icons/fa";
 import { GrServices as ServicesIcon } from "react-icons/gr";
 
@@ -21,11 +21,11 @@ export const types = [
         icon: <DoctorIcon />,
         tooltip: 'Here you can edit the doctors information of the hospital, such as the doctor name, number and email.'
     },
-    {
-        type: 'gallery',
-        icon: <GalleryIcon />,
-        tooltip: 'Here you can edit the gallery of the hospital, such as the gallery images.'
-    },
+    // {
+    //     type: 'gallery',
+    //     icon: <GalleryIcon />,
+    //     tooltip: 'Here you can edit the gallery of the hospital, such as the gallery images.'
+    // },
     {
         type: 'address',
         icon: <AddressIcon />,

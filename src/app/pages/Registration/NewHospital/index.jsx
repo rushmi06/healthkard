@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar'
 import Button from '../../../components/Button';
 import { CARD_DATA } from './constants';
 import Slider from '../../../components/Slider';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function NewHospital({ theme }) {
 
@@ -17,9 +19,13 @@ function NewHospital({ theme }) {
     return (
         <div style={ { backgroundColor: theme.senary, backgroundImage: `linear-gradient(45deg, ${theme.secondary} , ${theme.senary}, ${theme.secondary})` } } className='flex flex-col w-full h-screen'>
             <Navbar />
-            <div className='flex flex-col gap-5 flex-1 overflow-y-scroll relative'>
+            <div className='flex flex-col gap-5 flex-1 overflow-y-scroll relative   '>
                 <Slider isVisible={ isSliderVisible } onClose={ () => setIsSliderVisible(false) }>
-                    { currentForm && <currentForm.form /> }
+                    <Header title={ currentForm?.title } description={ currentForm?.sliderDescription } />
+                    <div className='flex flex-col gap-5 flex-1 overflow-y-scroll'>
+                        { currentForm && <currentForm.form /> }
+                    </div>
+                    <Footer />
                 </Slider>
                 <div className='flex flex-col gap-5 flex-1 py-4 px-5'>
                     <div className='h-48'>

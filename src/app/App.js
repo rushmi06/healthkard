@@ -25,12 +25,15 @@ import Records from './pages/Admin/Users/Records'
 import Transactions from './pages/Admin/Transactions'
 import Database from './pages/Admin/Database'
 import NewHospital from './pages/Registration/NewHospital'
+import NewUser from './pages/Registration/NewUser'
+import ViewImage from './components/ViewImage'
 import './App.css'
 function App() {
   return (
     <ThemeProvider>
       <Alert />
       <EmailBox />
+      <ViewImage />
       <Routes>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >
@@ -63,6 +66,7 @@ function App() {
           <Route path="database" element={ <Database /> } />
         </Route>
         <Route path='new-hospital' element={ <NewHospital /> } />
+        <Route path='new-user' element={ <NewUser /> } />
         <Route path='*' element={ <NotFound /> } />
       </Routes>
     </ThemeProvider>
