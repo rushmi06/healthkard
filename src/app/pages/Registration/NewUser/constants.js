@@ -1,3 +1,21 @@
+export const GENDERS = ['Male', 'Female', 'Other']
+
+export const NEW_USER_FORMS = {
+    name: '',
+    image: '',
+    email: '',
+    number: '',
+    dob: '',
+    gender: 'Male',
+    age: '',
+    address: '',
+    city: '',
+    pincode: '',
+    dateJoined: '',
+    startDate: '',
+    agent: 'self',
+}
+
 export const PLANS = [
     {
         id: 1,
@@ -28,3 +46,5 @@ export const PLANS = [
         discount: 501,
     }
 ]
+
+

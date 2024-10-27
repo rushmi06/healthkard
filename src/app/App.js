@@ -27,6 +27,7 @@ import Database from './pages/Admin/Database'
 import NewHospital from './pages/Registration/NewHospital'
 import NewUser from './pages/Registration/NewUser'
 import ViewImage from './components/ViewImage'
+import { Toaster } from 'react-hot-toast'
 import './App.css'
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Alert />
       <EmailBox />
       <ViewImage />
+      <Toaster />
       <Routes>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >

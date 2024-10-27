@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import withTheme from '../../../../theme/Theme'
 import Button from '../../../../components/Button'
 import Search from '../../../../components/Search'
 import Table from '../../../../components/Table'
 import { IoFilter } from "react-icons/io5";
 import { IoAdd } from "react-icons/io5";
+
 import './style.css'
-function TableContainer({ title, headers = [], data = [], onApplyFilters = () => { }, onAdd = () => { }, theme, currentPage, totalPages, onPageChange, isLoading, onRowClick }) {
+function TableContainer({ title, headers = [], data = [], onApplyFilters = () => { }, onAdd = () => { }, theme, currentPage, totalPages, onPageChange, isLoading, onRowClick, onAddButton = { label: 'Add Hospital', url: '/new-hospital' } }) {
     const [filteredData, setFilteredData] = useState(data);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setFilteredData(data);
@@ -23,7 +26,7 @@ function TableContainer({ title, headers = [], data = [], onApplyFilters = () =>
                 <div className='text-sm font-semibold'>{ title }</div>
                 <div className='flex gap-2'>
                     <Button label='Filter' type='btn-secondary' icon={ IoFilter } onClick={ onApplyFilters } />
-                    <Button label='Add Hospital' icon={ IoAdd } onClick={ onAdd } />
+                    <Button label={ onAddButton.label } icon={ IoAdd } onClick={ () => window.open(onAddButton.url, '_blank') } />
                 </div>
             </div>
             <div id='table-container-body' className='flex flex-col justify-start items-start p-2 w-full gap-2'>

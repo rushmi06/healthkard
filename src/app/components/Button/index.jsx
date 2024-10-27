@@ -1,7 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../../theme/Theme';
-const Button = ({ label, type, color, disabled, isLoading, style, onClick, icon: Icon, iconPosition, theme }) => {
+
+const Button = ({
+    label,
+    type = 'btn-primary',
+    color,
+    disabled = false,
+    isLoading = false,
+    style,
+    onClick,
+    icon: Icon,
+    iconPosition = 'left',
+    theme
+}) => {
     const baseStyle = {
         borderRadius: '0.25rem',
         transition: 'background-color 0.2s',
@@ -89,13 +101,6 @@ Button.propTypes = {
     onClick: PropTypes.func,
     icon: PropTypes.elementType,
     iconPosition: PropTypes.oneOf(['left', 'right']),
-};
-
-Button.defaultProps = {
-    type: 'btn-primary',
-    disabled: false,
-    isLoading: false,
-    iconPosition: 'left',
 };
 
 export default withTheme(Button);

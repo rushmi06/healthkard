@@ -42,6 +42,7 @@ Input.propTypes = {
 Input.defaultProps = {
     type: 'text',
     inputStyle: {},
+    onChange: () => { },
     placeholder: '',
     multiline: false,
     rows: 3,

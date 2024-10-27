@@ -72,6 +72,7 @@ function Details() {
                     totalPages={ totalPages }
                     onPageChange={ handlePageChange }
                     isLoading={ isLoading }
+                    onAddButton={ { label: 'Add User', url: '/new-user' } }
                 />
             </div> : <Outlet /> }
         </div>

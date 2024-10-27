@@ -7,17 +7,24 @@ import DragAndDropFile from '../../../components/DragAndDropFile'
 import { PLANS } from './constants'
 import { HiOutlineArrowTopRightOnSquare } from "react-icons/hi2";
 import useViewport from '../../../utils/useViewPort'
+import Select from '../../../components/Select'
+import { GENDERS, NEW_USER_FORMS } from './constants'
+import Camera from '../../../components/Camera'
 
 function NewUser({ theme }) {
     const [currentFormId, setCurrentFormId] = useState(0);
+    const [newUserForm, setNewUserForm] = useState(NEW_USER_FORMS);
+    const changeHandler = (key, value) => {
+        setNewUserForm({ ...newUserForm, [key]: value })
+    }
     return (
         <div style={ { backgroundColor: theme.senary, backgroundImage: `linear-gradient(45deg, ${theme.secondary} , ${theme.senary}, ${theme.secondary})` } } className='flex flex-col w-full h-screen'>
             <Navbar />
             <div className='flex flex-1 justify-center items-center'>
-                { currentFormId === 0 && <ContactCard theme={ theme } onNext={ () => setCurrentFormId(1) } /> }
-                { currentFormId === 1 && <BasicDetailsCard theme={ theme } onNext={ () => setCurrentFormId(2) } onPrevious={ () => setCurrentFormId(0) } /> }
-                { currentFormId === 2 && <PhotoCard theme={ theme } onNext={ () => setCurrentFormId(3) } onPrevious={ () => setCurrentFormId(1) } /> }
-                { currentFormId === 3 && <PlanCard theme={ theme } /> }
+                { currentFormId === 0 && <ContactCard theme={ theme } onNext={ () => setCurrentFormId(1) } form={ newUserForm } changeHandler={ changeHandler } /> }
+                { currentFormId === 1 && <BasicDetailsCard theme={ theme } onNext={ () => setCurrentFormId(2) } onPrevious={ () => setCurrentFormId(0) } form={ newUserForm } changeHandler={ changeHandler } /> }
+                { currentFormId === 2 && <PhotoCard theme={ theme } onNext={ () => setCurrentFormId(3) } onPrevious={ () => setCurrentFormId(1) } form={ newUserForm } changeHandler={ changeHandler } /> }
+                { currentFormId === 3 && <PlanCard theme={ theme } form={ newUserForm } changeHandler={ changeHandler } /> }
             </div>
         </div>
     )
@@ -25,18 +32,18 @@ function NewUser({ theme }) {
 
 export default withTheme(NewUser)
 
-function ContactCard({ theme, onNext }) {
+function ContactCard({ theme, onNext, form, changeHandler }) {
     return (
         <div style={ { backgroundColor: theme.secondary, color: theme.primary } } className=' flex flex-col gap-4 lg:w-1/2 w-full lg:h-fit lg:min-h-96 h-full rounded p-4'>
             <div style={ { borderBottom: `1px solid ${theme.primary}` } } className='text-xl font-semibold pb-4'>User Contact Details</div>
             <div className='flex flex-col flex-1 justify-between'>
                 <div className='flex flex-1 justify-center flex-col  gap-4'>
-                    <Input label='Name' placeholder='Enter your name' />
-                    <Input label='Email' placeholder='Enter your email' />
-                    <Input label='Mobile Number' placeholder='Enter your mobile number' />
+                    <Input label='Name' placeholder='Enter your name' value={ form.name } onChange={ (e) => changeHandler('name', e.target.value) } />
+                    <Input label='Email' placeholder='Enter your email' value={ form.email } onChange={ (e) => changeHandler('email', e.target.value) } />
+                    <Input label='Mobile Number' placeholder='Enter your mobile number' value={ form.number } onChange={ (e) => changeHandler('number', e.target.value) } />
                 </div>
                 <div className='flex justify-end'>
-                    <Button label='Next' type='btn-primary' onClick={ onNext } />
+                    <Button label='Next' type='btn-primary' onClick={ onNext } disabled={ !form.name || !form.email || !form.number } />
                 </div>
             </div>
         </div>
@@ -44,7 +51,7 @@ function ContactCard({ theme, onNext }) {
 }
 
 
-function BasicDetailsCard({ theme, onNext, onPrevious }) {
+function BasicDetailsCard({ theme, onNext, onPrevious, form, changeHandler }) {
     const { width } = useViewport();
 
     const getInputStyle = (baseWidth) => {
@@ -69,11 +76,15 @@ function BasicDetailsCard({ theme, onNext, onPrevious }) {
                             type='date'
                             placeholder='Enter your date of birth'
                             style={ getInputStyle('50%') }
+                            value={ form.dob }
+                            onChange={ (e) => changeHandler('dob', e.target.value) }
                         />
-                        <Input
+                        <Select
+                            style={ { width: '45%' } }
                             label='Gender'
-                            placeholder='Select your gender'
-                            style={ getInputStyle('50%') }
+                            options={ GENDERS }
+                            value={ form.gender }
+                            onChange={ (value) => changeHandler('gender', value) }
                         />
                     </div>
                     <div className='text-lg font-semibold'>Address</div>
@@ -82,41 +93,58 @@ function BasicDetailsCard({ theme, onNext, onPrevious }) {
                             label='Address'
                             placeholder='Enter your address'
                             style={ getInputStyle('45%') }
+                            value={ form.address }
+                            onChange={ (e) => changeHandler('address', e.target.value) }
                         />
                         <Input
                             label='City'
                             placeholder='Enter your city'
                             style={ getInputStyle('45%') }
+                            value={ form.city }
+                            onChange={ (e) => changeHandler('city', e.target.value) }
                         />
                         <Input
                             label='Pin Code'
                             placeholder='Enter your pin code'
                             style={ getInputStyle('45%') }
+                            value={ form.pincode }
+                            onChange={ (e) => changeHandler('pincode', e.target.value) }
                         />
                     </div>
                 </div>
                 <div className='flex justify-between'>
                     <Button label='Previous' type='btn-secondary' onClick={ onPrevious } />
-                    <Button label='Next' type='btn-primary' onClick={ onNext } />
+                    <Button label='Next' type='btn-primary' onClick={ onNext } disabled={ !form.dob || !form.gender || !form.address || !form.city || !form.pincode } />
                 </div>
             </div>
         </div>
     )
 }
 
-function PhotoCard({ theme, onNext, onPrevious }) {
+function PhotoCard({ theme, onNext, onPrevious, form, changeHandler }) {
+    const [isCameraOpen, setIsCameraOpen] = useState(false);
+
     return (
         <div style={ { backgroundColor: theme.secondary, color: theme.primary } } className=' flex flex-col gap-4 lg:w-1/2 w-full lg:h-96 h-full rounded p-4'>
             <div style={ { borderBottom: `1px solid ${theme.primary}` } } className='text-xl font-semibold pb-4'>Upload Photo</div>
             <div className='flex flex-col flex-1 justify-between'>
-                <div className='flex flex-1 justify-center flex-col gap-4'>
-                    <DragAndDropFile style={ { width: '100%', height: '50%' } } />
-                    <div style={ { color: theme.tertiary } } className='text-sm text-center'>--- or ---</div>
-                    <Button label='Take a picture' type='btn-primary' />
-                </div>
+                {
+                    form.image && <div className='flex flex-col flex-1 justify-center items-center'>
+                        <img src={ URL.createObjectURL(form.image) } alt='user' className='mx-auto w-48 h-48 rounded-full object-cover' />
+                        <Button label='Change Photo' type='btn-tertiary' onClick={ () => changeHandler('image', null) } />
+                    </div>
+                }
+                { !form.image &&
+                    <div className='flex flex-1 justify-center flex-col gap-4'>
+                        <DragAndDropFile style={ { width: '100%', height: '50%' } } onSelect={ (file) => changeHandler('image', file) } />
+                        <div style={ { color: theme.tertiary } } className='text-sm text-center'>--- or ---</div>
+                        <Button label='Take a picture' type='btn-primary' onClick={ () => setIsCameraOpen(true) } />
+                        { isCameraOpen && <Camera isCameraOpen={ isCameraOpen } setIsCameraOpen={ setIsCameraOpen } /> }
+                    </div>
+                }
                 <div className='flex justify-between'>
                     <Button label='Previous' type='btn-secondary' onClick={ onPrevious } />
-                    <Button label='Save and Next' type='btn-primary' onClick={ onNext } />
+                    <Button label='Save and Next' type='btn-primary' onClick={ onNext } disabled={ !form.image } />
                 </div>
             </div>
         </div>

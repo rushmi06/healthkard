@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import withTheme from '../../../../theme/Theme'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import httpService from '../../../../api/httpService'
 import { formateAddress, formatNumber } from '../../../../utils/format'
 import { IoIosAdd, IoIosClose, IoMdCall, IoIosSend, IoMdTrash, IoIosMail, IoIosCheckmark, IoMdClose } from "react-icons/io";
@@ -173,6 +173,7 @@ function Content({ theme, hospital }) {
 }
 
 function MoreOptions({ theme, hospital, setIsEditHomeOpen }) {
+    const navigate = useNavigate();
     const [isPending, setIsPending] = useState(false);
 
     useEffect(() => {
@@ -207,15 +208,15 @@ function MoreOptions({ theme, hospital, setIsEditHomeOpen }) {
                 setIsOpen(false)
             },
             () => {
-                console.log('Deleting hospital:', hospital?.hospitalId)
-                // Implement actual delete logic here
+                console.log('Deleting hospital:', hospital?._id)
+                httpService.delete(`hospitals`, hospital?._id)
+                navigate(-1)
                 setIsOpen(false)
             }
         )
     }
     const onSendMessage = (e) => {
         e.stopPropagation()
-        console.log('Send Message')
         emailBoxTrigger.emit(
             hospital?.email,
             `Message from ${hospital?.hospitalDetails?.hospitalLegalName}`,
@@ -282,7 +283,7 @@ function Gallery({ theme, hospital }) {
                 {
                     hospital?.mediaDetails?.achivements?.map((image, index) => {
                         return (
-                            <Image image={ image } title={ `Achivement ${index + 1}` } />
+                            <Image key={ index } image={ image } title={ `Achivement ${index + 1}` } />
                         )
                     })
                 }
