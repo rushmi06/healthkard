@@ -1,0 +1,88 @@
+.timeline-wrapper {
+  --line-height: 0%;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 2px;
+  height: var(--line-height);
+  background-color: #303486;
+  transition: height 1.5s ease-out;
+}
+
+.timeline-dot {
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  z-index: 2;
+}
+
+.timeline-dot-inner {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  transition-delay: 0.3s;
+}
+
+.timeline-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease-out;
+}
+
+.animate-timeline {
+  --line-height: calc(100% - 24px);
+}
+
+.animate-timeline .timeline-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.animate-timeline .timeline-dot-inner {
+  opacity: 1;
+}
+
+.animate-timeline .timeline-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-timeline .timeline-item:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.animate-timeline .timeline-item:nth-child(1) .timeline-dot {
+  transition-delay: 0.3s;
+}
+
+.animate-timeline .timeline-item:nth-child(2) {
+  transition-delay: 0.6s;
+}
+
+.animate-timeline .timeline-item:nth-child(2) .timeline-dot {
+  transition-delay: 0.6s;
+}
+
+.animate-timeline .timeline-item:nth-child(3) {
+  transition-delay: 0.9s;
+}
+
+.animate-timeline .timeline-item:nth-child(3) .timeline-dot {
+  transition-delay: 0.9s;
+}
+
+.timeline-wrapper:not(.animate-timeline) .timeline-line {
+  --line-height: 0%;
+  transition: height 0.5s ease-out;
+}
+
+.timeline-wrapper:not(.animate-timeline) .timeline-dot,
+.timeline-wrapper:not(.animate-timeline) .timeline-item {
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.5s ease-out;
+}

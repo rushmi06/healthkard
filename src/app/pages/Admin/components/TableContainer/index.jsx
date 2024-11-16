@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
 import withTheme from '../../../../theme/Theme'
 import Button from '../../../../components/Button'
 import Search from '../../../../components/Search'
@@ -10,7 +9,6 @@ import { IoAdd } from "react-icons/io5";
 import './style.css'
 function TableContainer({ title, headers = [], data = [], onApplyFilters = () => { }, onAdd = () => { }, theme, currentPage, totalPages, onPageChange, isLoading, onRowClick, onAddButton = { label: 'Add Hospital', url: '/new-hospital' } }) {
     const [filteredData, setFilteredData] = useState(data);
-    const navigate = useNavigate();
 
     useEffect(() => {
         setFilteredData(data);

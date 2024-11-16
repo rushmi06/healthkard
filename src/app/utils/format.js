@@ -18,10 +18,10 @@ export const formateAddress = (address) => {
     const parts = [
         address.street,
         address.landmark,
+        address.code,
         address.city,
         address.state,
         address.country,
-        address.code
     ];
 
     // Filter out any undefined or empty parts

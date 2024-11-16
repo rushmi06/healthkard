@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+// admin
 import Admin from './pages/Admin'
 import Hospitals from './pages/Admin/Hospitals'
 import Approved from './pages/Admin/Hospitals/Approved'
@@ -29,6 +30,11 @@ import NewUser from './pages/Registration/NewUser'
 import ViewImage from './components/ViewImage'
 import { Toaster } from 'react-hot-toast'
 import './App.css'
+// public
+import Public from './pages/Public'
+import Home from './pages/Public/Home'
+import ListOfHospitals from './pages/Public/Hospitals'
+import HospitalForPublic from './pages/Public/Hospital'
 function App() {
   return (
     <ThemeProvider>
@@ -37,6 +43,11 @@ function App() {
       <ViewImage />
       <Toaster />
       <Routes>
+        <Route path="/" element={ <Public /> } >
+          <Route path="/" element={ <Home /> } />
+          <Route path='hospitals' element={ <ListOfHospitals /> } />
+          <Route path='hospital/:hospitalId' element={ <HospitalForPublic /> } />
+        </Route>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >
             <Route path="approved" element={ <Approved /> } >

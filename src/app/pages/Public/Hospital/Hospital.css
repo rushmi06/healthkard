@@ -1,0 +1,13 @@
+@media (min-width: 1024px) {
+  .hospital-details {
+    /* border: 1px solid red; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .hospital-details {
+    left: 11rem;
+    top: 0;
+    width: calc(100% - 11rem);
+  }
+}

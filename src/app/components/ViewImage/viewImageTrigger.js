@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 
 const viewImageEmitter = new EventEmitter();
+viewImageEmitter.setMaxListeners(0);
 
 export const viewImageTrigger = {
     emit: (image, header) => {

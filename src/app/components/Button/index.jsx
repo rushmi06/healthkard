@@ -12,13 +12,15 @@ const Button = ({
     onClick,
     icon: Icon,
     iconPosition = 'left',
-    theme
+    theme,
+    outline = false,
 }) => {
     const baseStyle = {
         borderRadius: '0.25rem',
         transition: 'background-color 0.2s',
         cursor: disabled || isLoading ? 'not-allowed' : 'pointer',
         opacity: disabled || isLoading ? 0.5 : 1,
+        border: outline ? `1px solid ${theme.primary}` : 'none',
     };
 
     const typeStyles = {

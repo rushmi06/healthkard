@@ -1,6 +1,6 @@
 import React from 'react'
 import NavigationPanel from './components/NavigationPanel'
-import Logo from './components/Logo'
+import Logo from '../../components/Logo'
 import Button from '../../components/Button'
 import { Outlet } from 'react-router-dom'
 import withTheme from '../../theme/Theme'

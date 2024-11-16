@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import imagePlaceholder from '../../assets/image_placeholder.jpg'
-import './ViewImage.css'
 import withTheme from '../../theme/Theme'
 import { MdDelete } from "react-icons/md";
 import { HiOutlineArrowTopRightOnSquare } from "react-icons/hi2";
@@ -58,7 +57,7 @@ function ViewImage({ theme }) {
     return (
         <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-20'>
 
-            <div onMouseEnter={ handleMouseEnter } onMouseLeave={ handleMouseLeave } className='relative flex flex-col gap-4 view-image'>
+            <div onMouseEnter={ handleMouseEnter } onMouseLeave={ handleMouseLeave } className='relative flex flex-col gap-4 lg:w-1/2 lg:h-1/2 w-10/12 h-1/2'>
                 <CloseOnOutsideClick style={ { width: '100%', height: '100%' } } onClose={ closeViewImage }>
                     <div
                         style={ {
