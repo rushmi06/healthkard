@@ -3,6 +3,7 @@ import chooseUsImage from "../../../../../assets/chooseUs.png";
 import { benefits } from "./constants";
 import withTheme from "../../../../../theme/Theme";
 import "./ChooseUs.css";
+import Header from "../Header";
 
 const ChooseUs = ({ theme }) => {
   const benefitsRef = useRef(null);
@@ -38,12 +39,7 @@ const ChooseUs = ({ theme }) => {
           <img src={ chooseUsImage } alt="" width={ 375 } height={ 384 } />
         </div>
         <div className="md:w-[50%] flex flex-col gap-4 py-5 px-4 md:px-6 w-full">
-          <div className="flex flex-col gap-2 px-2">
-            <h2 style={ { color: theme.primary } } className="font-bold text-2xl">
-              Why You Choose Healthkard?
-            </h2>
-            <p style={ { color: theme.text } } className="font-normal">Healthkard provides you these benefits</p>
-          </div>
+          <Header heading="Why Choose Us?" subHeading="We are a team of dedicated professionals who are passionate about helping you achieve your health goals." />
           <div ref={ benefitsRef } className="flex flex-col gap-5 items-center md:items-start">
             { benefits.map((benefit, index) => (
               <div

@@ -38,9 +38,10 @@ function Modal({ children, open, onClose, position = 'center', style = { width: 
         left: { x: '-100%' },
         right: { x: '100%' },
     };
-
+    const width = window.innerWidth < 1024 ? '90%' : '50%';
+    const height = window.innerWidth < 1024 ? '70%' : '50%';
     // Ensure style is always an object
-    const mergedStyle = { width: '50%', height: '50%', ...style, backgroundColor: theme.senary, color: theme.text };
+    const mergedStyle = { width, height, ...style, backgroundColor: theme.senary, color: theme.text };
 
     const modalContent = open ? (
         <div className={ `fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex ${positionClasses[position]}` }>

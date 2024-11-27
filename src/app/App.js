@@ -35,6 +35,9 @@ import Public from './pages/Public'
 import Home from './pages/Public/Home'
 import ListOfHospitals from './pages/Public/Hospitals'
 import HospitalForPublic from './pages/Public/Hospital'
+import Blog from './pages/Public/Blog'
+import Plans from './pages/Public/Plans'
+
 function App() {
   return (
     <ThemeProvider>
@@ -45,6 +48,8 @@ function App() {
       <Routes>
         <Route path="/" element={ <Public /> } >
           <Route path="/" element={ <Home /> } />
+          <Route path='plans' element={ <Plans /> } />
+          <Route path='blog/:blogId' element={ <Blog /> } />
           <Route path='hospitals' element={ <ListOfHospitals /> } />
           <Route path='hospital/:hospitalId' element={ <HospitalForPublic /> } />
         </Route>

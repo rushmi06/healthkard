@@ -10,6 +10,7 @@ function SelectCity({ showSelectCity, setShowSelectCity, theme }) {
         if (city.active) {
             localStorage.setItem('city', city.name)
             setShowSelectCity(false)
+            window.location.reload()
         }
     }
 

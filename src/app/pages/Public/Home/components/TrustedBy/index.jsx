@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { stats } from "./constants";
 import withTheme from "../../../../../theme/Theme";
+import Header from "../Header";
 
 const TrustedBY = ({ theme }) => {
   const [counters, setCounters] = useState(stats.map(() => 0));
@@ -50,10 +51,7 @@ const TrustedBY = ({ theme }) => {
 
   return (
     <div ref={ sectionRef } style={ { backgroundColor: theme.secondary } } className="w-full md:h-96 my-2">
-      <div className="px-2 md:px-5 py-2">
-        <h2 style={ { color: theme.primary } } className="text-3xl font-semibold">Trusted By</h2>
-        <p style={ { color: theme.primary } } className="font-medium">We have lots of support from our Healthkard family</p>
-      </div>
+      <Header heading="Trusted By" subHeading="We have lots of support from our Healthkard family" />
       <div className="md:h-[85%] flex justify-evenly items-center flex-wrap md:px-12 py-5 gap-4">
         { stats.map((stat, index) => (
           <div key={ index } className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] flex item-center justify-center flex-col gap-2 text-center">
@@ -62,7 +60,7 @@ const TrustedBY = ({ theme }) => {
                 { stat.icon }
               </div>
             </div>
-            <p style={ { color: theme.primary } } className="font-semibold text-xl -ml-5">{ counters[index] } { stat.label }</p>
+            <p style={ { color: theme.primary } } className="font-semibold text-sm lg:text-xl -ml-5">{ counters[index] } { stat.label }</p>
           </div>
         )) }
       </div>

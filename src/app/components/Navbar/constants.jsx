@@ -9,7 +9,7 @@ export const navbarLinks = [
     },
     {
         label: 'Our Plans',
-        path: '/our-plans'
+        path: '/plans'
     },
     {
         label: 'Testimonials',

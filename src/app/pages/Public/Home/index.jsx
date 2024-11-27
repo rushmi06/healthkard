@@ -3,6 +3,8 @@ import Banner from "./components/Banner"
 import ChooseUs from "./components/ChooseUs"
 import TrustedBy from "./components/TrustedBy"
 import Steps from "./components/Steps"
+import Blogs from "./components/Blogs"
+import Plans from "./components/Plans"
 import Footer from "../../../components/Footer"
 import withTheme from "../../../theme/Theme";
 import { useEffect } from "react"
@@ -18,9 +20,11 @@ const Home = ({ theme }) => {
     return (
         <div style={ { backgroundColor: theme.senary } } className="flex flex-col">
             <Banner />
-            <ChooseUs />
-            <TrustedBy />
             <Steps />
+            <ChooseUs />
+            <Plans />
+            <TrustedBy />
+            <Blogs />
             <Footer />
         </div>
 

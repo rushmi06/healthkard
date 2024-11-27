@@ -5,7 +5,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 function UserLogin({ theme, open, onClose }) {
     return (
-        <Modal open={ open } onClose={ onClose } style={ { width: '50%', height: '60%', overflow: 'hidden' } }>
+        <Modal open={ open } onClose={ onClose } style={ { overflow: 'hidden' } }>
             <div style={ { background: `linear-gradient(55deg, ${theme.senary} 55%, ${theme.primary} 45%)` } } className='w-full h-full flex '>
                 <div className='user-login-left w-1/2 flex flex-col justify-center items-center gap-4 p-2'>
                     <Input label='Email' type='email' placeholder='Enter your email' style={ { width: '100%' } } inputStyle={ { width: '70%' } } />
