@@ -4,3 +4,9 @@
   width: 100vw;
   height: calc(100vh - 3.5rem);
 }
+
+/* @media (max-width: 1024px) {
+  .public-body {
+    top: 1.5rem;
+  }
+} */
