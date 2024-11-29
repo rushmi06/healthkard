@@ -39,7 +39,7 @@ const ChooseUs = ({ theme }) => {
           <img src={ chooseUsImage } alt="" width={ 375 } height={ 384 } />
         </div>
         <div className="md:w-[50%] flex flex-col gap-4 py-5 px-4 md:px-6 w-full">
-          <Header heading="Why Choose Us?" subHeading="We are a team of dedicated professionals who are passionate about helping you achieve your health goals." />
+          <Header heading="Why choose Healthkard?" subHeading="Changing the way, You visit a Doctor" />
           <div ref={ benefitsRef } className="flex flex-col gap-5 items-center md:items-start">
             { benefits.map((benefit, index) => (
               <div

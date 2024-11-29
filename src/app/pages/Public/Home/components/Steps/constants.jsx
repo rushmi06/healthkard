@@ -1,22 +1,22 @@
 export const steps = [
     {
-        title: 'Purchase our healthkard',
-        description: 'Buy our healthkard plan to join our healthkard family',
+        title: 'Subscribe to Healthkard',
+        description: 'Purchase our plan to join our family.',
     },
     {
-        title: 'Search the nearest hospital',
-        description: 'Find doctors and hospitals based on the factors that matter to you',
+        title: 'Find Doctors and Hospitals',
+        description: 'Based on factors that matter to you.',
     },
     {
-        title: 'Show your healthkard to hospital management',
-        description: 'Verify your identity with the hospital receptionist',
+        title: 'Get Verified your Healthkard',
+        description: 'Show your identification with the receptionist.',
     },
     {
-        title: 'Consult the doctor',
-        description: 'Build a conversation with your best doctor',
+        title: 'Consult your Best Doctor',
+        description: 'Get diagnosed and build a conversation about your health with them.',
     },
     {
-        title: 'Renewal of healthkard',
-        description: 'Buy our healthkard plan to stay a part of our healthkard family',
+        title: 'Renew the subscription',
+        description: 'Continue being healthy as a member of our family.',
     },
 ];  

@@ -9,7 +9,7 @@ const Steps = ({ theme }) => {
   return (
     <div style={ { backgroundColor: theme.senary } } className="w-full  my-7 flex justify-between md:px-16 bg-white relative" >
       <div className="flex flex-col w-full  md:w-50% gap-10  px-4">
-        <Header heading="Find the right Doctor right at your finger tips" subHeading="Healthkard gives you tools and information you need" />
+        <Header heading="Find the Best Hospital, Right away!" subHeading="We’ll be with you in every step of ZERO Doctor Fees" />
         <StepsTimeline />
       </div>
 

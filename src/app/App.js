@@ -37,6 +37,12 @@ import ListOfHospitals from './pages/Public/Hospitals'
 import HospitalForPublic from './pages/Public/Hospital'
 import Blog from './pages/Public/Blog'
 import Plans from './pages/Public/Plans'
+import About from './pages/Public/About'
+
+// authentications
+import Auth from './auth'
+import UserLogin from './auth/UserLogin'
+import UserSignup from './auth/UserSignup'
 
 function App() {
   return (
@@ -46,8 +52,16 @@ function App() {
       <ViewImage />
       <Toaster />
       <Routes>
+        <Route path='/auth' element={ <Auth /> } >
+          <Route path="user/login" element={ <UserLogin /> } />
+          <Route path="user/signup" element={ <UserSignup /> } />
+        </Route>
         <Route path="/" element={ <Public /> } >
+          <Route path="user/login" element={ <UserLogin /> } />
+          <Route path="user/signup" element={ <UserSignup /> } />
+
           <Route path="/" element={ <Home /> } />
+          <Route path='about' element={ <About /> } />
           <Route path='plans' element={ <Plans /> } />
           <Route path='blog/:blogId' element={ <Blog /> } />
           <Route path='hospitals' element={ <ListOfHospitals /> } />

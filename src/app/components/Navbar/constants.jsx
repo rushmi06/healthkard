@@ -12,7 +12,7 @@ export const navbarLinks = [
         path: '/plans'
     },
     {
-        label: 'Testimonials',
-        path: '/testimonials'
+        label: 'Community',
+        path: '/community'
     }
 ]

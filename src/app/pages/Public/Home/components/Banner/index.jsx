@@ -31,25 +31,14 @@ const Banner = ({ theme }) => {
   return (
     <div style={ { color: theme.primary } } className="w-full lg:h-[700px] relative flex items-center flex-col  mb-5 ">
       <div style={ { backgroundColor: theme.secondary } } className="w-full h-[80%] absolute top-0 left-0"></div>
-      <div className=" z-10 flex items-center flex-col md:flex-row  justify-center md:justify-around px-2 md:px-10 w-full h-[80%]  gap-5 md:gap-0">
+      <div className=" z-10 flex items-center flex-col lg:flex-row  justify-center lg:justify-around px-2 lg:px-10 w-full h-[80%]  gap-5 lg:gap-0">
 
-        <div className="flex flex-col gap-5 w-full md:w-[60%] mt-8 lg:-mt-24 " >
+        <div className="flex flex-col gap-5 w-full lg:w-[60%] mt-8 lg:-mt-24 " >
 
-          <div className={ ` font-bold text-[1.5rem] md:text-[3rem] text-center md:text-left` }>
-            <p>Unlocking Optimal Health :</p>
-            <p className="hidden md:block">The Power of HealthKard</p>
-            <p className="md:hidden">by Healkard</p>
+          <div className={ ` font-bold text-[1.5rem] lg:text-[3rem] text-center lg:text-left` }>
+            Consult an expert Doctor for zero fees with wide network access and longer validity
           </div>
-          <div className="text-[#00BFA8] font-semibold text-[1.2rem] flex flex-row md:flex-col w-full gap-2 md:gap-1 text-center md:text-left">
-            <p className="w-[30%] md:w-full">Unlimites Hospital </p>
-            <hr style={ { backgroundColor: theme.primary } } className="h-16 w-[2px] md:hidden" />
-            <p className="w-[30%] md:w-full">Unlimited Doctor Visits</p>
-            <hr style={ { backgroundColor: theme.primary } } className="h-16 w-[2px] md:hidden" />
-            <p className="hidden md:block">Unlimited Time's with Validity of 28 Days</p>
-            <p className="md:hidden w-[30%]">Unlimited Times's</p>
-
-          </div>
-          <div className="flex items-center gap-8 justify-center md:justify-start">
+          <div className="flex items-center gap-8 justify-center lg:justify-start">
 
             <button style={ { backgroundColor: theme.primary, color: theme.senary } } className="w-40 h-11 rounded-sm  hover:bg-transparent hover:border-2 hover:border-[#303486] hover:text-[#303486]">Subscribe Now</button>
             <button style={ { border: `1px solid ${theme.primary}` } } className="w-40 h-11 bg-transparent border-2 border-[#303486] rounded-sm hover:bg-[#303486] hover:text-white">Request for demo</button>
@@ -57,14 +46,14 @@ const Banner = ({ theme }) => {
           </div>
         </div>
 
-        <div className="relative -left-8 md:left-0">
+        <div className="relative -left-8 lg:left-0">
 
           <img src={ bannerImage } alt="bannerImage" width={ 600 } height={ 500 } />
 
         </div>
 
       </div>
-      <div style={ { backgroundColor: theme.senary, border: `1px solid ${theme.primary}` } } className="shadow-2xl w-[95%] px-5 md:px-10 py-5 rounded-md flex flex-col gap-3 md:absolute bottom-0 md:mt-5 z-20">
+      <div style={ { backgroundColor: theme.senary, border: `1px solid ${theme.primary}` } } className="shadow-2xl w-[95%] px-5 lg:px-10 py-5 rounded-md flex flex-col gap-3 lg:absolute bottom-0 lg:mt-5 z-20">
 
         <SearchHospitals hospitals={ hospitals } />
         <div className="w-full">
@@ -72,9 +61,9 @@ const Banner = ({ theme }) => {
             <BsGraphUpArrow />
             <p>Top Hospitals</p>
           </div>
-          <div className="flex gap-2 md:gap-10 pt-4 overflow-hidden items-center w-full">
+          <div className="flex gap-2 lg:gap-10 pt-4 overflow-hidden items-center w-full">
             <ScrollContainer>
-              <div className="flex gap-2 md:gap-10 overflow-hidden items-center w-8/12">
+              <div className="flex gap-2 lg:gap-10 overflow-hidden items-center w-8/12">
                 {
                   hospitals.map((hospital) => (
                     <HospitalNameCard key={ hospital._id } hospital={ hospital } />

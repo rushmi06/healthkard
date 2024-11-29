@@ -23,7 +23,7 @@ function SearchHospitals({ hospitals, theme }) {
     return (
         <div className="flex justify-center flex-col w-full gap-4">
             <SelectCity showSelectCity={ showSelectCity } setShowSelectCity={ setShowSelectCity } />
-            <h2 className="text-[1.3rem] font-semibold">Search the Popular Hospitals here</h2>
+            <h2 className="text-[1.3rem] font-semibold">Find Best Hospitals, Near you!</h2>
             <div className="h-14  flex items-center gap-1 ">
 
                 <div className="h-full w-[40%] border  flex items-center gap-1 md:gap-4 px-2 rounded ">

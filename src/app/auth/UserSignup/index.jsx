@@ -1,30 +1,36 @@
 import React from 'react'
-import Modal from '../../components/Modal'
-import withTheme from '../../theme/Theme'
+import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-function UserSignup({ theme, open, onClose }) {
+import withTheme from '../../theme/Theme'
+import Logo from '../../components/Logo'
+
+function UserLogin({ theme }) {
+    const navigate = useNavigate()
+
     return (
-        <Modal open={ open } onClose={ onClose } style={ { width: '50%', height: '60%', overflow: 'hidden' } }>
-            <div style={ { background: `linear-gradient(-55deg, ${theme.senary} 55%, ${theme.primary} 45%)` } } className='w-full h-full flex flex-row-reverse'>
-                <div className='w-1/2 flex flex-col justify-center items-center gap-4 p-2'>
-                    <Input label='Email' type='email' placeholder='Enter your email' style={ { width: '100%' } } inputStyle={ { width: '70%' } } />
-                    <Input label='Password' type='password' placeholder='Enter your password' style={ { width: '100%' } } inputStyle={ { width: '70%' } } />
-                    <div className='w-full flex justify-between'>
-                        <Button label='Create Account' />
+        <div style={ { backgroundColor: theme.senary, color: theme.text } } className='flex flex-row-reverse  justify-start items-center h-screen'>
+            <div className='w-full lg:w-1/2 p-8 h-full flex flex-col '>
+                <div className=''><Logo /></div>
+                <div className='text-2xl font-bold mt-6'>Create your account</div>
+                <div className='flex flex-col gap-4 mt-10 mx-auto w-5/6 '>
+                    <Input label='Name' type='text' />
+                    <Input label='Email' type='email' />
+                    <Input label='Phone Number' type='phone' />
+                    <Input label='Password' type='password' />
+                    <Input label='Confirm Password' type='password' />
+                    <Button label='Sign up' type='btn-primary' />
+                    <div className='flex items-center justify-center gap-4'>
+                        <div className='h-[1px] bg-gray-400 w-1/2'></div>
+                        <div>or</div>
+                        <div className='h-[1px] bg-gray-400 w-1/2'></div>
                     </div>
-                    <div className='w-full flex justify-between text-sm items-center gap-2 '>
-                        Already have an account? <Button label='Login' type='btn-secondary' />
-                    </div>
-                </div>
-                <div style={ { color: theme.textSecondary } } className='w-1/2 p-10'>
-                    <div className='text-4xl font-bold p-2 text-left'>Sign Up</div>
-                    <div className='text-xl font-bold text-left'>Create an account!</div>
-                    <div className='text-sm text-left'>Please enter your details</div>
+                    <Button label='Login' type='btn-secondary' onClick={ () => navigate('/auth/user/login') } />
                 </div>
             </div>
-        </Modal>
+            <div style={ { backgroundColor: theme.secondary, color: theme.text } } className='hidden lg:block w-1/2 h-full'></div>
+        </div>
     )
 }
 
-export default withTheme(UserSignup)
+export default withTheme(UserLogin)

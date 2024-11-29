@@ -5,22 +5,22 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 export const benefits = [
     {
         icon: <MdPersonSearch />,
-        description: "Visit any of our associated hospital",
+        description: "Zero Doctor Consultation Fees",
     },
     {
         icon: <FaStethoscope />,
-        description: "Free Doctor Consultation (OP)",
+        description: "Longer Validity",
     },
     {
         icon: <FaBriefcaseMedical />,
-        description: "Avoid high Consultation fee",
+        description: "Several Doctor Visits",
     },
     {
         icon: <FaRegCalendarAlt />,
-        description: "Longer validity with 28 days",
+        description: "Access to Well Qualified Doctors",
     },
     {
         icon: <FaUserDoctor />,
-        description: "Chance of visiting multiple doctors with single HEALTHKARD",
+        description: "Gateway to Multiple Hospitals",
     },
 ];
