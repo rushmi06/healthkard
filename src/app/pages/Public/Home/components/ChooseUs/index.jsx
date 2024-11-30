@@ -36,7 +36,7 @@ const ChooseUs = ({ theme }) => {
     <div style={ { backgroundColor: theme.secondary } } className="w-full">
       <div className="flex w-full h-full">
         <div className="hidden md:flex w-[50%] items-center justify-center mt-auto">
-          <img src={ chooseUsImage } alt="" width={ 375 } height={ 384 } />
+          <img src={ chooseUsImage } alt="" width={ 500 } height={ 500 } />
         </div>
         <div className="md:w-[50%] flex flex-col gap-4 py-5 px-4 md:px-6 w-full">
           <Header heading="Why choose Healthkard?" subHeading="Changing the way, You visit a Doctor" />

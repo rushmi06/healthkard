@@ -4,11 +4,11 @@ import Button from '../Button';
 import withTheme from '../../theme/Theme';
 
 const Alert = ({ theme }) => {
-    const [alertState, setAlertState] = useState({ isOpen: false, title: '', message: '', onCancel: null, onProceed: null });
+    const [alertState, setAlertState] = useState({ isOpen: false, title: '', message: '', onCancel: null, onProceed: null, primaryBtnColor: 'btn-danger', primaryBtnText: 'Proceed' });
 
     useEffect(() => {
-        const handleAlert = ({ type, message, onCancel, onProceed }) => {
-            setAlertState({ isOpen: true, title: type, message, onCancel, onProceed });
+        const handleAlert = ({ type, message, onCancel, onProceed, primaryBtnColor, primaryBtnText }) => {
+            setAlertState({ isOpen: true, title: type, message, onCancel, onProceed, primaryBtnColor, primaryBtnText });
         };
 
         alertTrigger.subscribe(handleAlert);
@@ -16,7 +16,7 @@ const Alert = ({ theme }) => {
         return () => {
             alertTrigger.unsubscribe(handleAlert);
         };
-    }, []);
+    }, [theme]);
 
     const handleCancel = () => {
         setAlertState({ ...alertState, isOpen: false });
@@ -33,11 +33,11 @@ const Alert = ({ theme }) => {
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
             <div style={ { backgroundColor: theme.senary, color: theme.text } } className="flex flex-col p-4 rounded-lg shadow-lg gap-2 w-96 h-48 justify-between">
-                <div className='text-lg font-bold'>{ alertState.title }</div>
+                <div className='text-lg font-bold capitalize'>{ alertState.title }</div>
                 <div className='text-sm'>{ alertState.message }</div>
                 <div className='w-full flex justify-between'>
                     <Button onClick={ handleCancel } label='Cancel' type='btn-secondary' />
-                    <Button onClick={ handleProceed } label='Proceed' type='btn-danger' />
+                    <Button onClick={ handleProceed } label={ alertState.primaryBtnText || 'Proceed' } type={ alertState.primaryBtnColor || 'btn-danger' } />
                 </div>
             </div>
         </div>

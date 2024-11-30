@@ -36,7 +36,7 @@ const Banner = ({ theme }) => {
         <div className="flex flex-col gap-5 w-full lg:w-[60%] mt-8 lg:-mt-24 " >
 
           <div className={ ` font-bold text-[1.5rem] lg:text-[3rem] text-center lg:text-left` }>
-            Consult an expert Doctor for zero fees with wide network access and longer validity
+            Access to well Qualified Doctors with <span style={ { color: theme.success } } className="">ZERO</span> Fees.
           </div>
           <div className="flex items-center gap-8 justify-center lg:justify-start">
 
@@ -47,9 +47,7 @@ const Banner = ({ theme }) => {
         </div>
 
         <div className="relative -left-8 lg:left-0">
-
-          <img src={ bannerImage } alt="bannerImage" width={ 600 } height={ 500 } />
-
+          <img src={ bannerImage } alt="bannerImage" width={ 850 } height={ 850 } />
         </div>
 
       </div>

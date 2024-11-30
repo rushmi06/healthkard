@@ -1,5 +1,6 @@
 import React from "react";
 import Banner from "./components/Banner"
+import Departments from "./components/Departments"
 import ChooseUs from "./components/ChooseUs"
 import TrustedBy from "./components/TrustedBy"
 import Steps from "./components/Steps"
@@ -20,6 +21,7 @@ const Home = ({ theme }) => {
     return (
         <div style={ { backgroundColor: theme.senary } } className="flex flex-col">
             <Banner />
+            <Departments />
             <Steps />
             <ChooseUs />
             <Plans />

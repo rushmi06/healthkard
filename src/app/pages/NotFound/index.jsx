@@ -11,7 +11,7 @@ function NotFound({ theme }) {
             <div className="flex flex-col items-center justify-center">
                 <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
                 <p className="text-2xl text-gray-600 mb-8">Oops! Page not found.</p>
-                <Button label="Go back home" onClick={ () => navigate('/admin/hospitals/approved') } />
+                <Button label="Go back home" onClick={ () => navigate('/') } />
             </div>
         </div>
     )

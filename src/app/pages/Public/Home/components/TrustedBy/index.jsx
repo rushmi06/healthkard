@@ -51,7 +51,7 @@ const TrustedBY = ({ theme }) => {
 
   return (
     <div ref={ sectionRef } style={ { backgroundColor: theme.secondary } } className="w-full md:h-96 my-2">
-      <Header heading="Trusted By" subHeading="We have lots of support from our Healthkard family" />
+      <Header heading="Trusted By" subHeading="We have lots of support from our Healthkard family." />
       <div className="md:h-[85%] flex justify-evenly items-center flex-wrap md:px-12 py-5 gap-4">
         { stats.map((stat, index) => (
           <div key={ index } className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] flex item-center justify-center flex-col gap-2 text-center">

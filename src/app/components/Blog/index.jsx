@@ -13,7 +13,7 @@ function Blog({ blog, theme }) {
     }
 
     return (
-        <div style={ { backgroundColor: theme.secondary } } className='flex flex-col justify-between items-start gap-2 w-40 h-48 lg:w-64 lg:h-80 border-2 border-gray-300 rounded shadow-md overflow-hidden'>
+        <div style={ { backgroundColor: theme.secondary } } className='flex flex-col justify-between items-start gap-2 w-44 h-48 lg:w-64 lg:h-80 border-2 border-gray-300 rounded shadow-md overflow-hidden'>
             <img src={ blog?.image } alt={ blog?.title } className='h-1/2 w-full object-fit-cover' />
             <div style={ { color: theme.text } } className='text-left p-2 flex-grow justify-between flex flex-col w-full'>
                 <div className='flex flex-col gap-0.5 lg:gap-2'>

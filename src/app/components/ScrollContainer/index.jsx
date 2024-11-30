@@ -18,7 +18,7 @@ function ScrollContainer({ children }) {
             }
         };
 
-        const intervalId = setInterval(scroll, 20);
+        const intervalId = setInterval(scroll, 5);
 
         return () => clearInterval(intervalId);
     }, [isPaused]);

@@ -7,6 +7,10 @@ import Logo from '../../components/Logo'
 
 function UserLogin({ theme }) {
     const navigate = useNavigate()
+    const login = () => {
+        localStorage.setItem('userToken', '1234567890')
+        navigate('/')
+    }
 
     return (
         <div style={ { backgroundColor: theme.senary, color: theme.text } } className='flex  justify-start items-center h-screen'>
@@ -16,7 +20,7 @@ function UserLogin({ theme }) {
                 <div className='flex flex-col gap-4 mt-10 mx-auto w-5/6 '>
                     <Input label='Email' type='email' />
                     <Input label='Password' type='password' />
-                    <Button label='Login' type='btn-primary' />
+                    <Button label='Login' type='btn-primary' onClick={ login } />
                     <div className='flex items-center justify-center gap-4'>
                         <div className='h-[1px] bg-gray-400 w-1/2'></div>
                         <div>or</div>

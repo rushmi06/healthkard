@@ -9,7 +9,7 @@ function UserLogin({ theme }) {
     const navigate = useNavigate()
 
     return (
-        <div style={ { backgroundColor: theme.senary, color: theme.text } } className='flex flex-row-reverse  justify-start items-center h-screen'>
+        <div style={ { backgroundColor: theme.senary, color: theme.text } } className='flex flex-row-reverse h-screen overflow-y-scroll justify-start items-center'>
             <div className='w-full lg:w-1/2 p-8 h-full flex flex-col '>
                 <div className=''><Logo /></div>
                 <div className='text-2xl font-bold mt-6'>Create your account</div>
@@ -19,7 +19,7 @@ function UserLogin({ theme }) {
                     <Input label='Phone Number' type='phone' />
                     <Input label='Password' type='password' />
                     <Input label='Confirm Password' type='password' />
-                    <Button label='Sign up' type='btn-primary' />
+                    <Button label='Sign up' type='btn-primary' onClick={ () => navigate('/auth/user/login') } />
                     <div className='flex items-center justify-center gap-4'>
                         <div className='h-[1px] bg-gray-400 w-1/2'></div>
                         <div>or</div>

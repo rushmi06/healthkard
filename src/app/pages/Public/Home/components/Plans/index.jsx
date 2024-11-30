@@ -10,8 +10,8 @@ function Plans({ theme }) {
     const headers = plans.map((plan) => ({ label: plan.name, key: plan.id, recommended: plan.recommended }))
 
     return (
-        <div className='py-2 text-[10px] lg:text-sm'>
-            <Header heading='Our Subscription Plans' subHeading='We are providing lots of benefits at minimal cost' />
+        <div className='py-2 text-[10px] lg:text-lg'>
+            <Header heading='Our Plans' subHeading='Get More, Pay Less' />
             <div className='px-4'>
                 <table className='w-full rounded-lg' style={ { color: theme.text, border: `1px solid ${theme.tertiary}` } } >
                     <thead className='' style={ { backgroundColor: theme.primary, color: theme.textSecondary } }>

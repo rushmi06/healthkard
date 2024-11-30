@@ -5,6 +5,8 @@ import logo from '../../../../logo.svg'
 import { navbarLinks } from '../constants';
 import Button from '../../Button';
 import CloseOnOutsideClick from '../../CloseOnOutsideClick';
+import { useNavigate } from 'react-router-dom';
+import { isUserLoggedIn } from '../../../utils/auth';
 
 function MobileNavbar({ theme }) {
     return (
@@ -20,6 +22,7 @@ function MobileNavbar({ theme }) {
 
 const HamburgerMenu = ({ theme }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div style={ { color: theme.primary } } className='relative'>
@@ -54,10 +57,12 @@ const HamburgerMenu = ({ theme }) => {
                                         }
                                     </div>
                                     <div style={ { backgroundColor: theme.primary } } className='h-0.5 w-full'></div>
-                                    <div className='flex items-center justify-between gap-2 p-4'>
-                                        <Button label='Login' style={ { width: '100%' } } />
-                                        <Button label='Sign Up' style={ { width: '100%' } } type='btn-secondary' />
-                                    </div>
+                                    { isUserLoggedIn() ? <div className='flex items-center justify-between gap-2 p-4'>
+                                        <Button label='Logout' style={ { width: '100%' } } type='btn-danger' />
+                                    </div> : <div className='flex items-center justify-between gap-2 p-4'>
+                                        <Button label='Login' style={ { width: '100%' } } onClick={ () => navigate('/auth/user/login') } />
+                                        <Button label='Sign Up' style={ { width: '100%' } } type='btn-secondary' onClick={ () => navigate('/auth/user/signup') } />
+                                    </div> }
                                 </div>
                             </div>
                         </div>

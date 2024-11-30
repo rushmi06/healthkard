@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import withTheme from '../../../theme/Theme'
 import GridContainer from '../../../components/GridContainer'
 import httpService from '../../../api/httpService';
@@ -8,11 +8,19 @@ import SearchHospitals from '../../../components/SearchHospitals';
 import './Hospitals.css'
 function Hospitals({ theme }) {
     const [hospitals, setHospitals] = useState([]);
-    const currentCity = localStorage.getItem('city')
+    const currentCity = localStorage.getItem('city');
+    const [departmentName, setDepartmentName] = useState('');
+    const { search } = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(search);
+        setDepartmentName(params.get('department'));
+    }, [search]);
+
 
     useEffect(() => {
         const fetchHospitals = async () => {
-            const response = await httpService.get(`hospitals/?city=${currentCity}&&limit=20`);
+            const response = await httpService.get(`hospitals/?city=${currentCity}&&limit=20&&department=${departmentName}`);
             const hospitals = response.hospitals.map(hospital => ({
                 _id: hospital._id,
                 name: hospital.hospitalDetails.hospitalLegalName,
@@ -24,7 +32,7 @@ function Hospitals({ theme }) {
             setHospitals(hospitals);
         }
         fetchHospitals();
-    }, [currentCity])
+    }, [currentCity, departmentName])
     return (
         <div style={ { backgroundColor: theme.senary, color: theme.text } } className='w-full h-full p-4'>
             <Header hospitals={ hospitals } />

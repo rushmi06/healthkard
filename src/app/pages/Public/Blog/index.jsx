@@ -17,11 +17,6 @@ function Blog({ theme }) {
                 </div>
                 <div className='w-full lg:w-2/3'>
                     <div className='flex flex-col gap-2'>
-                        <h1 className='text-2xl font-bold' style={ { color: theme.primary } }>{ blog?.title }</h1>
-                        <p style={ { color: theme.text } } className='text-sm'>{ blog?.description }</p>
-                    </div>
-
-                    <div className='flex flex-col gap-2'>
                         <h2 className='text-xl font-bold' style={ { color: theme.primary } }>{ blog?.question }</h2>
                         <div style={ { color: theme.text } } className=''>
                             { blog?.answer }
@@ -49,11 +44,14 @@ function Blog({ theme }) {
                         <ul style={ { color: theme.text } } className=''>
                             { blog?.preventions?.map((prevention) => (
                                 <li className='flex flex-row gap-2 items-center'>
-                                    <RxDotFilled />
                                     { prevention.heading } : { prevention.description }
                                 </li>
                             )) }
                         </ul>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                        <h1 className='text-2xl font-bold' style={ { color: theme.primary } }>{ blog?.title }</h1>
+                        <p style={ { color: theme.text } } className='text-sm'>{ blog?.description }</p>
                     </div>
                 </div>
             </div>

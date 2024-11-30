@@ -17,7 +17,10 @@ const Footer = ({ theme }) => {
           HealthKard
         </h2>
         <p className="font-light">
-          Healthkard has a clear objective: to provide hassle-free access to physical doctor consultations. Our main agenda is to create a single card called Healthkard, that allows people to visit multiple doctors associated with us and multiple times for just INR 99. The user will get the unique Healthkard ID for identifying the personal details of the user which will prevent the misuse of the card.
+          We’re redefining doctor visits—no more worrying about consultation fees. Join our
+          growing family and access affordable, high-qualified Doctors whenever you need it.
+          Let us take care of your doctor visits, so you can focus on what matters most—your
+          health.
         </p>
         <div className="font-light">
           <p className="text-[1rem] font-semibold">Contact Us</p>
