@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { stats } from "./constants";
+import { stats } from "../../../../constants";
 import withTheme from "../../../../../theme/Theme";
 import Header from "../Header";
 
@@ -50,13 +50,13 @@ const TrustedBY = ({ theme }) => {
   };
 
   return (
-    <div ref={ sectionRef } style={ { backgroundColor: theme.secondary } } className="w-full md:h-96 my-2">
+    <div ref={ sectionRef } style={ { backgroundColor: theme.secondary } } className="w-full my-2">
       <Header heading="Trusted By" subHeading="We have lots of support from our Healthkard family." />
       <div className="md:h-[85%] flex justify-evenly items-center flex-wrap md:px-12 py-5 gap-4">
         { stats.map((stat, index) => (
-          <div key={ index } className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] flex item-center justify-center flex-col gap-2 text-center">
+          <div key={ index } className="w-[150px] h-[150px] md:w-[180px] md:h-[180px] flex item-center justify-center flex-col gap-2 text-center">
             <div style={ { backgroundColor: theme.primary } } className="w-[80%] h-[80%] rounded-full flex items-center justify-center">
-              <div style={ { backgroundColor: theme.senary, color: theme.primary } } className="w-[80%] h-[80%] rounded-full flex items-center justify-center text-6xl">
+              <div style={ { backgroundColor: theme.senary, color: theme.primary } } className="w-[80%] h-[80%] rounded-full flex items-center justify-center text-2xl lg:text-5xl">
                 { stat.icon }
               </div>
             </div>

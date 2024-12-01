@@ -44,7 +44,6 @@ export const formatDate = (date) => {
 
 
 export const formatCurrency = (amount) => {
-    if (!amount) return '';
     return `₹ ${amount.toLocaleString('en-IN')}/-`;
 }
 

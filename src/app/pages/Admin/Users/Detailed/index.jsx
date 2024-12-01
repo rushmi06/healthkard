@@ -84,7 +84,7 @@ const UserPanel = ({ theme, user }) => {
 }
 
 
-const Payments = ({ theme, payments }) => {
+export const Payments = ({ theme, payments }) => {
     return (
         <div className='flex flex-col w-full h-full overflow-y-scroll'>
             { payments?.map((payment, index) => (
@@ -119,7 +119,7 @@ const Visits = ({ theme, visits }) => {
     )
 }
 
-const EditUser = ({ theme, user: storedUser }) => {
+const EditUser = ({ user: storedUser }) => {
     const [user, setUser] = useState(storedUser)
     const handleChange = (property, value) => {
         setUser({ ...user, [property]: value })

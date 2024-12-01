@@ -13,6 +13,16 @@ export const navbarLinks = [
     },
     {
         label: 'Community',
-        path: '/community'
+        path: '/community',
+        subLinks: [
+            {
+                label: 'Testimonials',
+                path: '/testimonials'
+            },
+            {
+                label: 'Blogs',
+                path: '/blogs'
+            }
+        ]
     }
 ]

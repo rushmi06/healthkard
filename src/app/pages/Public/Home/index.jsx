@@ -4,9 +4,9 @@ import Departments from "./components/Departments"
 import ChooseUs from "./components/ChooseUs"
 import TrustedBy from "./components/TrustedBy"
 import Steps from "./components/Steps"
+import Feedbacks from "./components/Feedbacks"
 import Blogs from "./components/Blogs"
 import Plans from "./components/Plans"
-import Footer from "../../../components/Footer"
 import withTheme from "../../../theme/Theme";
 import { useEffect } from "react"
 import { CITIES } from "../../../components/SelectCity/constants"
@@ -26,8 +26,8 @@ const Home = ({ theme }) => {
             <ChooseUs />
             <Plans />
             <TrustedBy />
+            <Feedbacks />
             <Blogs />
-            <Footer />
         </div>
 
     )

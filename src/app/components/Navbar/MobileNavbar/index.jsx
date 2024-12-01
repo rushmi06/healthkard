@@ -5,9 +5,9 @@ import logo from '../../../../logo.svg'
 import { navbarLinks } from '../constants';
 import Button from '../../Button';
 import CloseOnOutsideClick from '../../CloseOnOutsideClick';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isUserLoggedIn } from '../../../utils/auth';
-
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 function MobileNavbar({ theme }) {
     return (
         <div className='flex fixed z-50 justify-between items-center px-4 py-2 w-full h-14' style={ { backgroundColor: theme.senary } }>
@@ -22,7 +22,12 @@ function MobileNavbar({ theme }) {
 
 const HamburgerMenu = ({ theme }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const navigate = useNavigate();
+    const onLinkClick = () => {
+        setIsOpen(false);
+        setDropdownOpen(false);
+    }
 
     return (
         <div style={ { color: theme.primary } } className='relative'>
@@ -41,17 +46,32 @@ const HamburgerMenu = ({ theme }) => {
                                             <img src={ logo } alt='logo' style={ { width: '60px', height: '44px' } } />
                                         </div>
                                     </div>
-                                    <div className='flex flex-col items-left justify-center'>
-                                        <div className='text-lg font-bold'>HealthKard</div>
-                                        <div className='text-sm'>Your health, your way</div>
+                                    <div className='flex flex-col items-left justify-center text-wrap'>
+                                        <div className='text-lg font-bold'>Your Health</div>
+                                        <div className='text-sm'>Your way, please sign in</div>
                                     </div>
                                 </div>
                                 <div className='h-2/3'>
                                     <div className='p-4'>
                                         {
                                             navbarLinks.map((link, index) => (
-                                                <div key={ index } className='flex items-center justify-start gap-2 p-4'>
-                                                    <div className='text-sm font-semibold'>{ link.label }</div>
+                                                <div key={ index } className='flex flex-col items-start justify-start gap-2 p-4'>
+                                                    {
+                                                        !link.subLinks ?
+                                                            <Link to={ link.path } className='text-sm font-semibold' onClick={ onLinkClick }>{ link.label }</Link>
+                                                            : <div className='flex items-center gap-2 cursor-pointer w-full justify-between font-semibold' onClick={ () => setDropdownOpen(!dropdownOpen) }>{ link.label } { dropdownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown /> }</div>
+                                                    }
+                                                    {
+                                                        link.subLinks && link.subLinks.length > 0 && dropdownOpen && (
+                                                            <div style={ { backgroundColor: theme.secondary } } className='w-full flex flex-col gap-2 p-3 text-left'>
+                                                                {
+                                                                    link.subLinks.map((subLink, subIndex) => (
+                                                                        <Link to={ subLink.path } key={ subIndex } className=''>{ subLink.label }</Link>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                        )
+                                                    }
                                                 </div>
                                             ))
                                         }

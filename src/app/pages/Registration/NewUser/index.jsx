@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
 import withTheme from '../../../theme/Theme'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import DragAndDropFile from '../../../components/DragAndDropFile'
-import { PLANS } from './constants'
+import { plans } from '../../constants'
 import { HiOutlineArrowTopRightOnSquare } from "react-icons/hi2";
 import useViewport from '../../../utils/useViewPort'
 import Select from '../../../components/Select'
 import { GENDERS, NEW_USER_FORMS } from './constants'
 import Camera from '../../../components/Camera'
+import { formatCurrency } from '../../../utils/format'
 
 function NewUser({ theme }) {
     const [currentFormId, setCurrentFormId] = useState(0);
@@ -19,7 +19,6 @@ function NewUser({ theme }) {
     }
     return (
         <div style={ { backgroundColor: theme.senary, backgroundImage: `linear-gradient(45deg, ${theme.secondary} , ${theme.senary}, ${theme.secondary})` } } className='flex flex-col w-full h-screen'>
-            <Navbar />
             <div className='flex flex-1 justify-center items-center'>
                 { currentFormId === 0 && <ContactCard theme={ theme } onNext={ () => setCurrentFormId(1) } form={ newUserForm } changeHandler={ changeHandler } /> }
                 { currentFormId === 1 && <BasicDetailsCard theme={ theme } onNext={ () => setCurrentFormId(2) } onPrevious={ () => setCurrentFormId(0) } form={ newUserForm } changeHandler={ changeHandler } /> }
@@ -49,7 +48,6 @@ function ContactCard({ theme, onNext, form, changeHandler }) {
         </div>
     )
 }
-
 
 function BasicDetailsCard({ theme, onNext, onPrevious, form, changeHandler }) {
     const { width } = useViewport();
@@ -165,50 +163,72 @@ const PlanCard = ({ theme }) => {
                 <div className='flex flex-col flex-1 gap-4 w-full'>
                     { !selectedPlan ? <div className='flex flex-col flex-wrap gap-4'>
                         {
-                            PLANS.map((plan) => (
+                            plans.map((plan) => (
                                 <div key={ plan.id } className='flex flex-col lg:flex-row gap-4 justify-between'>
                                     <div className='flex flex-col'>
                                         <div className='text-lg font-semibold'>{ plan.name }</div>
-                                        <div className=''>Enjoy { plan.duration } of unlimited access to all our features</div>
+                                        <div className=''>Enjoy { plan.validUpto } of unlimited access to all our features</div>
                                     </div>
-                                    <Button label={ `Pay ₹${plan.price}` } icon={ HiOutlineArrowTopRightOnSquare } iconPosition='right' type='btn-primary' onClick={ () => handlePlanClick(plan) } />
+                                    <Button label={ `Pay ${formatCurrency(plan.price)}` } icon={ HiOutlineArrowTopRightOnSquare } iconPosition='right' type='btn-primary' onClick={ () => handlePlanClick(plan) } />
                                 </div>
                             ))
                         }
                     </div>
-                        : <div className='flex flex-col flex-1 lg:justify-between justify-start items-start gap-4 w-full'>
-                            <div className='flex gap-4 font-semibold text-lg'>
-                                <div className=''>Selected plan: </div>
-                                <div className='font-bold'>{ selectedPlan.name }</div>
-                                <div className=''>|</div>
-                                <Button label='Change Plan' type='btn-tertiary' />
-                            </div>
-                            <div className='flex flex-col gap-4 w-full'>
-                                <div className=''>Payment Details</div>
-                                <div className='flex flex-col border-dashed border border-primary p-4 rounded'>
-                                    <div className='flex justify-between py-1'>
-                                        <div className=''>Total Amount: </div>
-                                        <div className='font-semibold'>₹{ selectedPlan.price + selectedPlan.discount }</div>
-                                    </div>
-                                    <div className='flex justify-between py-1'>
-                                        <div className=''>Discount: </div>
-                                        <div className='font-semibold'> - ₹{ selectedPlan.discount }</div>
-                                    </div>
-                                    <div style={ { borderTop: `1px solid ${theme.primary}` } } className='flex justify-between py-1'>
-                                        <div className=''>Payable Amount <span className='text-[10px] text-center'>(Incl. GST)</span>: </div>
-                                        <div className='font-semibold'>₹{ selectedPlan.price }</div>
-                                    </div>
-                                </div>
-                                <div className='flex flex-col gap-4'>
-                                    <div className=''>Payment Method</div>
-                                    <div className='flex gap-4'>
-                                        <Button label='Pay with UPI' type='btn-primary' />
-                                        <Button label='Pay with Cash' type='btn-secondary' />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        : <PaymentDetails theme={ theme } selectedPlan={ selectedPlan } setSelectedPlan={ setSelectedPlan } />
                     }
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const PaymentDetails = ({ theme, selectedPlan, setSelectedPlan }) => {
+    return (
+        <div className='flex flex-col flex-1 lg:justify-between justify-start items-start gap-4 w-full'>
+            <div className='flex gap-4 font-semibold text-lg'>
+                <div className=''>Selected plan: </div>
+                <div className='font-bold'>{ selectedPlan.name }</div>
+                <div className=''>|</div>
+                <Button label='Change Plan' type='btn-tertiary' onClick={ () => setSelectedPlan(null) } />
+            </div>
+            <div className='flex flex-col gap-4 w-full'>
+                <div className=''>Payment Details</div>
+                <div className='flex flex-col border-dashed border border-primary p-4 rounded'>
+                    <div className='flex justify-between py-1'>
+                        <div className=''>Total Amount: </div>
+                        <div className='font-semibold'><span className='text-xs line-through mx-1'>{ formatCurrency(selectedPlan.price + selectedPlan.savings) }</span>{ formatCurrency(selectedPlan.price) }</div>
+                    </div>
+                    <div className='flex justify-between py-1'>
+                        <div className=''>State GST: </div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan.stateGST) }</div>
+                    </div>
+                    <div className='flex justify-between py-1'>
+                        <div className=''>Central GST: </div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan.centralGST) }</div>
+                    </div>
+                    <div className='flex justify-between py-1'>
+                        <div className=''>Convenience Fee: </div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan.convenienceFee) }</div>
+                    </div>
+                    <div className='flex justify-between py-1'>
+                        <div className=''>Platform Fee: </div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan.platformFee) }</div>
+                    </div>
+                    <div style={ { borderTop: `1px solid ${theme.primary}` } } className='flex justify-between py-1'>
+                        <div className=''>Payable Amount <span className='text-[10px] text-center'>(Incl. GST)</span>: </div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan.total) }</div>
+                    </div>
+                    <div className='flex justify-between py-1'>
+                        <div className=''>Savings: </div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan.savings) }</div>
+                    </div>
+                </div>
+                <div className='flex flex-col ga`p`-4'>
+                    <div className=''>Payment Method</div>
+                    <div className='flex gap-4'>
+                        <Button label='Pay with UPI' type='btn-primary' />
+                        <Button label='Pay with Cash' type='btn-secondary' />
+                    </div>
                 </div>
             </div>
         </div>

@@ -25,8 +25,7 @@ import MobileUserDetailed from './pages/Admin/Users/MobileUserDetailed'
 import Records from './pages/Admin/Users/Records'
 import Transactions from './pages/Admin/Transactions'
 import Database from './pages/Admin/Database'
-import NewHospital from './pages/Registration/NewHospital'
-import NewUser from './pages/Registration/NewUser'
+
 import ViewImage from './components/ViewImage'
 import { Toaster } from 'react-hot-toast'
 import './App.css'
@@ -38,11 +37,17 @@ import HospitalForPublic from './pages/Public/Hospital'
 import Blog from './pages/Public/Blog'
 import Plans from './pages/Public/Plans'
 import About from './pages/Public/About'
-
+import Profile from './pages/Public/Profile'
 // authentications
 import Auth from './auth'
 import UserLogin from './auth/UserLogin'
 import UserSignup from './auth/UserSignup'
+import Registration from './pages/Registration'
+
+// registration
+import NewHospital from './pages/Registration/NewHospital'
+import NewUser from './pages/Registration/NewUser'
+import UserRenewal from './pages/Registration/UserRenewal'
 
 function App() {
   return (
@@ -59,13 +64,13 @@ function App() {
         <Route path="/" element={ <Public /> } >
           <Route path="user/login" element={ <UserLogin /> } />
           <Route path="user/signup" element={ <UserSignup /> } />
-
           <Route path="/" element={ <Home /> } />
           <Route path='about' element={ <About /> } />
           <Route path='plans' element={ <Plans /> } />
           <Route path='blog/:blogId' element={ <Blog /> } />
           <Route path='hospitals' element={ <ListOfHospitals /> } />
           <Route path='hospital/:hospitalId' element={ <HospitalForPublic /> } />
+          <Route path='profile/:userId' element={ <Profile /> } />
         </Route>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >
@@ -97,8 +102,12 @@ function App() {
           <Route path="transactions" element={ <Transactions /> } />
           <Route path="database" element={ <Database /> } />
         </Route>
-        <Route path='new-hospital' element={ <NewHospital /> } />
-        <Route path='new-user' element={ <NewUser /> } />
+        <Route path='registration' element={ <Registration /> } >
+          <Route path='new-hospital' element={ <NewHospital /> } />
+          <Route path='new-user' element={ <NewUser /> } />
+          <Route path='user-renewal' element={ <UserRenewal /> } />
+        </Route>
+
         <Route path='*' element={ <NotFound /> } />
       </Routes>
     </ThemeProvider>

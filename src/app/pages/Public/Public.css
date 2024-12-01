@@ -1,9 +1,11 @@
 .public-body {
-  position: relative;
-  top: 3.5rem;
-  width: 100vw;
-  height: calc(100vh - 3.5rem);
+    position: relative;
+    top: 3.5rem;
+    width: 100vw;
+    height: calc(100vh - 3.5rem);
+    overflow-y: scroll;
 }
+
 
 /* @media (max-width: 1024px) {
   .public-body {

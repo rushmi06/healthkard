@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import withTheme from '../../../theme/Theme'
-import Navbar from '../components/Navbar'
 import Button from '../../../components/Button';
 import { CARD_DATA } from './constants';
 import Slider from '../../../components/Slider';
@@ -18,7 +17,7 @@ function NewHospital({ theme }) {
     }
     return (
         <div style={ { backgroundColor: theme.senary, backgroundImage: `linear-gradient(45deg, ${theme.secondary} , ${theme.senary}, ${theme.secondary})` } } className='flex flex-col w-full h-screen'>
-            <Navbar />
+
             <div className='flex flex-col gap-5 flex-1 overflow-y-scroll relative   '>
                 <Slider isVisible={ isSliderVisible } onClose={ () => setIsSliderVisible(false) }>
                     <Header title={ currentForm?.title } description={ currentForm?.sliderDescription } />

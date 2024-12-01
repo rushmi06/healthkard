@@ -20,8 +20,9 @@ function SelectCity({ showSelectCity, setShowSelectCity, theme }) {
                 <div className='flex flex-col gap-6'>
                     <div className='text-2xl font-semibold'>Select City</div>
                     <div className='flex flex-wrap gap-2'>
-                        { CITIES.map((city) => (
+                        { CITIES.map((city, index) => (
                             <div
+                                key={ index }
                                 style={
                                     {
                                         backgroundColor: currentCity === city.name ? theme.primary : theme.secondary,

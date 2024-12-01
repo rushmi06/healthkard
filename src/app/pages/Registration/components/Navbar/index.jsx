@@ -3,12 +3,15 @@ import withTheme from '../../../../theme/Theme'
 import logo from '../../../../../logo.svg'
 import './Navbar.css'
 import ThemeToggle from '../../../../components/ThemeToggle'
+import { useNavigate } from 'react-router-dom'
+
 function Navbar({ theme }) {
+    const navigate = useNavigate()
     return (
-        <div className='flex justify-between items-center border-b border-gray-200 pb-2 pt-5 px-5'>
-            <div className='flex items-center gap-2'>
+        <div style={ { backgroundColor: theme.senary } } className='flex justify-between items-center border-b border-gray-200 pb-2 pt-5 px-5'>
+            <div onClick={ () => navigate('/') } className='flex items-center gap-2'>
                 <img src={ logo } alt='logo' style={ { width: '30px', height: '22px' } } />
-                <div id='title' className='text-lg font-bold'>Healthkard</div>
+                <div style={ { color: theme.success } } id='title' className='text-lg font-bold'>Healthkard</div>
             </div>
             <div style={ { color: theme.text } } className='flex items-center gap-4'>
                 <ThemeToggle />

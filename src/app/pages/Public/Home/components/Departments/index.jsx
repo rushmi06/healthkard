@@ -15,7 +15,7 @@ function Departments({ theme }) {
             <Header heading="Popular Searches on Healthkard" />
             <div className="flex justify-center px-6">
                 <ScrollContainer>
-                    <div className="flex gap-4 p-4 w-full">
+                    <div className="flex gap-4 w-full">
                         { DEPARTMENTS.map((department) => (
                             <div onClick={ () => onClickDepartment(department.name) } key={ department.id } className="flex flex-col gap-2 items-center justify-start w-full hover:cursor-pointer">
                                 <div style={ { backgroundColor: theme.secondary } } className='flex items-center justify-center w-16 h-16 border border-primary rounded-full overflow-hidden p-2'>

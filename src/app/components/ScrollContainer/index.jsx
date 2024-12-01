@@ -24,10 +24,10 @@ function ScrollContainer({ children }) {
     }, [isPaused]);
 
     return (
-        <div className="overflow-hidden whitespace-nowrap w-full">
+        <div className="overflow-hidden  w-full">
             <div
                 ref={ containerRef }
-                className="inline-flex animate-scroll hover:pause-animation "
+                className="inline-flex animate-scroll hover:pause-animation gap-4"
                 onMouseEnter={ () => setIsPaused(true) }
                 onMouseLeave={ () => setIsPaused(false) }
             >
