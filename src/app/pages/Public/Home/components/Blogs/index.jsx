@@ -10,7 +10,7 @@ function Blogs({ theme }) {
         <div className='flex flex-col gap-4'>
             <Header heading="Our Blogs" subHeading="Expert advice for Healthy Life." />
             <ScrollContainer>
-                <div className='flex flex-wrap lg:flex-nowrap pb-4 gap-4'>
+                <div className='flex lg:flex-nowrap pb-4 gap-4'>
                     { blogs.map((blog) => (
                         <Blog key={ blog.id } blog={ blog } theme={ theme } />
                     )) }

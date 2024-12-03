@@ -40,7 +40,7 @@ function Renewal({ theme, user }) {
         const amount = plans.find((p) => p.name === plan)?.total
         try {
             const response = await httpService.get(`pay/?number=${user?.number}&healthId=${user?.healthId}&amount=${amount}`)
-            setPaymentUrl(response.data.paymentUrl)
+            setPaymentUrl(response.paymentUrl)
             setShowPaymentModal(true)
         } catch (error) {
             console.error('Payment initiation failed:', error)

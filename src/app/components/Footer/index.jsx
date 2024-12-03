@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 
 const Footer = ({ theme }) => {
   return (
-    <div style={ { backgroundColor: theme.primary, color: theme.senary } } className="w-full md:h-[400px] flex flex-col md:flex-row md:items-center md:justify-around p-4 md:px-10">
+    <div style={ { backgroundColor: theme.primary, color: theme.senary } } className="w-full lg:h-[400px] flex flex-col lg:flex-row lg:items-center lg:justify-around p-4 lg:px-10">
 
       {/* Left Side Panel */ }
-      <div className="flex md:justify-center flex-col gap-4 md:w-[45%] h-[70%]">
-        <h2 className="w-max h-[45px] text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#00BFA8] to-[rgba(0,191,168,0.5)] text-transparent bg-clip-text">
-          HealthKard
+      <div className="flex lg:justify-center flex-col gap-4 lg:w-1/2 h-[70%] p-2">
+        <h2 className="w-max h-[45px] text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#00BFA8] to-[rgba(0,191,168,0.5)] text-transparent bg-clip-text">
+          Healthkard
         </h2>
         <p className="font-light">
           We’re redefining doctor visits—no more worrying about consultation fees. Join our
@@ -26,7 +26,7 @@ const Footer = ({ theme }) => {
           <p className="text-[1rem] font-semibold">Contact Us</p>
           <p>+91 78427 22245</p>
           <p>support@healthkard.in</p>
-          <p>HaleKard Pvt Ltd.</p>
+          <p>Halekard Pvt Ltd.</p>
         </div>
         <div className="font-semibold">
           <p style={ { color: theme.senary } }>©Copyright @2024 Healthkard Powered by Halekard Private Limited</p>
@@ -34,14 +34,14 @@ const Footer = ({ theme }) => {
       </div>
 
       {/* Divider for Desktop */ }
-      <div style={ { backgroundColor: theme.senary } } className="hidden md:block h-[80%] w-[2px]"></div>
-      <div style={ { backgroundColor: theme.senary } } className="block md:hidden h-[2px] w-full my-4"></div>
+      <div style={ { backgroundColor: theme.senary } } className="hidden lg:block h-[80%] w-[2px]"></div>
+      <div style={ { backgroundColor: theme.senary } } className="block lg:hidden h-[2px] w-full my-4"></div>
 
       {/* Right Side Panel */ }
-      <div className="w-full md:w-[50%] flex flex-col  md:flex-row justify-between h-auto md:h-[70%]">
+      <div className="w-full lg:w-1/2 flex justify-between h-auto lg:h-[70%] p-2">
 
         {/* About Us Section */ }
-        <div className="font-semibold flex flex-col gap-4">
+        <div className="font-semibold flex flex-col gap-4 w-1/2">
           <div className="flex flex-col gap-2">
             <a href="/about" target="_blank" rel="noreferrer">About Us</a>
             <a href="/blogs" target="_blank" rel="noreferrer">Blogs</a>
@@ -61,10 +61,10 @@ const Footer = ({ theme }) => {
         </div>
 
         {/* Divider for Mobile */ }
-        <div className="block md:hidden h-[2px] w-full bg-white my-4"></div>
+        <div className="block lg:hidden h-[2px] bg-white my-4"></div>
 
         {/* HealthKard Plans Section */ }
-        <div className="flex flex-col">
+        <div className="flex flex-col w-1/2">
           <h2 className="font-semibold">HealthKard Plans</h2>
           <div className="flex flex-col gap-2 font-light">
             <Link to="/">Monthly Plan</Link>
@@ -72,15 +72,15 @@ const Footer = ({ theme }) => {
             <Link to="/">Half Yearly Plan</Link>
             <Link to="/">Yearly Plan</Link>
           </div>
-          <div className="flex flex-col items-center py-4">
-            <h2 className="font-semibold mb-2">Download Apps</h2>
-            <div className="flex gap-2">
-              <img src={ GooglePlayStoreLogo } alt="Google Play Store" className="w-28 h-10" />
-              <img src={ AppStoreLogo } alt="App Store" className="w-28" />
-            </div>
-          </div>
         </div>
 
+      </div>
+      <div className="flex flex-col items-center py-4">
+        <h2 className="font-semibold mb-2">Download Apps</h2>
+        <div className="flex gap-2">
+          <img src={ GooglePlayStoreLogo } alt="Google Play Store" className="w-28 h-10" />
+          <img src={ AppStoreLogo } alt="App Store" className="w-28" />
+        </div>
       </div>
 
     </div>

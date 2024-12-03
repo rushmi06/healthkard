@@ -14,7 +14,7 @@ import toast from 'react-hot-toast';
 
 function UnregisteredTrack({ theme, user, setUser }) {
     const [isCameraOpen, setIsCameraOpen] = useState(false);
-    const [isEnterDetailsModalOpen, setIsEnterDetailsModalOpen] = useState(true);
+    const [isEnterDetailsModalOpen, setIsEnterDetailsModalOpen] = useState(false);
     const onGetImage = async (image) => {
         try {
             const number = getFromLocalStorage('userNumber')
@@ -32,7 +32,7 @@ function UnregisteredTrack({ theme, user, setUser }) {
             <div className='text-2xl font-bold '>Track</div>
             <div className='flex items-center justify-between w-full flex-1'>
                 <Step title='Step 1' description='Take a photo of your healthKard' icon={ FaCameraRetro } theme={ theme } isSuccess={ user?.image } buttonLabel={ user?.image ? 'Retake' : 'Take Photo' } onClick={ () => setIsCameraOpen(true) } />
-                <Step title='Step 2' description='Enter your details' icon={ MdDataSaverOff } theme={ theme } isSuccess={ user?.registered } buttonLabel='Enter Details' onClick={ () => setIsEnterDetailsModalOpen(true) } />
+                <Step title='Step 2' description='Enter your details' icon={ MdDataSaverOff } theme={ theme } isSuccess={ user?.registered && user?.dob && user?.email } buttonLabel='Enter Details' onClick={ () => setIsEnterDetailsModalOpen(true) } />
                 <Step title='Step 3' description='Pay for your health card' icon={ MdOutlinePayment } theme={ theme } isSuccess={ false } buttonLabel='Start Payment' onClick={ () => setIsCameraOpen(false) } />
             </div>
             { isCameraOpen && <Camera isCameraOpen={ isCameraOpen } setIsCameraOpen={ setIsCameraOpen } getImage={ onGetImage } /> }

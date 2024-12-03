@@ -1,19 +1,26 @@
 #healthkard {
-  width: 451.06px;
-  height: 284px;
+    width: 451.06px;
+    min-height: 350px;
+}
+
+@media (min-width: 768px) {
+    #healthkard {
+        width: 451.06px;
+        height: 284px;
+    }
 }
 
 #healthkard-top {
-  width: 100%;
-  height: 82px;
+    width: 100%;
+    height: 82px;
 }
 
 #healthkard-bottom {
-  width: 100%;
-  height: calc(100% - 82px);
+    width: 100%;
+    height: calc(100% - 82px);
 }
 
 #healthkard-image {
-  width: 100px;
-  height: 100px;
+    width: 100px;
+    height: 100px;
 }

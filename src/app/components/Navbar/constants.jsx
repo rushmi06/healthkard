@@ -12,6 +12,10 @@ export const navbarLinks = [
         path: '/plans'
     },
     {
+        label: 'Challenges',
+        path: '/challenges'
+    },
+    {
         label: 'Community',
         path: '/community',
         subLinks: [

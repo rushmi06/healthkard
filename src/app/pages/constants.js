@@ -3,11 +3,17 @@ import { FaHospitalAlt } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
 import { BiSolidCity } from "react-icons/bi";
 
+// plan vector images
+import planVector1 from '../assets/plans/plan1.png'
+import planVector2 from '../assets/plans/plan2.png'
+import planVector3 from '../assets/plans/plan3.png'
+import planVector4 from '../assets/plans/plan4.png'
+
 export const stats = [
     { icon: <BsFillPeopleFill />, value: "2000+ ", label: "Users" },
-    { icon: <FaHospitalAlt />, value: "100+ ", label: "Hospitals" },
-    { icon: <FaUserDoctor />, value: "180+ ", label: "Doctors" },
-    { icon: <BiSolidCity />, value: "4+ ", label: "Cities" }
+    { icon: <FaHospitalAlt />, value: "25+ ", label: "Hospitals" },
+    { icon: <FaUserDoctor />, value: "75+ ", label: "Doctors" },
+    { icon: <BiSolidCity />, value: "2+ ", label: "Cities" }
 ];
 
 export const plans = [
@@ -26,7 +32,8 @@ export const plans = [
         opFee: 'No',
         hiddenCharges: 'No',
         validUpto: '28 Days',
-        recommended: false
+        recommended: false,
+        vectorImage: planVector1
     },
     {
         id: 2,
@@ -43,7 +50,8 @@ export const plans = [
         opFee: 'No',
         hiddenCharges: 'No',
         validUpto: '84 Days',
-        recommended: false
+        recommended: false,
+        vectorImage: planVector2
     },
     {
         id: 3,
@@ -60,7 +68,8 @@ export const plans = [
         opFee: 'No',
         hiddenCharges: 'No',
         validUpto: '168 Days',
-        recommended: false
+        recommended: false,
+        vectorImage: planVector3
     },
     {
         id: 4,
@@ -76,7 +85,8 @@ export const plans = [
         doctorConsultations: 'Unlimited',
         opFee: 'No',
         hiddenCharges: 'No',
-        validUpto: '226 Days',
-        recommended: true
+        validUpto: '336 Days',
+        recommended: true,
+        vectorImage: planVector4
     }
 ]

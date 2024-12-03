@@ -7,7 +7,7 @@ import { IoIosStarOutline } from "react-icons/io";
 
 function Feedback({ theme, feedback }) {
     return (
-        <div style={ { backgroundColor: theme.senary, border: `1px solid ${theme.primary}`, color: theme.primary } } className="w-72 h-48 rounded-lg p-4 shadow-lg flex flex-col gap-2 overflow-hidden">
+        <div style={ { backgroundColor: theme.senary, border: `1px solid ${theme.primary}`, color: theme.primary } } className="min-w-72 max-w-96 min-h-48 max-h-64 rounded-lg p-4 shadow-lg flex flex-col gap-2 overflow-hidden">
             <div className="flex items-center gap-2">
                 <img src={ feedback.image } alt={ feedback.name } className="w-8 h-8" />
                 <div className="flex flex-col justify-center">

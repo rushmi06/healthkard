@@ -5,18 +5,27 @@ const header = {
     'Content-Type': 'application/json',
 };
 
-const joinURL = (base, url) => `${base}/${url}`;
+const joinURL = (base, url) => {
+    base = base.replace(/\/+$/, '');
+    url = url.replace(/^\/+/, '');
+    return `${base}/${url}`;
+};
 
 class HttpService {
     constructor() {
-        this.domain = 'http://192.168.0.103:3002';
-        // this.domain = 'https://backend-green-tau.vercel.app/';
+        this.domain = 'https://backend-green-tau.vercel.app';
+        // this.domain = 'http://127.0.0.1:3002';
+
+        this.axiosInstance = axios.create({
+            baseURL: this.domain,
+            withCredentials: true,
+            headers: header
+        });
     }
 
     async request(url, method = 'POST', data = null) {
-        url = joinURL(this.domain, url);
+        url = url.replace(/^\/+/, '');
         const options = {
-            headers: header,
             method,
             url,
         };
@@ -24,10 +33,19 @@ class HttpService {
             options.data = data;
         }
         try {
-            const response = await axios(options);
+            const response = await this.axiosInstance(options);
             return response.data;
         } catch (error) {
-            throw new Error(`Failed to fetch: ${error.message}`);
+            if (error.response) {
+                throw new Error(`Server error: ${error.response.status} - ${error.response.data}`);
+            } else if (error.request) {
+                throw new Error('No response received from server');
+            } else if (error.code === 'ERR_NETWORK') {
+                window.location.href = 'https://healthkard.in';
+                throw new Error('Network error occurred');
+            } else {
+                throw new Error(`Request failed: ${error.message}`);
+            }
         }
     }
 

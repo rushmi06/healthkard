@@ -3,10 +3,11 @@ import Header from '../Header'
 import withTheme from '../../../../../theme/Theme'
 import { plans } from '../../../../../pages/constants'
 import { FaCrown } from "react-icons/fa";
+import { formatCurrency } from '../../../../../utils/format'
 
 function Plans({ theme }) {
 
-    const benefits = [{ label: 'Hospital Visits', key: 'hospitalVisits' }, { label: 'Doctor Consultations', key: 'doctorConsultations' }, { label: 'OP Fee', key: 'opFee' }, { label: 'Hidden Charges', key: 'hiddenCharges' }, { label: 'Valid Upto', key: 'validUpto' }]
+    const benefits = [{ label: 'Price', key: 'price' }, { label: 'Hospital Visits', key: 'hospitalVisits' }, { label: 'Doctor Consultations', key: 'doctorConsultations' }, { label: 'OP Fee', key: 'opFee' }, { label: 'Hidden Charges', key: 'hiddenCharges' }, { label: 'Valid Upto', key: 'validUpto' }]
     const headers = plans.map((plan) => ({ label: plan.name, key: plan.id, recommended: plan.recommended }))
 
     return (
@@ -34,7 +35,10 @@ function Plans({ theme }) {
                                     <td className='py-2 px-1 text-left'>{ benefit.label }</td>
                                     {
                                         headers.map((header, index) => (
-                                            <td className='py-2 px-1 text-left' key={ index }>{ plans[index][benefit.key] }</td>
+                                            benefit.key === 'price' ?
+                                                <td className='py-2 px-1 text-left' key={ index }> { formatCurrency(plans[index][benefit.key]) }</td>
+                                                :
+                                                <td className='py-2 px-1 text-left' key={ index }>{ plans[index][benefit.key] }</td>
                                         ))
                                     }
                                 </tr>

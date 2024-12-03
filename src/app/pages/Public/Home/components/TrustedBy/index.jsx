@@ -60,7 +60,7 @@ const TrustedBY = ({ theme }) => {
                 { stat.icon }
               </div>
             </div>
-            <p style={ { color: theme.primary } } className="font-semibold text-sm lg:text-xl -ml-5">{ counters[index] } { stat.label }</p>
+            <p style={ { color: theme.primary } } className="font-semibold text-sm lg:text-xl -ml-5">{ counters[index] }+ { stat.label }</p>
           </div>
         )) }
       </div>

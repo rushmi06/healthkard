@@ -3,7 +3,8 @@ import React from "react";
 import StepsTimeline from "./StepsTimeline"
 import withTheme from "../../../../../theme/Theme";
 import Header from "../Header";
-import stepsImage from "../../../../../assets/home/image2.png"
+// import stepsImage from "../../../../../assets/home/image2.png"
+import stepsImage from "../../../../../assets/home/stepsImage.png"
 
 const Steps = ({ theme }) => {
   return (
@@ -14,7 +15,7 @@ const Steps = ({ theme }) => {
       </div>
 
       <div className="absolute bottom-0 right-0 hidden md:block">
-        <img src={ stepsImage } alt="" width={ 650 } height={ 650 } style={ { objectFit: "contain" } } />
+        <img src={ stepsImage } alt="" width={ 500 } height={ 500 } style={ { objectFit: "contain" } } />
       </div>
 
     </div>

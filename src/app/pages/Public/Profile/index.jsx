@@ -13,6 +13,9 @@ import { clearLocalStorage, getFromLocalStorage } from '../../../auth/localStora
 import { Payments } from '../../Admin/Users/Detailed'
 import profileImage from '../../../assets/profile.png'
 import UnregisteredTrack from './UnregisteredTrack'
+import SupportBox from './SupportBox'
+import { RiMenu2Line } from "react-icons/ri";
+
 function Profile({ theme }) {
     const navigate = useNavigate()
     const [activeIndex, setActiveIndex] = useState(0)
@@ -21,7 +24,8 @@ function Profile({ theme }) {
     const [healthKards, setHealthKards] = useState([])
     const [currentHealthKardId, setCurrentHealthKardId] = useState(0);
     const [isChangeHealthKardModalOpen, setIsChangeHealthKardModalOpen] = useState(false);
-    const [unRegisteredUser, setUnRegisteredUser] = useState(null)
+    const [unRegisteredUser, setUnRegisteredUser] = useState(null);
+    const [closeSideBar, setCloseSideBar] = useState(true)
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -67,17 +71,21 @@ function Profile({ theme }) {
     }
 
     return (
-        <div style={ { backgroundColor: theme.senary, color: theme.text } } className='w-full h-full p-8'>
-            <div style={ { backgroundColor: theme.primary } } className='w-full h-full rounded relative'>
-                <div style={ { color: theme.textSecondary } } className='p-4 flex items-center justify-between gap-4'>
+        <div style={ { backgroundColor: theme.senary, color: theme.text } } className='w-full h-full p-2 lg:p-8'>
+            <div style={ { backgroundColor: theme.primary } } className='w-full lg:h-full rounded relative p-2 lg:p-0'>
+                <div style={ { color: theme.textSecondary } } className='p-4 flex flex-col lg:flex-row items-center justify-between gap-4'>
                     {/* profile */ }
                     <div className='flex items-center justify-start gap-4'>
                         <div className='flex items-center justify-center'>
-                            <img src={ user?.image || unRegisteredUser?.image || profileImage } alt="profile" className='w-20 h-20 rounded-full' />
+                            <img src={ user?.image || unRegisteredUser?.image || profileImage } alt="profile" className='w-16 h-16 lg:w-20 lg:h-20 rounded-full' />
                         </div>
                         <div className=''>
-                            <h1 className='text-2xl font-bold'>{ user?.name || unRegisteredUser?.name } <span className='text-sm font-normal'>({ user?.healthId || unRegisteredUser?.healthId })</span></h1>
-                            <p className='text-sm'>{ user?.email || unRegisteredUser?.email } | { formatNumber(user?.number || unRegisteredUser?.number) }</p>
+                            <h1 className='text-lg lg:text-2xl font-bold'>{ user?.name || unRegisteredUser?.name } <span className='text-xs lg:text-sm font-normal'>({ user?.healthId || unRegisteredUser?.healthId })</span></h1>
+                            <div className='flex flex-col lg:flex-row text-xs lg:text-sm gap-2'>
+                                <div>{ user?.email || unRegisteredUser?.email }</div>
+                                <div className='hidden lg:block'>|</div>
+                                <div>{ formatNumber(user?.number || unRegisteredUser?.number) }</div>
+                            </div>
                         </div>
                     </div>
                     <div className='flex items-center justify-end gap-4'>
@@ -87,18 +95,21 @@ function Profile({ theme }) {
                     </div>
                 </div>
                 {/* container */ }
-                <div style={ { backgroundColor: theme.senary } } className='w-11/12 h-4/5 absolute bottom-1 right-1 rounded flex '>
-                    <div className='w-1/6 h-full flex items-center justify-center'>
-                        <SideNavigationBar theme={ theme } activeIndex={ activeIndex } setActiveIndex={ setActiveIndex } />
+                <div style={ { backgroundColor: theme.senary } } className='w-full lg:w-11/12 h-4/6  lg:h-4/5 relative lg:absolute lg:bottom-1 lg:right-1 rounded flex mx-auto '>
+                    <div className='w-1/2 z-20 lg:w-1/6 lg:h-full flex items-center justify-center absolute lg:relative top-0 left-0 '>
+                        <div className='lg:hidden absolute top-2 left-2 cursor-pointer' onClick={ () => setCloseSideBar(!closeSideBar) }>
+                            <RiMenu2Line className='text-2xl ' />
+                        </div>
+                        <SideNavigationBar theme={ theme } activeIndex={ activeIndex } setActiveIndex={ setActiveIndex } closeSideBar={ closeSideBar } setCloseSideBar={ setCloseSideBar } />
                     </div>
-                    <div className='w-5/6 h-full flex items-center justify-center'>
+                    <div className='w-full h-96 mt-10 lg:mt-0 absolute lg:relative right-0 lg:w-5/6 lg:h-full flex items-center justify-center p-2 '>
                         { activeIndex === 0 && <>
-                            { unRegisteredUser ? <UnregisteredTrack user={ user } setUser={ setUser } /> : <Healthkard user={ user } /> }
+                            { unRegisteredUser || !user?.registered || !user?.image || !user?.address ? <UnregisteredTrack user={ user } setUser={ setUser } /> : <Healthkard user={ user } /> }
                         </> }
                         { activeIndex === 1 && <UserRenewal theme={ theme } user={ user } /> }
                         { activeIndex === 2 && <Payments payments={ user?.payments } theme={ theme } /> }
                         { activeIndex === 3 && <div>Coming Soon</div> }
-                        { activeIndex === 4 && <div>Coming Soon</div> }
+                        { activeIndex === 4 && <SupportBox /> }
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import CloseOnClickOutside from '../../../components/CloseOnOutsideClick'
 import { IoMdLogOut } from "react-icons/io";
-import { clearLocalStorage } from '../../../auth/localStorage'
+import { clearLocalStorage, getFromLocalStorage } from '../../../auth/localStorage'
 
 const NonMobileNavbar = ({ theme }) => {
     const navigate = useNavigate()
@@ -23,29 +23,29 @@ const NonMobileNavbar = ({ theme }) => {
                 <div className='w-2/12'>
                     <Logo main />
                 </div>
-                <div style={ { color: theme.text } } className='hidden lg:flex gap-4 w-7/12 justify-between'>
+                <div style={ { color: theme.text } } className='hidden lg:flex gap-10 w-7/12 justify-center items-center'>
                     {
                         navbarLinks.map((link, index) => (
-                            <div key={ index } className='relative text-sm font-medium flex-1 text-center'>
-                                {
-                                    !link.subLinks ?
-                                        <Link to={ link.path } key={ index } className=''>{ link.label }</Link>
-                                        : <div key={ index } className='flex items-center gap-2 cursor-pointer' onClick={ () => setDropdownOpen(true) }>{ link.label } { dropdownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown /> }</div>
-                                }
-                                {
-                                    link.subLinks && link.subLinks.length > 0 && dropdownOpen && (
-                                        <CloseOnClickOutside onClose={ () => setDropdownOpen(false) }>
-                                            <div style={ { backgroundColor: theme.secondary } } className='absolute -bottom-16 left-0 w-64 flex flex-col gap-2 p-2 text-sm text-left'>
+                            <CloseOnClickOutside onClose={ () => setDropdownOpen(false) }>
+                                <div key={ index } className='relative text-sm font-medium text-center w-fit'>
+                                    {
+                                        !link.subLinks ?
+                                            <Link to={ link.path } key={ index } className=''>{ link.label }</Link>
+                                            : <div key={ index } className='flex items-center gap-2 cursor-pointer' onClick={ () => setDropdownOpen(!dropdownOpen) }>{ link.label } { dropdownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown /> }</div>
+                                    }
+                                    {
+                                        link.subLinks && link.subLinks.length > 0 && dropdownOpen && (
+                                            <div style={ { backgroundColor: theme.secondary } } className='absolute -bottom-16 mt-2 left-0 w-64 flex flex-col gap-2 p-2 text-sm text-left'>
                                                 {
                                                     link.subLinks.map((subLink, subIndex) => (
                                                         <Link to={ subLink.path } key={ subIndex } className=''>{ subLink.label }</Link>
                                                     ))
                                                 }
                                             </div>
-                                        </CloseOnClickOutside>
-                                    )
-                                }
-                            </div>
+                                        )
+                                    }
+                                </div>
+                            </CloseOnClickOutside>
                         ))
                     }
                 </div>
@@ -67,7 +67,7 @@ const NonMobileNavbar = ({ theme }) => {
 const Profile = ({ theme }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const navigate = useNavigate()
-    const userId = localStorage.getItem('userToken')
+    const userId = getFromLocalStorage('userToken')
     const handleLogout = () => {
         clearLocalStorage()
         navigate('/')

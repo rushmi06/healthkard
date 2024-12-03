@@ -12,6 +12,7 @@ function UserSignup({ theme }) {
     const navigate = useNavigate()
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false)
+
     const signup = async () => {
         setLoading(true)
         if (user?.name?.length === 0) {

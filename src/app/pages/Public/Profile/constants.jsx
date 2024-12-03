@@ -3,7 +3,7 @@ import { MdPayment as PaymentIcon } from "react-icons/md";
 import { BiTask as ChallengeIcon } from "react-icons/bi";
 import { IoIdCardSharp as HealthKardIcon } from "react-icons/io5";
 import { IoRefresh as RefreshIcon } from "react-icons/io5";
-import { MdFeedback as FeedbackIcon } from "react-icons/md";
+
 export const links = [
     {
         index: 0,
@@ -27,11 +27,6 @@ export const links = [
     },
     {
         index: 4,
-        label: 'Feedback',
-        icon: <FeedbackIcon />,
-    },
-    {
-        index: 5,
         label: 'Support',
         icon: <SupportIcon />,
     },

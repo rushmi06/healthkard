@@ -99,6 +99,9 @@ export const Payments = ({ theme, payments }) => {
                     <div className='w-1/4'>{ formatDate(payment.issueDate) }</div>
                 </div>
             )) }
+            {
+                payments?.length === 0 && <div className='flex items-center justify-center w-full h-full'>No payments found</div>
+            }
         </div>
     )
 }

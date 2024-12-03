@@ -13,6 +13,8 @@ export const removeFromLocalStorage = (key) => {
 }
 
 export const clearLocalStorage = () => {
+    const theme = getFromLocalStorage('theme')
     localStorage.clear();
+    saveToLocalStorage({ theme })
 }
 

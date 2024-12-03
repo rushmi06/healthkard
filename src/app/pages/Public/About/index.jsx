@@ -4,9 +4,16 @@ import Button from '../../../components/Button'
 import { stats } from '../../constants'
 import missionImage from '../../../assets/about/mission.jpg'
 import visionImage from '../../../assets/about/vision.jpg'
+// backed by image
+import image1 from '../../../assets/backedby/image1.jpeg'
+import image2 from '../../../assets/backedby/image2.jpeg'
+import image3 from '../../../assets/backedby/image3.png'
+import image4 from '../../../assets/backedby/image4.jpeg'
+
 function About({ theme }) {
 
     const [isMobile, setIsMobile] = useState(false);
+    const images = [image1, image2, image3, image4]
 
     useEffect(() => {
         const checkMobile = () => {
@@ -26,8 +33,8 @@ function About({ theme }) {
     }, []);
 
     return (
-        <div style={ { backgroundColor: theme.senary, color: theme.primary } } className="h-full w-full overflow-y-auto">
-            <div className="flex flex-col gap-6 lg:gap-12 w-full mx-auto p-12">
+        <div style={ { backgroundColor: theme.senary, color: theme.primary } } className="w-full p-2">
+            <div className="flex flex-col gap-6 lg:gap-12 w-full mx-auto p-2 lg:p-12">
                 <section className="">
                     <p className="mb-6 font-bold text-center text-2xl lg:text-5xl">We're changing the way you experience Doctor visits at Hospitals.</p>
                 </section>
@@ -39,7 +46,7 @@ function About({ theme }) {
                         </div>
                     </div>
                     <div className='w-full lg:w-1/2 flex flex-col gap-10'>
-                        <Button label='Our Mission' style={ { width: isMobile ? "100%" : "40%", fontSize: "1.5rem", height: "3rem" } } />
+                        <Button label='Our Mission' style={ { width: isMobile ? "100%" : "40%", fontSize: "1.5rem", height: "3rem", cursor: "default" } } />
                         <div style={ { color: theme.text } } className='text-lg flex flex-col gap-4'>
                             <div style={ { color: theme.primary } } className='text-xl font-bold'>Getting the access to visit a well qualified Doctor without breaking your pocket.</div>
                             <div className=''>We believe visiting a doctor shouldn’t come with a large bill. That’s why we created a
@@ -67,7 +74,7 @@ function About({ theme }) {
                         </div>
                     </div>
                     <div className='w-full lg:w-1/2 flex flex-col gap-10'>
-                        <Button label='Our Vision' style={ { width: isMobile ? "100%" : "40%", fontSize: "1.5rem", height: "3rem" } } />
+                        <Button label='Our Vision' style={ { width: isMobile ? "100%" : "40%", fontSize: "1.5rem", height: "3rem", cursor: "default" } } />
                         <div style={ { color: theme.text } } className='text-lg flex flex-col gap-4'>
                             <div style={ { color: theme.primary } } className='text-xl font-bold'>We all has access to affordable and High quality healthcare whenever we need it.</div>
                             <div className=''>
@@ -84,9 +91,23 @@ function About({ theme }) {
                     Founded in March 2024 and launched in June 2024, Healthkard is already making a
                     difference in Narasaraopet and Guntur, helping over 2,000 users get the care they
                     deserve. With partnerships across 25+ hospitals and 75+ doctors, we're growing fast,
-                    but our goal is clear—to make sure that everyone, everywhere, can access quality
+                    but our goal is clear—to make sure that everyone, everywhere, can access quality.
                 </div>
             </div>
+            <section className='flex flex-col justify-center items-center flex-wrap gap-6 lg:gap-12'>
+                <div className='flex flex-col gap-6 lg:gap-12'>
+                    <Button label='Backed By' style={ { width: isMobile ? "100%" : "40%", fontSize: "1.5rem", height: "3rem", cursor: "default" } } />
+                </div>
+                <div className='flex justify-center items-center flex-wrap gap-6 lg:gap-12'>
+                    {
+                        images.map((image, index) => (
+                            <div key={ index } className='w-1/3 lg:w-1/4'>
+                                <img src={ image } alt='backed by' className='w-full h-full object-cover' />
+                            </div>
+                        ))
+                    }
+                </div>
+            </section>
         </div>
     )
 }

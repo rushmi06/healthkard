@@ -40,9 +40,9 @@ const PlanCard = ({ plan, theme }) => {
     }
     return (
         <div style={ { backgroundColor: theme.secondary, color: theme.text, border: `1px solid ${plan.recommended ? 'gold' : theme.tertiary}` } } className={ `w-full lg:w-1/4 h-fit ${plan.recommended ? 'border-2 border-yellow-500 lg:scale-105' : ''} lg:hover:scale-105 transition-all duration-300` }>
-            <div style={ { backgroundColor: theme.secondary } } className='h-32 lg:h-48 w-full flex justify-center items-center relative'>
+            <div style={ { backgroundColor: theme.secondary } } className='h-32 lg:h-48 w-full flex justify-center items-center relative pt-2 px-2'>
                 { plan.recommended && <div className='absolute -top-4 left-1/2 -translate-x-1/2 text-2xl text-yellow-500'><FaCrown /></div> }
-                replace with image
+                <img src={ plan.vectorImage } alt={ plan.name } className='w-full h-full object-contain' />
             </div>
             <div className='p-4 flex flex-col gap-2 items-center justify-center'>
                 <div className='text-xl lg:text-2xl font-bold'>{ plan.name }</div>

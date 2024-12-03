@@ -10,7 +10,7 @@ function Logo({ column = false, main = false, theme }) {
     return (
         <div onClick={ () => navigate('/') } style={ { backgroundColor: main ? '' : theme.secondary } } className={ `w-full ${main ? '' : 'h-12'} flex items-center justify-center gap-2 rounded hover:cursor-pointer ${column ? 'flex-col' : ''}` }>
             <img src={ logo } alt='logo' style={ { width: '30px', height: '22px' } } />
-            <div style={ { color: theme.success } } className='text-lg font-bold'>HealthKard</div>
+            <div style={ { color: theme.success } } className='text-lg font-bold'>Healthkard</div>
         </div >
     )
 
