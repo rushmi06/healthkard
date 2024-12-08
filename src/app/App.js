@@ -12,7 +12,6 @@ import NewAgent from './pages/Admin/Agents/NewAgent'
 import { ThemeProvider } from './theme/Theme/ThemeContext'
 import NotFound from './pages/NotFound'
 import Blogs from './pages/Admin/Marketing/Blogs'
-import Testimonials from './pages/Admin/Marketing/Testimonials'
 import Youtube from './pages/Admin/Marketing/Youtube'
 import Alert from './components/Alert'
 import EmailBox from './components/EmailBox'
@@ -38,6 +37,10 @@ import Blog from './pages/Public/Blog'
 import Plans from './pages/Public/Plans'
 import About from './pages/Public/About'
 import Profile from './pages/Public/Profile'
+import Plan from './pages/Public/Plan'
+import Testimonials from './pages/Public/Testimonials'
+import PublicBlogs from './pages/Public/Blogs'
+import RequestForDemo from './pages/Public/RequestForDemo'
 // authentications
 import Auth from './auth'
 import UserLogin from './auth/UserLogin'
@@ -48,6 +51,9 @@ import Registration from './pages/Registration'
 import NewHospital from './pages/Registration/NewHospital'
 import NewUser from './pages/Registration/NewUser'
 import UserRenewal from './pages/Registration/UserRenewal'
+
+// challenges
+import Challenges from './pages/Public/Challenges'
 
 function App() {
   return (
@@ -66,11 +72,16 @@ function App() {
           <Route path="user/signup" element={ <UserSignup /> } />
           <Route path="/" element={ <Home /> } />
           <Route path='about' element={ <About /> } />
+          <Route path='plans/:planId' element={ <Plan /> } />
           <Route path='plans' element={ <Plans /> } />
           <Route path='blog/:blogId' element={ <Blog /> } />
           <Route path='hospitals' element={ <ListOfHospitals /> } />
           <Route path='hospital/:hospitalId' element={ <HospitalForPublic /> } />
           <Route path='profile/:userId' element={ <Profile /> } />
+          <Route path='challenges' element={ <Challenges /> } />
+          <Route path='testimonials' element={ <Testimonials /> } />
+          <Route path='blogs' element={ <PublicBlogs /> } />
+          <Route path='request-for-demo' element={ <RequestForDemo /> } />
         </Route>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >

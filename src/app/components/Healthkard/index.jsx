@@ -47,7 +47,7 @@ function Healthkard({ theme, user }) {
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col justify-center items-center lg:w-1/2 w-full'>
+                    <div className='flex flex-col justify-center items-center lg:w-1/3 w-full'>
                         <img id='healthkard-image' src={ user?.image } alt={ user?.name } className='rounded-full w-10 h-10 object-cover' />
                         <div className='flex font-semibold'>{ user?.healthId }</div>
                     </div>

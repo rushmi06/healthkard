@@ -34,9 +34,9 @@ function Plans({ theme }) {
                                 <tr key={ index } style={ { backgroundColor: index % 2 === 0 ? '' : theme.secondary } } className='lg:hover:scale-105 lg:hover:translate-x-10 hover:cursor-pointer hover:shadow transition-all duration-300'>
                                     <td className='py-2 px-1 text-left'>{ benefit.label }</td>
                                     {
-                                        headers.map((header, index) => (
+                                        headers.map((_, index) => (
                                             benefit.key === 'price' ?
-                                                <td className='py-2 px-1 text-left' key={ index }> { formatCurrency(plans[index][benefit.key]) }</td>
+                                                <td className='py-2 px-1 text-left text-sm lg:text-2xl font-semibold' key={ index }> { formatCurrency(plans[index][benefit.key]) }</td>
                                                 :
                                                 <td className='py-2 px-1 text-left' key={ index }>{ plans[index][benefit.key] }</td>
                                         ))

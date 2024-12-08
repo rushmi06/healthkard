@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -6,12 +6,19 @@ import withTheme from '../../theme/Theme'
 import Logo from '../../components/Logo'
 import toast from 'react-hot-toast'
 import httpService from '../../api/httpService'
-import signupImage from '../../assets/signup.jpg'
+// import signupImage from '../../assets/signup.jpg'
+import signupImage from '../../assets/vector/image7.jpg'
+import { isUserLoggedIn } from '../../utils/auth'
 
 function UserSignup({ theme }) {
     const navigate = useNavigate()
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        if (isUserLoggedIn()) {
+            navigate(-1)
+        }
+    }, [navigate])
 
     const signup = async () => {
         setLoading(true)
@@ -22,7 +29,7 @@ function UserSignup({ theme }) {
         }
         if (user?.password !== user?.confirmPassword) {
             toast.error('Passwords do not match')
-            setLoading(true)
+            setLoading(false)
             return
         }
         if (user?.number?.length !== 10) {
@@ -46,6 +53,7 @@ function UserSignup({ theme }) {
                 toast.error(response.message)
             } else {
                 toast.success(response.message)
+                navigate('/auth/user/login')
             }
         } catch (error) {
             toast.error('Please try again later')

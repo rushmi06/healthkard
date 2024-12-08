@@ -7,7 +7,8 @@ import Logo from '../../components/Logo'
 import toast from 'react-hot-toast'
 import httpService from '../../api/httpService'
 import { saveToLocalStorage } from '../localStorage'
-import loginImage from '../../assets/login.jpg'
+// import loginImage from '../../assets/login.jpg'
+import loginImage from '../../assets/vector/image1.jpg'
 import { sendPasswordToEmail } from '../mails'
 function UserLogin({ theme }) {
     const navigate = useNavigate()
@@ -33,7 +34,7 @@ function UserLogin({ theme }) {
             if (response.status === 200) {
                 saveToLocalStorage({ userToken: response.id, userEmail: response.email, userNumber: user.number, userName: response.name })
                 toast.success(response.message)
-                navigate('/')
+                navigate(-1)
             } else {
                 toast.error(response.message)
             }
@@ -75,7 +76,8 @@ function UserLogin({ theme }) {
                     <div className='flex flex-col gap-4 mt-10 mx-auto w-5/6 '>
                         <Input label='Email' type='email' onChange={ (e) => setUser({ ...user, email: e.target.value }) } />
                         <Button label={ sendingPassword ? 'Sending password...' : passwordSend ? 'Password sent to your email' : 'Send password' } type='btn-primary' onClick={ sendPassword } />
-                    </div> : <div className='flex flex-col gap-4 mt-10 mx-auto w-5/6 '>
+                    </div>
+                    : <div className='flex flex-col gap-4 mt-10 mx-auto w-5/6 '>
                         <Input label='Number' type='number' onChange={ (e) => setUser({ ...user, number: e.target.value }) } />
                         <Input label='Password' type='password' onChange={ (e) => setUser({ ...user, password: e.target.value }) } />
                         <Button label={ sendingPassword ? 'Sending password...' : passwordSend ? 'Password sent to your email' : 'Forgot password?' } type='btn-tertiary' onClick={ () => setIsForgotPasswordClicked(true) } style={ { width: 'fit-content' } } />

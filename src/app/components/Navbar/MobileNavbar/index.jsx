@@ -8,6 +8,7 @@ import CloseOnOutsideClick from '../../CloseOnOutsideClick';
 import { Link, useNavigate } from 'react-router-dom';
 import { isUserLoggedIn } from '../../../utils/auth';
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+import ThemeToggle from '../../ThemeToggle';
 import { clearLocalStorage, getFromLocalStorage } from '../../../auth/localStorage';
 import greets from './greets';
 function MobileNavbar({ theme }) {
@@ -30,11 +31,7 @@ const HamburgerMenu = ({ theme }) => {
         setIsOpen(false);
         setDropdownOpen(false);
     }
-    const onProfileClick = () => {
-        setIsOpen(false);
-        setDropdownOpen(false);
-        navigate(`/profile/${getFromLocalStorage('userToken')}`);
-    }
+
     const logout = () => {
         clearLocalStorage()
         navigate('/')
@@ -52,28 +49,7 @@ const HamburgerMenu = ({ theme }) => {
                         <div style={ { backgroundColor: theme.secondary } } className='relative w-full h-full shadow-lg border-l border-gray-600'>
                             <div style={ { backgroundColor: theme.senary } } className='w-full h-full absolute top-0 right-0 -z-10'></div>
                             <div className='h-full'>
-                                <div style={ { backgroundColor: theme.senary } } className='flex items-center justify-start  gap-2 p-4'>
-                                    <div style={ { borderColor: theme.primary } } className='flex items-center justify-center h-20 w-20 rounded-full border-2 p-1'>
-                                        <div style={ { borderColor: theme.primary } } className='flex items-center justify-center h-full w-full rounded-full border'>
-                                            <img src={ logo } alt='logo' style={ { width: '60px', height: '44px' } } />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col items-left justify-center text-wrap'>
-                                        { isUserLoggedIn() ? (
-                                            <>
-                                                <div className='text-lg font-bold'>Hey!<br />{ getFromLocalStorage('userName') }</div>
-                                                <div className='text-sm'>{ greets() }</div>
-                                                <div onClick={ onProfileClick } style={ { backgroundColor: theme.secondary, border: `1px solid ${theme.primary}` } } className='text-xs cursor-pointer text-center rounded-full px-2 py-1 mt-2'>Go to your profile</div>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <div className='text-lg font-bold'>Your Health</div>
-                                                <div className='text-sm'>Your way, please sign up</div>
-                                            </>
-                                        ) }
-
-                                    </div>
-                                </div>
+                                <ProfileCard theme={ theme } setIsOpen={ setIsOpen } setDropdownOpen={ setDropdownOpen } />
                                 <div className='h-2/3'>
                                     <div className='p-4'>
                                         {
@@ -112,6 +88,41 @@ const HamburgerMenu = ({ theme }) => {
                     </CloseOnOutsideClick>
                 </div>
             }
+        </div>
+    )
+}
+
+const ProfileCard = ({ theme, setIsOpen, setDropdownOpen }) => {
+    const navigate = useNavigate();
+    const onProfileClick = () => {
+        setIsOpen(false);
+        setDropdownOpen(false);
+        navigate(`/profile/${getFromLocalStorage('userToken')}`);
+    }
+    return (
+        <div style={ { backgroundColor: theme.senary } } className='flex items-center justify-start relative gap-2 p-4'>
+            <div style={ { borderColor: theme.primary } } className='flex items-center justify-center h-20 w-20 rounded-full border-2 p-1'>
+                <div style={ { borderColor: theme.primary } } className='flex items-center justify-center h-full w-full rounded-full border'>
+                    <img src={ logo } alt='logo' style={ { width: '60px', height: '44px' } } />
+                </div>
+            </div>
+            <div className='flex flex-col items-left justify-center text-wrap'>
+                { isUserLoggedIn() ? (
+                    <>
+                        <div className='text-lg font-bold'>Hey!<br />{ getFromLocalStorage('userName') }</div>
+                        <div className='text-sm'>{ greets() }</div>
+                        <div onClick={ onProfileClick } style={ { backgroundColor: theme.secondary, border: `1px solid ${theme.primary}` } } className='text-xs cursor-pointer text-center rounded-full px-2 py-1 mt-2'>Go to your profile</div>
+                    </>
+                ) : (
+                    <>
+                        <div className='text-lg font-bold'>Your Health</div>
+                        <div className='text-sm'>Your way, please sign up</div>
+                    </>
+                ) }
+            </div>
+            <div className='absolute top-2 right-2'>
+                <ThemeToggle />
+            </div>
         </div>
     )
 }

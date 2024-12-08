@@ -2,7 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withTheme from '../../theme/Theme';
 
-const Input = ({ label, type, onChange = () => { }, style, inputStyle, placeholder = 'Enter value', theme, multiline, rows = 10, value }) => {
+const Input = ({
+    label,
+    type = 'text',
+    onChange = () => { },
+    style,
+    inputStyle = {},
+    placeholder = '',
+    theme,
+    multiline = false,
+    rows = 3,
+    value
+}) => {
     const inputProps = {
         type: multiline ? undefined : type,
         onChange: onChange,
@@ -37,15 +48,6 @@ Input.propTypes = {
     placeholder: PropTypes.string,
     multiline: PropTypes.bool,
     rows: PropTypes.number,
-};
-
-Input.defaultProps = {
-    type: 'text',
-    inputStyle: {},
-    onChange: () => { },
-    placeholder: '',
-    multiline: false,
-    rows: 3,
 };
 
 export default withTheme(Input);

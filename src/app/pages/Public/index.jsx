@@ -7,7 +7,7 @@ import './Public.css'
 
 function Public({ theme }) {
     return (
-        <div style={ { backgroundColor: theme.senary } } className="flex flex-col h-screen w-screen">
+        <div style={ { backgroundColor: theme.senary, color: theme.text } } className="flex flex-col h-screen w-screen">
             <Navbar />
             <div className='public-body'>
                 <Outlet />

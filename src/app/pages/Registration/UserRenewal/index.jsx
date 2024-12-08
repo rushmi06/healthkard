@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import withTheme from '../../../theme/Theme'
 import Select from '../../../components/Select'
-import PaymentModal from '../../../components/PaymentModal'
 import { plans } from '../../constants'
 import Checkbox from '../../../components/Checkbox'
 import Button from '../../../components/Button'
-import httpService from '../../../api/httpService'
+import pay from '../../../utils/pay'
 import { formatCurrency } from '../../../utils/format'
+import httpService from '../../../api/httpService'
 
 function UserRenewal({ theme, user }) {
     if (!user) return null
@@ -25,8 +25,8 @@ function Renewal({ theme, user }) {
     const [isReferred, setIsReferred] = useState(false)
     const [agents, setAgents] = useState(['Self'])
     const [agent, setAgent] = useState('Self')
-    const [showPaymentModal, setShowPaymentModal] = useState(false)
-    const [paymentUrl, setPaymentUrl] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchAgents = async () => {
@@ -37,20 +37,17 @@ function Renewal({ theme, user }) {
     }, [user])
 
     const handlePay = async () => {
-        const amount = plans.find((p) => p.name === plan)?.total
+        setLoading(true)
+        setError(null)
+
         try {
-            const response = await httpService.get(`pay/?number=${user?.number}&healthId=${user?.healthId}&amount=${amount}`)
-            setPaymentUrl(response.paymentUrl)
-            setShowPaymentModal(true)
+            await pay(user?.number, user?.healthId, plans.find((p) => p.name === plan)?.total, plan, agent, user?.name, 'renew')
         } catch (error) {
             console.error('Payment initiation failed:', error)
-            // Add error handling here (e.g., show error toast)
+            setError('Failed to initiate payment. Please try again.')
+        } finally {
+            setLoading(false)
         }
-    }
-
-    const handlePaymentSuccess = () => {
-        // Handle successful payment (e.g., show success message, refresh user data)
-        console.log('Payment successful')
     }
 
     return (
@@ -68,16 +65,13 @@ function Renewal({ theme, user }) {
                 </div>
                 <div className='font-semibold'>{ formatCurrency(plans.find((p) => p.name === plan)?.total || 0) }</div>
             </div>
-            <Button label='Pay and Renew' onClick={ handlePay } />
+            { error && <div className="text-red-500 text-sm">{ error }</div> }
+            <Button
+                label={ loading ? 'Processing...' : 'Pay and Renew' }
+                onClick={ handlePay }
+                disabled={ loading }
+            />
 
-            { showPaymentModal && (
-                <PaymentModal
-                    url={ paymentUrl }
-                    onClose={ () => setShowPaymentModal(false) }
-                    onSuccess={ handlePaymentSuccess }
-                    theme={ theme }
-                />
-            ) }
         </div>
     )
 }

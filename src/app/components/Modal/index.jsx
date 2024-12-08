@@ -38,10 +38,9 @@ function Modal({ children, open, onClose, position = 'center', style = { width: 
         left: { x: '-100%' },
         right: { x: '100%' },
     };
-    const width = window.innerWidth < 1024 ? '90%' : '50%';
-    const height = window.innerWidth < 1024 ? '70%' : '50%';
+    const width = window.innerWidth < 768 ? '95%' : '50%';
     // Ensure style is always an object
-    const mergedStyle = { width, height, ...style, backgroundColor: theme.senary, color: theme.text, border: theme.text === '#fff' ? `2px solid ${theme.text}` : 'none' };
+    const mergedStyle = { ...style, backgroundColor: theme.senary, color: theme.text, border: theme.text === '#fff' ? `2px solid ${theme.text}` : 'none', width };
 
     const modalContent = open ? (
         <div className={ `fixed inset-0 z-50 border-2 overflow-auto bg-black bg-opacity-50 flex ${positionClasses[position]}` }>

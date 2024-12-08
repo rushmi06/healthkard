@@ -5,14 +5,15 @@ import { BsGraphUpArrow } from "react-icons/bs";
 import HospitalNameCard from "./HospitalNameCard";
 import withTheme from "../../../../../theme/Theme";
 import httpService from "../../../../../api/httpService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import ScrollContainer from "../../../../../components/ScrollContainer";
 import SearchHospitals from "../../../../../components/SearchHospitals";
+import { isUserLoggedIn } from '../../../../../utils/auth'
 
 const Banner = ({ theme }) => {
   const [hospitals, setHospitals] = useState([]);
   const currentCity = localStorage.getItem('city')
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHospitals = async () => {
@@ -42,8 +43,8 @@ const Banner = ({ theme }) => {
           </div>
           <div className="flex items-center gap-8 justify-center lg:justify-start">
 
-            <button style={ { backgroundColor: theme.primary, color: theme.senary } } className="w-40 h-11 rounded-sm  hover:bg-transparent hover:border-2 hover:border-[#303486] hover:text-[#303486]" onClick={ () => { } }>Subscribe Now</button>
-            <button style={ { border: `1px solid ${theme.primary}` } } className="w-40 h-11 bg-transparent border-2 border-[#303486] rounded-sm hover:bg-[#303486] hover:text-white" onClick={ () => { } }>Request for demo</button>
+            { !isUserLoggedIn() && <button style={ { backgroundColor: theme.primary, color: theme.senary } } className="w-40 h-11 rounded-sm  hover:bg-transparent hover:border-2 hover:border-[#303486] hover:text-[#303486]" onClick={ () => { navigate('/auth/user/signup') } }>Subscribe Now</button> }
+            <button style={ { border: `1px solid ${theme.primary}` } } className="w-40 h-11 bg-transparent border-2 border-[#303486] rounded-sm hover:bg-[#303486] hover:text-white" onClick={ () => { navigate('/request-for-demo') } }>Request for demo</button>
 
           </div>
         </div>

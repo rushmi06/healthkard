@@ -4,23 +4,23 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 
 export const benefits = [
     {
-        icon: <MdPersonSearch />,
+        icon: <FaStethoscope />,
         description: "Zero Doctor Consultation Fees",
     },
     {
-        icon: <FaStethoscope />,
+        icon: <FaRegCalendarAlt />,
         description: "Longer Validity",
     },
     {
-        icon: <FaBriefcaseMedical />,
+        icon: <MdPersonSearch />,
         description: "Several Doctor Visits",
     },
     {
-        icon: <FaRegCalendarAlt />,
+        icon: <FaUserDoctor />,
         description: "Access to Well Qualified Doctors",
     },
     {
-        icon: <FaUserDoctor />,
+        icon: <FaBriefcaseMedical />,
         description: "Gateway to Multiple Hospitals",
     },
 ];

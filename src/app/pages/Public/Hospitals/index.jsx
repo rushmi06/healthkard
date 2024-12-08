@@ -11,6 +11,7 @@ function Hospitals({ theme }) {
     const currentCity = localStorage.getItem('city');
     const [departmentName, setDepartmentName] = useState('');
     const { search } = useLocation();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const params = new URLSearchParams(search);
@@ -20,31 +21,41 @@ function Hospitals({ theme }) {
 
     useEffect(() => {
         const fetchHospitals = async () => {
-            const response = await httpService.get(`hospitals/?city=${currentCity}&&limit=20&&department=${departmentName}`);
-            const hospitals = response.hospitals.map(hospital => ({
-                _id: hospital._id,
-                name: hospital.hospitalDetails.hospitalLegalName,
-                image: hospital.mediaDetails.hospitalImageURL,
-                desc: hospital.mediaDetails.desc,
-                services: hospital.hospitalDetails.servicesOffered,
-                logo: hospital.mediaDetails.logoURL
-            }))
-            setHospitals(hospitals);
+            try {
+                setLoading(true);
+                const response = await httpService.get(`hospitals/?city=${currentCity}&&department=${departmentName}`);
+                const hospitals = response.hospitals.map(hospital => ({
+                    _id: hospital._id,
+                    name: hospital.hospitalDetails.hospitalLegalName,
+                    image: hospital.mediaDetails.hospitalImageURL,
+                    desc: hospital.mediaDetails.desc,
+                    services: hospital.hospitalDetails.servicesOffered,
+                    logo: hospital.mediaDetails.logoURL
+                }))
+                setHospitals(hospitals);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false);
+            }
         }
         fetchHospitals();
     }, [currentCity, departmentName])
     return (
         <div style={ { backgroundColor: theme.senary, color: theme.text } } className='w-full h-full p-4'>
             <Header hospitals={ hospitals } />
-            <div className='w-full h-full grid-container'>
-                <GridContainer>
-                    {
-                        hospitals.map((hospital, index) => {
-                            return <HospitalCard key={ index } hospital={ hospital } theme={ theme } />
-                        })
-                    }
-                </GridContainer>
-            </div>
+            {
+                loading ? <div>Loading...</div> :
+                    <div className='w-full h-full grid-container'>
+                        <GridContainer label='Please Login to view more hospitals' blur={ true }>
+                            {
+                                hospitals.length > 0 ? hospitals.map((hospital, index) => {
+                                    return <HospitalCard key={ index } hospital={ hospital } theme={ theme } />
+                                }) : <div>No hospitals found</div>
+                            }
+                        </GridContainer>
+                    </div>
+            }
         </div>
     )
 }

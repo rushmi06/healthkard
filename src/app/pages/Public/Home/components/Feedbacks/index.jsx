@@ -3,9 +3,9 @@ import Header from "../Header"
 import withTheme from "../../../../../theme/Theme"
 import Feedback from "../../../../../components/Feedback"
 import ScrollContainer from "../../../../../components/ScrollContainer"
-import { FEEDBACKS } from "./constants"
+import { FEEDBACKS } from "../../../constants"
 
-function Feedbacks({ feedback, theme }) {
+function Feedbacks({ theme }) {
     return (
         <div>
             <Header heading="What Our Patients Say" subHeading="We are proud to have helped thousands of patients find the best hospitals and doctors in their city." />

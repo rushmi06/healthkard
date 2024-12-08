@@ -4,7 +4,7 @@ import { IoCaretDown } from "react-icons/io5";
 import { IoCaretUp } from "react-icons/io5";
 
 
-function Select({ label, options = [{ label: 'Male', value: 'Male' }], value = 'Male', onChange = () => { }, style, theme }) {
+function Select({ label, options = ['Male', 'Female'], value = 'Male', onChange = () => { }, style, theme }) {
 
     const [isOpen, setIsOpen] = useState(false)
 

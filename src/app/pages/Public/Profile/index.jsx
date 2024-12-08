@@ -15,6 +15,7 @@ import profileImage from '../../../assets/profile.png'
 import UnregisteredTrack from './UnregisteredTrack'
 import SupportBox from './SupportBox'
 import { RiMenu2Line } from "react-icons/ri";
+import ProfileEdit from './ProfileEdit'
 
 function Profile({ theme }) {
     const navigate = useNavigate()
@@ -22,17 +23,19 @@ function Profile({ theme }) {
     const { userId } = useParams()
     const [user, setUser] = useState({})
     const [healthKards, setHealthKards] = useState([])
-    const [currentHealthKardId, setCurrentHealthKardId] = useState(0);
+    const [currentHealthKardId, setCurrentHealthKardId] = useState(localStorage.getItem('currentHealthKardIndex') || 0);
     const [isChangeHealthKardModalOpen, setIsChangeHealthKardModalOpen] = useState(false);
     const [unRegisteredUser, setUnRegisteredUser] = useState(null);
     const [closeSideBar, setCloseSideBar] = useState(true)
-
+    const [isLoading, setIsLoading] = useState(true)
+    const [isProfileEditModalOpen, setIsProfileEditModalOpen] = useState(false)
     useEffect(() => {
         const fetchUser = async () => {
+            setIsLoading(true)
             try {
                 const number = localStorage.getItem('userNumber')
                 const { users } = await httpService.get(`users/?number=${number}`)
-                if (users.length === 0 || users[0]?.registered === false) {
+                if (users?.length === 0 || users[0]?.registered === false) {
                     let user = await httpService.get(`users/unregistered/${number}`)
                     if (user?.name === 'xyz') {
                         const userName = getFromLocalStorage('userName')
@@ -48,6 +51,8 @@ function Profile({ theme }) {
                 setHealthKards(users)
             } catch (error) {
                 console.log(error)
+            } finally {
+                setIsLoading(false)
             }
         }
         fetchUser()
@@ -62,6 +67,7 @@ function Profile({ theme }) {
         const healthKardIndex = healthKards.findIndex(healthKard => healthKard?.healthId === healthKardId) || 0
         setCurrentHealthKardId(healthKardIndex)
         setUser(healthKards[healthKardIndex])
+        localStorage.setItem('currentHealthKardIndex', healthKardIndex)
         setIsChangeHealthKardModalOpen(false)
     }
 
@@ -69,6 +75,7 @@ function Profile({ theme }) {
         clearLocalStorage()
         navigate('/')
     }
+    if (isLoading) return <div style={ { backgroundColor: theme.senary, color: theme.text } } className='w-full h-full flex items-center justify-center'>Loading...</div>
 
     return (
         <div style={ { backgroundColor: theme.senary, color: theme.text } } className='w-full h-full p-2 lg:p-8'>
@@ -90,7 +97,7 @@ function Profile({ theme }) {
                     </div>
                     <div className='flex items-center justify-end gap-4'>
                         { healthKards.length > 1 && <Button type='btn-tertiary' label='Change HealthKard' style={ { color: theme.textSecondary } } onClick={ () => setIsChangeHealthKardModalOpen(true) } /> }
-                        { !unRegisteredUser && <Button label='Edit Profile' type='btn-secondary' style={ { backgroundColor: theme.senary, color: theme.text } } /> }
+                        { !unRegisteredUser && <Button label='Edit Profile' type='btn-secondary' style={ { backgroundColor: theme.senary, color: theme.text } } onClick={ () => setIsProfileEditModalOpen(true) } /> }
                         <Button label='Logout' type='btn-danger' onClick={ logout } />
                     </div>
                 </div>
@@ -104,16 +111,19 @@ function Profile({ theme }) {
                     </div>
                     <div className='w-full h-96 mt-10 lg:mt-0 absolute lg:relative right-0 lg:w-5/6 lg:h-full flex items-center justify-center p-2 '>
                         { activeIndex === 0 && <>
-                            { unRegisteredUser || !user?.registered || !user?.image || !user?.address ? <UnregisteredTrack user={ user } setUser={ setUser } /> : <Healthkard user={ user } /> }
+                            { unRegisteredUser || !user?.registered || !user?.image || !user?.address ?
+                                <UnregisteredTrack user={ user } setUser={ setUser } />
+                                : <Healthkard user={ user } /> }
                         </> }
                         { activeIndex === 1 && <UserRenewal theme={ theme } user={ user } /> }
                         { activeIndex === 2 && <Payments payments={ user?.payments } theme={ theme } /> }
                         { activeIndex === 3 && <div>Coming Soon</div> }
-                        { activeIndex === 4 && <SupportBox /> }
+                        { activeIndex === 4 && <SupportBox user={ user } /> }
                     </div>
                 </div>
             </div>
             <ChangeHealthKardModal theme={ theme } healthKards={ healthKards } handleChangeHealthKard={ handleChangeHealthKard } currentHealthKardId={ currentHealthKardId } isChangeHealthKardModalOpen={ isChangeHealthKardModalOpen } setIsChangeHealthKardModalOpen={ setIsChangeHealthKardModalOpen } />
+            <ProfileEdit user={ user } setUser={ setUser } isProfileEditModalOpen={ isProfileEditModalOpen } setIsProfileEditModalOpen={ setIsProfileEditModalOpen } />
         </div>
     )
 }
@@ -125,7 +135,7 @@ const ChangeHealthKardModal = ({ theme, healthKards, handleChangeHealthKard, cur
         <Modal open={ isChangeHealthKardModalOpen } onClose={ () => setIsChangeHealthKardModalOpen(false) } style={ { height: '100px', width: '50%' } }>
             <div style={ { border: `2px solid ${theme.primary}` } } className='flex flex-col items-center justify-center gap-4 w-full h-full p-4'>
                 <h1 className='text-2xl font-bold w-full '>Change HealthKard</h1>
-                <Select label='Select HealthKard'
+                <Select label='Select Healthkard'
                     options={ healthKards.map(healthKard => healthKard?.name + ' - ' + healthKard?.healthId) }
                     style={ { width: '100%' } }
                     value={ healthKards[currentHealthKardId]?.name + ' - ' + healthKards[currentHealthKardId]?.healthId }

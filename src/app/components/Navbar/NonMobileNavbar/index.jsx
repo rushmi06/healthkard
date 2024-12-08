@@ -26,26 +26,26 @@ const NonMobileNavbar = ({ theme }) => {
                 <div style={ { color: theme.text } } className='hidden lg:flex gap-10 w-7/12 justify-center items-center'>
                     {
                         navbarLinks.map((link, index) => (
-                            <CloseOnClickOutside onClose={ () => setDropdownOpen(false) }>
-                                <div key={ index } className='relative text-sm font-medium text-center w-fit'>
-                                    {
-                                        !link.subLinks ?
-                                            <Link to={ link.path } key={ index } className=''>{ link.label }</Link>
-                                            : <div key={ index } className='flex items-center gap-2 cursor-pointer' onClick={ () => setDropdownOpen(!dropdownOpen) }>{ link.label } { dropdownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown /> }</div>
-                                    }
-                                    {
-                                        link.subLinks && link.subLinks.length > 0 && dropdownOpen && (
-                                            <div style={ { backgroundColor: theme.secondary } } className='absolute -bottom-16 mt-2 left-0 w-64 flex flex-col gap-2 p-2 text-sm text-left'>
+                            <div key={ index } className='relative text-sm font-medium text-center w-fit'>
+                                {
+                                    !link.subLinks ?
+                                        <Link to={ link.path } key={ index } className=''>{ link.label }</Link>
+                                        : <div key={ index } className='flex items-center gap-2 cursor-pointer' onClick={ () => setDropdownOpen(!dropdownOpen) }>{ link.label } { dropdownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown /> }</div>
+                                }
+                                {
+                                    link.subLinks && link.subLinks.length > 0 && dropdownOpen && (
+                                        <CloseOnClickOutside onClose={ () => setDropdownOpen(false) }>
+                                            <div style={ { backgroundColor: theme.senary } } className='absolute -bottom-16 mt-2 left-0 w-64 flex flex-col gap-2 p-2 text-sm text-left'>
                                                 {
                                                     link.subLinks.map((subLink, subIndex) => (
                                                         <Link to={ subLink.path } key={ subIndex } className=''>{ subLink.label }</Link>
                                                     ))
                                                 }
                                             </div>
-                                        )
-                                    }
-                                </div>
-                            </CloseOnClickOutside>
+                                        </CloseOnClickOutside>
+                                    )
+                                }
+                            </div>
                         ))
                     }
                 </div>

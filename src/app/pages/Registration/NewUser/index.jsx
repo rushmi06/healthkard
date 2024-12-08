@@ -174,7 +174,7 @@ const PlanCard = ({ theme }) => {
                             ))
                         }
                     </div>
-                        : <PaymentDetails theme={ theme } selectedPlan={ selectedPlan } setSelectedPlan={ setSelectedPlan } />
+                        : <PaymentDetails theme={ theme } selectedPlan={ selectedPlan } onChangePlan={ () => setSelectedPlan(null) } />
                     }
                 </div>
             </div>
@@ -182,52 +182,52 @@ const PlanCard = ({ theme }) => {
     )
 }
 
-export const PaymentDetails = ({ theme, selectedPlan, setSelectedPlan }) => {
+export const PaymentDetails = ({ theme, selectedPlan, onChangePlan, onOnlinePayment = false, onPay }) => {
     return (
         <div className='flex flex-col flex-1 lg:justify-between justify-start items-start gap-4 w-full'>
             <div className='flex gap-4 font-semibold text-lg'>
                 <div className=''>Selected plan: </div>
-                <div className='font-bold'>{ selectedPlan.name }</div>
+                <div className='font-bold'>{ selectedPlan?.name }</div>
                 <div className=''>|</div>
-                <Button label='Change Plan' type='btn-tertiary' onClick={ () => setSelectedPlan(null) } />
+                <Button label='Change Plan' type='btn-tertiary' onClick={ onChangePlan } />
             </div>
             <div className='flex flex-col gap-4 w-full'>
                 <div className=''>Payment Details</div>
                 <div className='flex flex-col border-dashed border border-primary p-4 rounded'>
                     <div className='flex justify-between py-1'>
                         <div className=''>Total Amount: </div>
-                        <div className='font-semibold'><span className='text-xs line-through mx-1'>{ formatCurrency(selectedPlan.price + selectedPlan.savings) }</span>{ formatCurrency(selectedPlan.price) }</div>
+                        <div className='font-semibold'><span className='text-xs line-through mx-1'>{ formatCurrency(selectedPlan?.price + selectedPlan?.savings) }</span>{ formatCurrency(selectedPlan?.price) }</div>
                     </div>
                     <div className='flex justify-between py-1'>
                         <div className=''>State GST: </div>
-                        <div className='font-semibold'>{ formatCurrency(selectedPlan.stateGST) }</div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan?.stateGST) }</div>
                     </div>
                     <div className='flex justify-between py-1'>
                         <div className=''>Central GST: </div>
-                        <div className='font-semibold'>{ formatCurrency(selectedPlan.centralGST) }</div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan?.centralGST) }</div>
                     </div>
                     <div className='flex justify-between py-1'>
                         <div className=''>Convenience Fee: </div>
-                        <div className='font-semibold'>{ formatCurrency(selectedPlan.convenienceFee) }</div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan?.convenienceFee) }</div>
                     </div>
                     <div className='flex justify-between py-1'>
                         <div className=''>Platform Fee: </div>
-                        <div className='font-semibold'>{ formatCurrency(selectedPlan.platformFee) }</div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan?.platformFee) }</div>
                     </div>
                     <div style={ { borderTop: `1px solid ${theme.primary}` } } className='flex justify-between py-1'>
                         <div className=''>Payable Amount <span className='text-[10px] text-center'>(Incl. GST)</span>: </div>
-                        <div className='font-semibold'>{ formatCurrency(selectedPlan.total) }</div>
+                        <div className='font-semibold'>{ formatCurrency(selectedPlan?.total) }</div>
                     </div>
-                    <div className='flex justify-between py-1'>
-                        <div className=''>Savings: </div>
-                        <div className='font-semibold'>{ formatCurrency(selectedPlan.savings) }</div>
-                    </div>
+                </div>
+                <div className='flex justify-center items-center gap-2 py-1'>
+                    <div className=''>************Savings: </div>
+                    <div className='font-semibold'>{ formatCurrency(selectedPlan?.savings) }**********</div>
                 </div>
                 <div className='flex flex-col ga`p`-4'>
                     <div className=''>Payment Method</div>
                     <div className='flex gap-4'>
-                        <Button label='Pay with UPI' type='btn-primary' />
-                        <Button label='Pay with Cash' type='btn-secondary' />
+                        <Button label='Pay with UPI' type='btn-primary' onClick={ onPay } />
+                        { !onOnlinePayment && <Button label='Pay with Cash' type='btn-secondary' /> }
                     </div>
                 </div>
             </div>

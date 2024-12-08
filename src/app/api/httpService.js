@@ -8,6 +8,7 @@ const header = {
 const joinURL = (base, url) => {
     base = base.replace(/\/+$/, '');
     url = url.replace(/^\/+/, '');
+    console.log(`${base}/${url}`)
     return `${base}/${url}`;
 };
 
