@@ -54,7 +54,9 @@ import UserRenewal from './pages/Registration/UserRenewal'
 
 // challenges
 import Challenges from './pages/Public/Challenges'
-
+import ChallengesContainer from './pages/Public/Challenges/ChallengesContainer'
+import Challenge from './pages/Public/Challenges/Challange'
+import DashBoard from './pages/Public/Challenges/Dashboard'
 function App() {
   return (
     <ThemeProvider>
@@ -78,7 +80,11 @@ function App() {
           <Route path='hospitals' element={ <ListOfHospitals /> } />
           <Route path='hospital/:hospitalId' element={ <HospitalForPublic /> } />
           <Route path='profile/:userId' element={ <Profile /> } />
-          <Route path='challenges' element={ <Challenges /> } />
+          <Route path='challenges' element={ <Challenges /> } >
+            <Route path='' element={ <ChallengesContainer /> } />
+            <Route path=':challengeId' element={ <Challenge /> } />
+            <Route path='dashboard' element={ <DashBoard /> } />
+          </Route>
           <Route path='testimonials' element={ <Testimonials /> } />
           <Route path='blogs' element={ <PublicBlogs /> } />
           <Route path='request-for-demo' element={ <RequestForDemo /> } />

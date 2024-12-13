@@ -48,3 +48,8 @@ export const formatCurrency = (amount) => {
     return `₹ ${amount.toLocaleString('en-IN')}/-`;
 }
 
+export const formateInteger = (amount) => {
+    if (amount < 0 && !amount) return '';
+    return `${amount.toLocaleString('en-IN')}`;
+}
+
