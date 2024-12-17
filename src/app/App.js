@@ -46,7 +46,7 @@ import Auth from './auth'
 import UserLogin from './auth/UserLogin'
 import UserSignup from './auth/UserSignup'
 import Registration from './pages/Registration'
-
+import AdminLogin from './auth/AdminLogin'
 // registration
 import NewHospital from './pages/Registration/NewHospital'
 import NewUser from './pages/Registration/NewUser'
@@ -57,6 +57,9 @@ import Challenges from './pages/Public/Challenges'
 import ChallengesContainer from './pages/Public/Challenges/ChallengesContainer'
 import Challenge from './pages/Public/Challenges/Challange'
 import DashBoard from './pages/Public/Challenges/Dashboard'
+
+// terms and conditions
+import RefundPolicies from './pages/Public/TermsAndConditions/RefundPolicies'
 function App() {
   return (
     <ThemeProvider>
@@ -68,6 +71,7 @@ function App() {
         <Route path='/auth' element={ <Auth /> } >
           <Route path="user/login" element={ <UserLogin /> } />
           <Route path="user/signup" element={ <UserSignup /> } />
+          <Route path="admin/login" element={ <AdminLogin /> } />
         </Route>
         <Route path="/" element={ <Public /> } >
           <Route path="user/login" element={ <UserLogin /> } />
@@ -88,6 +92,7 @@ function App() {
           <Route path='testimonials' element={ <Testimonials /> } />
           <Route path='blogs' element={ <PublicBlogs /> } />
           <Route path='request-for-demo' element={ <RequestForDemo /> } />
+          <Route path='refund-policy' element={ <RefundPolicies /> } />
         </Route>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >
@@ -99,7 +104,7 @@ function App() {
             </Route>
           </Route>
           <Route path="users" element={ <Users /> } >
-            <Route path="details" element={ <UsersDetails /> } >
+            <Route path="healtkards" element={ <UsersDetails /> } >
               <Route path=":userId" element={ <UserDetailed /> } />
             </Route>
             <Route path="mobile" element={ <MobileUsers /> } >

@@ -25,7 +25,7 @@ function AgentDetails({ theme }) {
         }
         getAgentDetails();
     }, [agentId]);
-
+    if (!agent) return <div>Loading...</div>;
     return (
         <div className='flex flex-col gap-4 w-full h-full'>
             <div style={ { backgroundColor: theme.secondary } } className='flex flex-col flex-grow rounded overflow-y-scroll h-full p-4'>

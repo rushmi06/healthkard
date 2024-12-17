@@ -33,7 +33,7 @@ function GeneralDetails({ agent, theme }) {
                 <div style={ { backgroundColor: theme.secondary, color: theme.text } } className='h-24 w-24 rounded flex flex-col items-center justify-center'>
                     <div className='text-sm font-semibold'> { formatCurrency(12000) }</div>
                     <div style={ { backgroundColor: theme.primary, color: theme.text } } className='w-full h-[1px]'></div>
-                    <div className='text-sm font-semibold'> { formatCurrency(agent?.healthkardsTarget) }</div>
+                    <div className='text-sm font-semibold'> { formatCurrency(agent?.healthkardsTarget || 0) }</div>
                 </div>
             </div>
         </div>

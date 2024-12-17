@@ -5,9 +5,40 @@ import { CiInstagram } from "react-icons/ci";
 import withTheme from "../../theme/Theme";
 import GooglePlayStoreLogo from "../../assets/GooglePlayStoreLogo.png";
 import AppStoreLogo from "../../assets/AppStoreLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { isUserLoggedIn } from "../../utils/auth";
+import alertTrigger from "../../components/Alert/alertTrigger";
 
 const Footer = ({ theme }) => {
+  const navigate = useNavigate();
+  const aboutUs = [
+    { label: 'About Us', link: '/about' },
+    { label: 'Blogs', link: '/blogs' },
+    { label: 'FAQ\'s', link: '/faqs' },
+    { label: 'Terms & Conditions', link: '/terms-and-conditions' },
+    { label: 'Private Policies', link: '/private-policies' },
+    { label: 'Refund Policy', link: '/refund-policy' },
+    { label: 'Admin Login', link: '/auth/admin/login' },
+  ]
+  const plans = [
+    { id: '1', name: 'Monthly Plan' },
+    { id: '2', name: 'Quarterly Plan' },
+    { id: '3', name: 'Half Yearly Plan' },
+    { id: '4', name: 'Yearly Plan' },
+  ]
+  const onClickPlan = (planId) => {
+    if (isUserLoggedIn()) {
+      navigate(`/plans/${planId}`)
+    } else {
+      alertTrigger.emit('alert',
+        'Please login to purchase the plan',
+        null,
+        () => navigate('/auth/user/login'),
+        'btn-primary',
+        'Login'
+      )
+    }
+  }
   return (
     <div style={ { backgroundColor: theme.primary, color: theme.senary } } className="w-full lg:h-[400px] flex flex-col lg:flex-row lg:items-center lg:justify-around p-4 lg:px-10">
 
@@ -43,12 +74,11 @@ const Footer = ({ theme }) => {
         {/* About Us Section */ }
         <div className="font-semibold flex flex-col gap-4 w-1/2">
           <div className="flex flex-col gap-2">
-            <a href="/about" target="_blank" rel="noreferrer">About Us</a>
-            <a href="/blogs" target="_blank" rel="noreferrer">Blogs</a>
-            <a href="/faqs" target="_blank" rel="noreferrer">FAQ's</a>
-            <a href="/terms-and-conditions" target="_blank" rel="noreferrer">Terms & Conditions</a>
-            <a href="/private-policies" target="_blank" rel="noreferrer">Private Policies</a>
-            <a href="/refund-policy" target="_blank" rel="noreferrer">Refund Policy</a>
+            { aboutUs.map((item) => (
+              <Link to={ item.link } target="_blank" rel="noreferrer">
+                { item.label }
+              </Link>
+            )) }
           </div>
           <div>
             <p>Follow Us :</p>
@@ -67,10 +97,9 @@ const Footer = ({ theme }) => {
         <div className="flex flex-col w-1/2">
           <h2 className="font-semibold">HealthKard Plans</h2>
           <div className="flex flex-col gap-2 font-light">
-            <Link to="/">Monthly Plan</Link>
-            <Link to="/">Quarterly Plan</Link>
-            <Link to="/">Half Yearly Plan</Link>
-            <Link to="/">Yearly Plan</Link>
+            { plans.map((plan) => (
+              <div onClick={ () => onClickPlan(plan.id) } className="cursor-pointer">{ plan.name }</div>
+            )) }
           </div>
         </div>
 

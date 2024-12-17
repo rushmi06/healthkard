@@ -3,9 +3,9 @@ import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import Checkbox from '../../../../components/Checkbox'
 import withTheme from '../../../../theme/Theme'
-import { toast } from 'react-hot-toast'
 import { MOBILE_VERIFICATION_FOR_AGENT } from '../../../../utils/config'
 import httpService from '../../../../api/httpService'
+import toast from 'react-hot-toast'
 
 function NewAgent({ theme }) {
     return (
@@ -32,7 +32,6 @@ function Form() {
     const [form, setForm] = useState({
         name: '',
         email: '',
-        phoneNumber: '',
         number: '',
         password: '',
     })
@@ -51,11 +50,17 @@ function Form() {
             toast.error('Password and confirm password does not match')
             return
         }
-        setForm({ ...form, name: `${firstName} ${lastName}` });
+        const agent = {
+            name: `${firstName} ${lastName}`,
+            email: form.email,
+            number: form.number,
+            password: form.password,
+        }
+        setForm(agent);
     }
 
     const onClear = () => {
-        setForm({ ...form, name: '', email: '', phoneNumber: '', number: '', password: '' })
+        setForm({ ...form, name: '', email: '', number: '', password: '' })
         setCheckes({ ...checkes, whatsapp: false, instagram: false, facebook: false, linkedin: false })
         setMobileVerified(false)
         setConfirmPassword('')
@@ -64,6 +69,14 @@ function Form() {
     }
 
     const sendSocialMediaLinks = async () => {
+        if (!checkes.whatsapp && !checkes.instagram && !checkes.facebook && !checkes.linkedin) {
+            toast.error('Confirm the social media links')
+            return
+        }
+        if (!form.email) {
+            toast.error('Email is required')
+            return
+        }
         setSendSocialMediaLinksLoading(true)
         try {
             const response = await httpService.post('emails/send-social-media-links-agent', { name: `${firstName} ${lastName}`, email: form.email })
@@ -92,9 +105,9 @@ function Form() {
                     <Input label='Phone Number' type='number' value={ form.number } placeholder='Enter phone number' onChange={ (e) => handleChange('number', e.target.value) } style={ { width: '45%' } } />
                     { MOBILE_VERIFICATION_FOR_AGENT && <Button label={ mobileVerified ? 'Verified' : 'Verify' } onClick={ () => setMobileVerified(true) } /> }
                 </div>
-                <div className='flex gap-4 justify-between'>
+                {/* <div className='flex gap-4 justify-between'>
                     <Input label='Inform to' value={ form.informTo } placeholder='Enter inform to' type='text' onChange={ (e) => handleChange('informTo', e.target.value) } style={ { width: '45%' } } />
-                </div>
+                </div> */}
                 <div className='flex gap-4 justify-between'>
                     <Input label='Password' value={ form.password } placeholder='Enter password' type='password' onChange={ (e) => handleChange('password', e.target.value) } style={ { width: '45%' } } />
                     <Input label='Confirm Password' value={ confirmPassword } placeholder='Enter confirm password' type='password' onChange={ (e) => setConfirmPassword(e.target.value) } style={ { width: '45%' } } />

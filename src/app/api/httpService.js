@@ -14,8 +14,8 @@ const joinURL = (base, url) => {
 
 class HttpService {
     constructor() {
-        this.domain = 'https://backend-green-tau.vercel.app';
-        // this.domain = 'http://127.0.0.1:3002';
+        // this.domain = 'https://backend-green-tau.vercel.app';
+        this.domain = 'http://127.0.0.1:3002';
 
         this.axiosInstance = axios.create({
             baseURL: this.domain,

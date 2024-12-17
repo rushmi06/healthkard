@@ -30,7 +30,7 @@ const Input = ({
 
     return (
         <div style={ { ...style } } className={ `flex gap-2 ${multiline ? 'flex-col' : 'h-9 items-center'}  justify-between` }>
-            <label style={ { color: theme.primary } } className='text-sm font-semibold'>{ label }</label>
+            <label style={ { color: theme.primary } } className='text-sm font-semibold capitalize'>{ label }</label>
             { multiline ? (
                 <textarea { ...inputProps } rows={ rows } value={ value } onChange={ e => onChange(e) } />
             ) : (

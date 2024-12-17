@@ -1,7 +1,7 @@
 import { TiInputChecked } from "react-icons/ti";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { FaDatabase, FaLock, FaMoneyBill, FaRegUserCircle } from "react-icons/fa";
-import { MdOutlineFeedback } from "react-icons/md";
+// import { MdOutlineFeedback } from "react-icons/md";
 import { FaUserShield } from "react-icons/fa";
 import { IoMdContacts } from "react-icons/io";
 import { MdOutlineRssFeed } from "react-icons/md";
@@ -31,8 +31,8 @@ export const NAVIGATION_PANEL_LINKS = [
         label: 'Users',
         subLinks: [
             {
-                label: 'Details',
-                link: '/admin/users/details',
+                label: 'Healtkards',
+                link: '/admin/users/healtkards',
                 icon: FaRegUserCircle
             },
             {
@@ -46,11 +46,11 @@ export const NAVIGATION_PANEL_LINKS = [
                 link: '/admin/users/records',
                 icon: RiFolderShield2Fill
             },
-            {
-                label: 'Feedback',
-                link: '/admin/users/feedback',
-                icon: MdOutlineFeedback
-            }
+            // {
+            //     label: 'Feedback',
+            //     link: '/admin/users/feedback',
+            //     icon: MdOutlineFeedback
+            // }
         ]
 
     },

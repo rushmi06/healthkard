@@ -8,7 +8,6 @@ import { FiTarget } from "react-icons/fi";
 import { formatCurrency, formateInteger } from '../../../../../utils/format'
 
 function Details({ challenge, theme }) {
-    const [buttons, setButtons] = useState([]);
     const [conditions, setConditions] = useState([]);
     useEffect(() => {
         if (!challenge) return;
@@ -17,7 +16,6 @@ function Details({ challenge, theme }) {
             { label: 'Duration', value: formateInteger(challenge?.duration), icon: <SlCalender size={ 24 } color={ 'blue' } /> },
             { label: 'Target', value: formateInteger(challenge?.target), icon: <FiTarget size={ 24 } color={ 'red' } /> },
         ]);
-        setButtons(challenge?.buttons);
     }, [challenge]);
     if (!challenge) return null;
 
@@ -53,11 +51,7 @@ function Details({ challenge, theme }) {
                     </div>
                 </div>
                 <div className='flex flex-col gap-2'>
-                    {
-                        buttons.map((button, index) => (
-                            <Button label={ button.label } onClick={ button.onClick } theme={ theme } key={ index } />
-                        ))
-                    }
+                    <Button label={ challenge.button.label } onClick={ challenge.button.onClick } theme={ theme } />
                 </div>
             </div>
         </div>

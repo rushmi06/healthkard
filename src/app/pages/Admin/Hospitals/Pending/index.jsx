@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { hospitalHeaders } from '../constants'
 import TableContainer from '../../components/TableContainer'
 import httpService from '../../../../api/httpService';
 import FilterSlider from '../../components/FilterSlider';
 import { Outlet, useParams } from 'react-router-dom';
+import useCustomEffect from '../../../../hooks/customUseEffect';
 
 function Pending() {
     const { hospitalId } = useParams()
@@ -20,11 +21,11 @@ function Pending() {
         sortByName: false
     });
 
-    useEffect(() => {
+    useCustomEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
             const data = await httpService.get('hospitals');
-            const formattedData = data.hospitals.map((hospital) => ({
+            const formattedData = data.hospitals.filter(hospital => hospital.isverified !== '2').map((hospital) => ({
                 _id: hospital._id,
                 id: hospital.hospitalId,
                 name: hospital?.hospitalDetails?.hospitalLegalName,

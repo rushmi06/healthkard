@@ -13,7 +13,7 @@ function User({ theme }) {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const users = await httpService.get('users', '?limit=100000');
+                const users = await httpService.get('users');
                 const formattedDataPoints = formatUserGraph(users.users);
                 setDataPoints(formattedDataPoints);
                 setUsers(users.users);

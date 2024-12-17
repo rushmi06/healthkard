@@ -1,4 +1,5 @@
 import steps from '../../../assets/challenges/steps.jpeg'
+
 export const challenges = [
     {
         id: 1,
@@ -14,17 +15,9 @@ export const challenges = [
         duration: 30,
         prize: 10000,
         image: steps,
-        buttons: [
-            {
-                label: 'Connect Google Fit',
-                onClick: () => { },
-                enabled: false
-            },
-            {
-                label: 'Register for Challenge',
-                onClick: () => { },
-                enabled: false
-            }
-        ]
+        button: {
+            label: 'Register for Challenge',
+            onClick: () => { }
+        }
     }
 ]

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { mobileUserHeaders } from '../constants'
 import { Outlet, useParams } from 'react-router-dom'
 import TableContainer from '../../components/TableContainer'
 import httpService from '../../../../api/httpService';
 import FilterSlider from '../../components/FilterSlider';
 import { formatDate, formatNumber } from '../../../../utils/format';
+import useCustomEffect from '../../../../hooks/customUseEffect';
 
 function Details() {
     const [data, setData] = useState([]);
@@ -23,7 +24,7 @@ function Details() {
 
 
 
-    useEffect(() => {
+    useCustomEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
             try {

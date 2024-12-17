@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { userHeaders } from '../constants'
 import { Outlet, useParams } from 'react-router-dom'
 import TableContainer from '../../components/TableContainer'
 import httpService from '../../../../api/httpService';
 import FilterSlider from '../../components/FilterSlider';
+import customUseEffect from '../../../../hooks/customUseEffect';
 
 function Details() {
     const [data, setData] = useState([]);
@@ -11,7 +12,6 @@ function Details() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    const itemsPerPage = 10;
     const { userId } = useParams();
 
     const [filterCategories] = useState({
@@ -23,11 +23,11 @@ function Details() {
 
 
 
-    useEffect(() => {
+    customUseEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const response = await httpService.get(`users?page=${currentPage}&limit=${itemsPerPage}`);
+                const response = await httpService.get(`users`);
                 const { users, totalPages: total } = response;
                 const formattedData = users.map((user) => ({
                     _id: user?._id,

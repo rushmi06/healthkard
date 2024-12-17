@@ -25,7 +25,7 @@ function AgentLogs() {
         const fetchData = async () => {
             setIsLoading(true);
             const data = await httpService.get(`agents`);
-            const formattedData = data.agents.map((agent) => ({
+            const formattedData = data.map((agent) => ({
                 _id: agent._id,
                 id: agent?.agentID,
                 name: agent?.name,
