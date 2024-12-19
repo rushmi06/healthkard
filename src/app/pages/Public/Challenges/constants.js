@@ -1,4 +1,5 @@
-import steps from '../../../assets/challenges/steps.jpeg'
+import steps from '../../../assets/challenges/steps.jpeg';
+import { googleFitService } from './services/googleFitService';
 
 export const challenges = [
     {
@@ -17,7 +18,14 @@ export const challenges = [
         image: steps,
         button: {
             label: 'Register for Challenge',
-            onClick: () => { }
+            onClick: async () => {
+                try {
+                    await googleFitService.authenticate();
+                    // Add your registration logic here
+                } catch (error) {
+                    console.error('Failed to connect to Google Fit:', error);
+                }
+            }
         }
     }
-]
+];

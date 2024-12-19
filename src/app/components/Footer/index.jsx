@@ -74,8 +74,8 @@ const Footer = ({ theme }) => {
         {/* About Us Section */ }
         <div className="font-semibold flex flex-col gap-4 w-1/2">
           <div className="flex flex-col gap-2">
-            { aboutUs.map((item) => (
-              <Link to={ item.link } target="_blank" rel="noreferrer">
+            { aboutUs.map((item, index) => (
+              <Link key={ index } to={ item.link } target="_blank" rel="noreferrer">
                 { item.label }
               </Link>
             )) }
@@ -97,8 +97,8 @@ const Footer = ({ theme }) => {
         <div className="flex flex-col w-1/2">
           <h2 className="font-semibold">HealthKard Plans</h2>
           <div className="flex flex-col gap-2 font-light">
-            { plans.map((plan) => (
-              <div onClick={ () => onClickPlan(plan.id) } className="cursor-pointer">{ plan.name }</div>
+            { plans.map((plan, index) => (
+              <div key={ index } onClick={ () => onClickPlan(plan.id) } className="cursor-pointer">{ plan.name }</div>
             )) }
           </div>
         </div>

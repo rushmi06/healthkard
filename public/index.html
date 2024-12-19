@@ -23,6 +23,15 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <!-- Updated Google API script with necessary attributes -->
+    <script src="https://apis.google.com/js/api.js" async defer></script>
+    <script>
+        // Initialize Google API client
+        function initGoogleApi() {
+            window.gapi = window.gapi || {};
+            window.googleApiInitialized = false;
+        }
+    </script>
     <title>HealthKard</title>
 </head>
 

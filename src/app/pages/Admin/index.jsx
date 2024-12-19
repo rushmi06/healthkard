@@ -17,7 +17,7 @@ function Admin({ theme }) {
         if (!getFromLocalStorage('adminToken')) {
             navigate('/auth/admin-login')
         }
-    }, [])
+    }, [navigate])
     return (
         <div className='flex p-4 h-screen w-full gap-4 ' style={ { backgroundColor: theme.senary || '#fff' } }>
             <div className='flex flex-col gap-4 w-56'>

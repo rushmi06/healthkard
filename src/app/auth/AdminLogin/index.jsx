@@ -38,7 +38,7 @@ function AdminLogin({ theme }) {
         if (token) {
             navigate('/admin/hospitals/approved')
         }
-    }, [])
+    }, [navigate])
     return (
         <div style={ { backgroundColor: theme.senary, color: theme.text } } className='flex  justify-start items-center h-screen'>
             <div className='w-full lg:w-1/2 p-8 h-full flex flex-col '>
