@@ -15,8 +15,10 @@ const Footer = ({ theme }) => {
     { label: 'About Us', link: '/about' },
     { label: 'Blogs', link: '/blogs' },
     { label: 'FAQ\'s', link: '/faqs' },
-    { label: 'Terms & Conditions', link: '/terms-and-conditions' },
-    { label: 'Private Policies', link: '/private-policies' },
+    { label: 'User Terms & Conditions', link: '/terms-and-conditions' },
+    { label: 'Hospital Terms & Conditions', link: '/hospital-terms-and-conditions' },
+    { label: 'Cookies Policies', link: '/cookies-policy' },
+    { label: 'Privacy Policies', link: '/privacy-policy' },
     { label: 'Refund Policy', link: '/refund-policy' },
     { label: 'Admin Login', link: '/auth/admin/login' },
   ]

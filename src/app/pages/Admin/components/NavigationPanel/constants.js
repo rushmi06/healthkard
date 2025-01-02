@@ -31,8 +31,8 @@ export const NAVIGATION_PANEL_LINKS = [
         label: 'Users',
         subLinks: [
             {
-                label: 'Healtkards',
-                link: '/admin/users/healtkards',
+                label: 'Healthkards',
+                link: '/admin/users/healthkards',
                 icon: FaRegUserCircle
             },
             {

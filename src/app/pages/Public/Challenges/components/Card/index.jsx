@@ -146,6 +146,11 @@ const Card = ({ challenge, theme }) => {
                                         🎯 Complete 10,000 steps daily to win exciting prizes!
                                     </p>
                                 </div>
+                                <div className="bg-yellow-50 p-4 rounded-lg">
+                                    <p className="text-sm font-medium text-yellow-800">
+                                        Note: For now, we are working on the Google Fit integration. We will update you once it is ready.
+                                    </p>
+                                </div>
                             </div>
 
                             <div className="mt-6 flex justify-end space-x-3">

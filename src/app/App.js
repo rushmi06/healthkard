@@ -60,6 +60,10 @@ import DashBoard from './pages/Public/Challenges/Dashboard'
 
 // terms and conditions
 import RefundPolicies from './pages/Public/TermsAndConditions/RefundPolicies'
+import CookiesPolicies from './pages/Public/TermsAndConditions/CookiesPolicies'
+import PrivacyPolicies from './pages/Public/TermsAndConditions/PrivacyPolicies'
+import HospitalTC from './pages/Public/TermsAndConditions/HospitalTC'
+import UserTC from './pages/Public/TermsAndConditions/UserTC'
 function App() {
   return (
     <ThemeProvider>
@@ -93,6 +97,10 @@ function App() {
           <Route path='blogs' element={ <PublicBlogs /> } />
           <Route path='request-for-demo' element={ <RequestForDemo /> } />
           <Route path='refund-policy' element={ <RefundPolicies /> } />
+          <Route path='cookies-policy' element={ <CookiesPolicies /> } />
+          <Route path='privacy-policy' element={ <PrivacyPolicies /> } />
+          <Route path='terms-and-conditions' element={ <UserTC /> } />
+          <Route path='hospital-terms-and-conditions' element={ <HospitalTC /> } />
         </Route>
         <Route path="admin" element={ <Admin /> }>
           <Route path="hospitals" element={ <Hospitals /> } >
@@ -104,7 +112,7 @@ function App() {
             </Route>
           </Route>
           <Route path="users" element={ <Users /> } >
-            <Route path="healtkards" element={ <UsersDetails /> } >
+            <Route path="healthkards" element={ <UsersDetails /> } >
               <Route path=":userId" element={ <UserDetailed /> } />
             </Route>
             <Route path="mobile" element={ <MobileUsers /> } >
