@@ -12,7 +12,8 @@ const Input = ({
     theme,
     multiline = false,
     rows = 3,
-    value
+    value,
+    disabled = false
 }) => {
     const inputProps = {
         type: multiline ? undefined : type,
@@ -25,7 +26,8 @@ const Input = ({
             width: '50%',
             ...inputStyle
         },
-        className: 'px-2 py-1 rounded focus:outline-none text-sm h-full'
+        className: 'px-2 py-1 rounded focus:outline-none text-sm h-full',
+        disabled: disabled
     };
 
     return (

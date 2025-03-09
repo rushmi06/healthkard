@@ -1,5 +1,13 @@
+import './App.css'
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+
+//components
+import Alert from './components/Alert'
+import EmailBox from './components/EmailBox'
+import ViewImage from './components/ViewImage'
+import { Toaster } from 'react-hot-toast'
+
 // admin
 import Admin from './pages/Admin'
 import Hospitals from './pages/Admin/Hospitals'
@@ -13,8 +21,6 @@ import { ThemeProvider } from './theme/Theme/ThemeContext'
 import NotFound from './pages/NotFound'
 import Blogs from './pages/Admin/Marketing/Blogs'
 import Youtube from './pages/Admin/Marketing/Youtube'
-import Alert from './components/Alert'
-import EmailBox from './components/EmailBox'
 import Users from './pages/Admin/Users'
 import Agents from './pages/Admin/Agents'
 import AgentLogs from './pages/Admin/Agents/AgentLogs'
@@ -25,9 +31,6 @@ import Records from './pages/Admin/Users/Records'
 import Transactions from './pages/Admin/Transactions'
 import Database from './pages/Admin/Database'
 
-import ViewImage from './components/ViewImage'
-import { Toaster } from 'react-hot-toast'
-import './App.css'
 // public
 import Public from './pages/Public'
 import Home from './pages/Public/Home'
@@ -41,12 +44,16 @@ import Plan from './pages/Public/Plan'
 import Testimonials from './pages/Public/Testimonials'
 import PublicBlogs from './pages/Public/Blogs'
 import RequestForDemo from './pages/Public/RequestForDemo'
+
 // authentications
 import Auth from './auth'
 import UserLogin from './auth/UserLogin'
 import UserSignup from './auth/UserSignup'
 import Registration from './pages/Registration'
 import AdminLogin from './auth/AdminLogin'
+import HospitalLogin from './auth/HospitalLogin'
+import HospitalSignup from './auth/HospitalSignup'
+
 // registration
 import NewHospital from './pages/Registration/NewHospital'
 import NewUser from './pages/Registration/NewUser'
@@ -64,6 +71,14 @@ import CookiesPolicies from './pages/Public/TermsAndConditions/CookiesPolicies'
 import PrivacyPolicies from './pages/Public/TermsAndConditions/PrivacyPolicies'
 import HospitalTC from './pages/Public/TermsAndConditions/HospitalTC'
 import UserTC from './pages/Public/TermsAndConditions/UserTC'
+
+// hospitals
+import MyHospital from './pages/Hospitals'
+import HospitalProfile from './pages/Hospitals/Profile'
+import HospitalDoctors from './pages/Hospitals/Doctors'
+import HospitalDashboard from './pages/Hospitals/Dashboard'
+import HospitalPatients from './pages/Hospitals/Patients'
+
 function App() {
   return (
     <ThemeProvider>
@@ -76,6 +91,8 @@ function App() {
           <Route path="user/login" element={ <UserLogin /> } />
           <Route path="user/signup" element={ <UserSignup /> } />
           <Route path="admin/login" element={ <AdminLogin /> } />
+          <Route path="my-hospital/login" element={ <HospitalLogin /> } />
+          <Route path="my-hospital/signup" element={ <HospitalSignup /> } />
         </Route>
         <Route path="/" element={ <Public /> } >
           <Route path="user/login" element={ <UserLogin /> } />
@@ -137,7 +154,12 @@ function App() {
           <Route path='new-user' element={ <NewUser /> } />
           <Route path='user-renewal' element={ <UserRenewal /> } />
         </Route>
-
+        <Route path='my-hospital/:hospitalId' element={ <MyHospital /> } >
+          <Route path='profile' element={ <HospitalProfile /> } />
+          <Route path='doctors' element={ <HospitalDoctors /> } />
+          <Route path='dashboard' element={ <HospitalDashboard /> } />
+          <Route path='patients' element={ <HospitalPatients /> } />
+        </Route>
         <Route path='*' element={ <NotFound /> } />
       </Routes>
     </ThemeProvider>

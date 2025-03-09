@@ -21,6 +21,7 @@ const Footer = ({ theme }) => {
     { label: 'Privacy Policies', link: '/privacy-policy' },
     { label: 'Refund Policy', link: '/refund-policy' },
     { label: 'Admin Login', link: '/auth/admin/login' },
+    { label: 'Hospital Login', link: '/auth/my-hospital/login' },
   ]
   const plans = [
     { id: '1', name: 'Monthly Plan' },
